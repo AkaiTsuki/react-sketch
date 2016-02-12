@@ -4,6 +4,14 @@ html, body, .full-height{
 
 .abs-pos{
   position: absolute;
-  top: 0;
-  left: 0;
+}
+
+.widget{
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.widget:hover {
+  cursor: move;
 }

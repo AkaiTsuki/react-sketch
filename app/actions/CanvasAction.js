@@ -1,9 +1,11 @@
+import * as CanvasActionType from '../constants/CanvasActionType';
+
 export function createTitle(x, y){
   return (dispatch, getState) => {
     const action = {
-      type: 'NEW_TITLE',
+      type: CanvasActionType.NEW_TITLE,
       dom : 'h1',
-      text: 'Input Title Text'
+      text: 'New Title'
     };
     dispatch(action);
   }
@@ -11,6 +13,10 @@ export function createTitle(x, y){
 
 export function createLabel(x, y){
   return (dispatch, getState) => {
-    console.log("Create Label")
+    const action = {
+      type: CanvasActionType.NEW_LABEL,
+      text: 'New Label'
+    };
+    dispatch(action);
   }
 }
