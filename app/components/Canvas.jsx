@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import * as WIDGET_TYPE from '../constants/WidgetType';
-
+import Label from './widgets/text/Label.jsx';
+import Title from './widgets/text/Title.jsx';
 
 
 export default class Canvas extends Component{
@@ -10,15 +11,22 @@ export default class Canvas extends Component{
 
   render() {
     const style = {
-      backgroundColor: 'white',
-      position:'relative',
-      left: 0,
-      top: 0,
+      backgroundColor: 'rgba(0,0,0,0.7)'
     };
+
+    const paperStyle = {
+      position:'relative',
+      backgroundColor: 'white',
+      overflowY: 'auto',
+      left: 0,
+      top: 0
+    }
 
     return (
       <div className="col-md-7 full-height" style={style}>
-        {this.renderWidgets()}
+        <div className="paper full-height" style={paperStyle}>
+          {this.renderWidgets()}
+        </div>
       </div>
     )
   }
@@ -47,23 +55,10 @@ export default class Canvas extends Component{
   }
 
   renderTitle(widget){
-    const Tag = widget.dom;
-    const style = {
-      top: widget.y,
-      left: widget.x,
-      margin: 0
-    }
-    return (
-      <Tag key={widget.id} className="widget abs-pos" style={style}>{widget.text}</Tag>
-    );
+    return <Title key={widget.id} id={widget.id} tag={widget.dom} text={widget.text} x={widget.x} y={widget.y} actions={this.props.actions} />
   }
 
   renderLabel(widget){
-    const style = {
-      top: widget.y,
-      left: widget.x,
-      margin: 0
-    }
-    return <label key={widget.id} className="widget abs-pos" style={style}>{widget.text}</label>
+    return <Label key={widget.id} id={widget.id} text={widget.text} x={widget.x} y={widget.y} actions={this.props.actions} />
   }
 }

@@ -13,7 +13,7 @@ class App extends React.Component {
     return (
       <MainFrame>
         <WidgetLibPanel widgetLib={widgetLib} actions={actions} />
-        <Canvas widgets={widgets} />
+        <Canvas widgets={widgets} actions={actions} />
         <WidgetConsole />
       </MainFrame>
     )

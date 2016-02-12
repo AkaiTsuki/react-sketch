@@ -20,3 +20,17 @@ export function createLabel(x, y){
     dispatch(action);
   }
 }
+
+export function updateLayout(id, width, height, marginTop, marginBottom){
+  return (dispatch, getState) => {
+    const action = {
+      type: CanvasActionType.UPDATE_LAYOUT,
+      id,
+      width,
+      height,
+      marginTop,
+      marginBottom
+    };
+    dispatch(action);
+  }
+}

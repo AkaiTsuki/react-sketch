@@ -9,7 +9,7 @@ const getYPosition = (state) => {
   for(let key in state){
     const ele = state[key];
     if(ele.y + ele.height >= maxY){
-      maxY = ele.y + ele.height;
+      maxY = ele.y + ele.height + ele.marginTop + ele.marginBottom;
       maxKey = key;
     }
   }
@@ -43,11 +43,19 @@ const newLabel = (state, text) => {
     type: WIDGET_TYPE.WIDGET_LABEL,
     text,
     x: 0,
-    y: getYPosition(newState),
-    height: 20
+    y: getYPosition(newState)
   }
 
   newState[id] = widget;
+  return newState;
+}
+
+const updateLayoutService = (state, id, width, height, marginTop, marginBottom) => {
+  const newState = Object.assign({}, state);
+  newState[id].height = height;
+  newState[id].width = width;
+  newState[id].marginTop = marginTop;
+  newState[id].marginBottom = marginBottom;
   return newState;
 }
 
@@ -57,6 +65,8 @@ const canvasReducer = (state = {}, action) => {
       return newTitle(state, action.dom, action.type);
     case CanvasActionType.NEW_LABEL:
       return newLabel(state, action.text);
+    case CanvasActionType.UPDATE_LAYOUT:
+      return updateLayoutService(state, action.id, action.width, action.height, action.marginTop, action.marginBottom);
     default:
       return state;
   }
