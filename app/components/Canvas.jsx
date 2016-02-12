@@ -13,7 +13,7 @@ export default class Canvas extends Component{
       backgroundColor: 'white',
       position:'relative',
       left: 0,
-      top: 0
+      top: 0,
     };
 
     return (

@@ -51,7 +51,7 @@ const newLabel = (state, text) => {
   return newState;
 }
 
-const widgetsReducer = (state = {}, action) => {
+const canvasReducer = (state = {}, action) => {
   switch(action.type){
     case CanvasActionType.NEW_TITLE:
       return newTitle(state, action.dom, action.type);
@@ -62,4 +62,4 @@ const widgetsReducer = (state = {}, action) => {
   }
 }
 
-export default widgetsReducer;
+export default canvasReducer;

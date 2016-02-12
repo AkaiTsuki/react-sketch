@@ -1,10 +1,10 @@
 import widgetLibReducer from './WidgetLibReducer'
-import widgetsReducer from './WidgetsReducer'
+import canvasReducer from './CanvasReducer'
 import { combineReducers } from 'redux'
 
 const rootReducer = combineReducers({
   widgetLib: widgetLibReducer,
-  widgets: widgetsReducer
+  widgets: canvasReducer
 });
 
 export default rootReducer;
