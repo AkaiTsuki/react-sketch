@@ -55,10 +55,12 @@ export default class Canvas extends Component{
   }
 
   renderTitle(widget){
-    return <Title key={widget.id} id={widget.id} tag={widget.dom} text={widget.text} x={widget.x} y={widget.y} actions={this.props.actions} />
+    const {selected} = this.props;
+    return <Title key={widget.id} id={widget.id} tag={widget.dom} text={widget.text} x={widget.x} y={widget.y} actions={this.props.actions} isSelected={selected[widget.id] === true} />
   }
 
   renderLabel(widget){
-    return <Label key={widget.id} id={widget.id} text={widget.text} x={widget.x} y={widget.y} actions={this.props.actions} />
+    const {selected} = this.props;
+    return <Label key={widget.id} id={widget.id} text={widget.text} x={widget.x} y={widget.y} actions={this.props.actions} isSelected={selected[widget.id] === true} />
   }
 }

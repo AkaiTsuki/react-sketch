@@ -15,3 +15,7 @@ html, body, .full-height{
 .widget:hover {
   cursor: move;
 }
+
+.selected{
+  border: 1px solid blue;
+}

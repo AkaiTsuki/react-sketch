@@ -5,6 +5,7 @@ import * as WidgetUtil from '../../WidgetUtil';
 export default class Label extends Component{
   constructor(props, context) {
     super(props, context);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount(){
@@ -19,13 +20,23 @@ export default class Label extends Component{
   }
 
   render(){
-    const {id, text, x, y} = this.props;
+    const {id, text, x, y, isSelected} = this.props;
     const style = {
       top: y,
       left: x,
       margin: 0
     }
 
-    return <label className="widget abs-pos" style={style}>{text}</label>
+    let className = "widget abs-pos";
+    if(isSelected){
+      className = className + " selected";
+    }
+
+    return <label className={className} style={style} onClick={this.handleClick}>{text}</label>
+  }
+
+  handleClick(){
+    const {id, actions} = this.props;
+    actions.selectWidget(id);
   }
 }

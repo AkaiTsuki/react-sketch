@@ -9,11 +9,11 @@ import Canvas from '../components/Canvas.jsx'
 
 class App extends React.Component {
   render() {
-    const {widgetLib, widgets, actions, dispatch} = this.props;
+    const {widgetLib, widgets, selected, actions, dispatch} = this.props;
     return (
       <MainFrame>
         <WidgetLibPanel widgetLib={widgetLib} actions={actions} />
-        <Canvas widgets={widgets} actions={actions} />
+        <Canvas widgets={widgets} actions={actions} selected={selected} />
         <WidgetConsole />
       </MainFrame>
     )
@@ -23,7 +23,8 @@ class App extends React.Component {
 function mapStateToProps(state) {
   return {
     widgetLib: state.widgetLib,
-    widgets: state.widgets
+    widgets: state.widgets,
+    selected: state.selected
   }
 }
 

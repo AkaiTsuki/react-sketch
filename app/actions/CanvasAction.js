@@ -34,3 +34,13 @@ export function updateLayout(id, width, height, marginTop, marginBottom){
     dispatch(action);
   }
 }
+
+export function selectWidget(id){
+  return (dispatch, getState) => {
+    const action = {
+      type: CanvasActionType.SELECT_WIDGET,
+      id
+    }
+    dispatch(action);
+  }
+}

@@ -13,7 +13,8 @@ import WidgetDefinition from './WidgetDefinition';
 const loggerMiddleware = createLogger();
 const initState = {
   widgetLib: WidgetDefinition,
-  widgets: {}
+  widgets: {},
+  selected: {}
 };
 
 const store = createStore(rootReducer, initState, applyMiddleware(thunkMiddleware, loggerMiddleware));
