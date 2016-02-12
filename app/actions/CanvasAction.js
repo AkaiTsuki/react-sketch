@@ -21,6 +21,15 @@ export function createLabel(x, y){
   }
 }
 
+export function createTextInput(){
+  return (dispatch, getState) => {
+    const action = {
+      type: CanvasActionType.NEW_TEXT_INPUT
+    };
+    dispatch(action);
+  }
+}
+
 export function updateLayout(id, width, height, marginTop, marginBottom){
   return (dispatch, getState) => {
     const action = {
@@ -40,6 +49,18 @@ export function selectWidget(id){
     const action = {
       type: CanvasActionType.SELECT_WIDGET,
       id
+    }
+    dispatch(action);
+  }
+}
+
+export function moveWidget(id, offsetX, offsetY){
+  return (dispatch, getState) => {
+    const action = {
+      type : CanvasActionType.MOVE_WIDGET,
+      id,
+      offsetX,
+      offsetY
     }
     dispatch(action);
   }

@@ -1,6 +1,9 @@
 import React, { Component, PropTypes } from 'react';
+// Drag and Drop Lib
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 
-export default class MainFrame extends Component{
+class MainFrame extends Component{
   constructor(props, context) {
     super(props, context);
   }
@@ -15,3 +18,5 @@ export default class MainFrame extends Component{
     )
   }
 }
+
+export default DragDropContext(HTML5Backend)(MainFrame);

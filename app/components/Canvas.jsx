@@ -3,13 +3,33 @@ import * as WIDGET_TYPE from '../constants/WidgetType';
 import Label from './widgets/text/Label.jsx';
 import Title from './widgets/text/Title.jsx';
 
+import TextInput from './widgets/form/TextInput.jsx';
 
-export default class Canvas extends Component{
+import { DropTarget } from 'react-dnd';
+
+const canvasTarget = {
+  drop(props, monitor) {
+    console.log("Drop");
+    const draggedItem = monitor.getItem();
+    const offset = monitor.getDifferenceFromInitialOffset();
+    props.actions.moveWidget(draggedItem.id, offset.x, offset.y);
+  }
+};
+
+function collect(connect, monitor) {
+  return {
+    connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver()
+  };
+}
+
+class Canvas extends Component{
   constructor(props, context) {
     super(props, context);
   }
 
   render() {
+    const {connectDropTarget} = this.props;
     const style = {
       backgroundColor: 'rgba(0,0,0,0.7)'
     };
@@ -22,7 +42,7 @@ export default class Canvas extends Component{
       top: 0
     }
 
-    return (
+    return connectDropTarget(
       <div className="col-md-7 full-height" style={style}>
         <div className="paper full-height" style={paperStyle}>
           {this.renderWidgets()}
@@ -48,6 +68,8 @@ export default class Canvas extends Component{
         return this.renderTitle(widget);
       case WIDGET_TYPE.WIDGET_LABEL:
         return this.renderLabel(widget);
+      case WIDGET_TYPE.WIDGET_INPUT_TEXT:
+        return this.renderTextInput(widget);
       default:
         console.error("Unsupport widget type: "+ widget.type);
         return null;
@@ -63,4 +85,11 @@ export default class Canvas extends Component{
     const {selected} = this.props;
     return <Label key={widget.id} id={widget.id} text={widget.text} x={widget.x} y={widget.y} actions={this.props.actions} isSelected={selected[widget.id] === true} />
   }
+
+  renderTextInput(widget){
+    const {selected} = this.props;
+    return <TextInput key={widget.id} id={widget.id} x={widget.x} y={widget.y} actions={this.props.actions} isSelected={selected[widget.id] === true} />
+  }
 }
+
+export default DropTarget(WIDGET_TYPE.WIDGET_DRAGGABLE, canvasTarget, collect)(Canvas);

@@ -23,7 +23,8 @@ const WidgetDefinition = {
       {
         name: WIDGET_TYPE.WIDGET_INPUT_TEXT,
         icon: 'fa fa-pencil-square-o',
-        display: "Input Text Field"
+        display: "Input Text Field",
+        action: 'createTextInput'
       },{
         name: WIDGET_TYPE.WIDGET_INPUT_RADIO,
         icon: 'fa fa-dot-circle-o',

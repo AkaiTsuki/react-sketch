@@ -50,6 +50,21 @@ const newLabel = (state, text) => {
   return newState;
 }
 
+const newTextInput = (state) => {
+  const newState = Object.assign({}, state);
+  const id = uuid.v4();
+
+  const widget = {
+    id,
+    type: WIDGET_TYPE.WIDGET_INPUT_TEXT,
+    x: 0,
+    y: getYPosition(newState)
+  }
+
+  newState[id] = widget;
+  return newState;
+}
+
 const updateLayoutService = (state, id, width, height, marginTop, marginBottom) => {
   const newState = Object.assign({}, state);
   newState[id].height = height;
@@ -59,14 +74,27 @@ const updateLayoutService = (state, id, width, height, marginTop, marginBottom) 
   return newState;
 }
 
+const moveWidget = (state, id, offsetX, offsetY) => {
+  const newState = Object.assign({}, state);
+
+  newState[id].x = newState[id].x + offsetX;
+  newState[id].y = newState[id].y + offsetY;
+
+  return newState;
+}
+
 const canvasReducer = (state = {}, action) => {
   switch(action.type){
     case CanvasActionType.NEW_TITLE:
       return newTitle(state, action.dom, action.type);
     case CanvasActionType.NEW_LABEL:
       return newLabel(state, action.text);
+    case CanvasActionType.NEW_TEXT_INPUT:
+      return newTextInput(state);
     case CanvasActionType.UPDATE_LAYOUT:
       return updateLayoutService(state, action.id, action.width, action.height, action.marginTop, action.marginBottom);
+    case CanvasActionType.MOVE_WIDGET:
+      return moveWidget(state, action.id, action.offsetX, action.offsetY);
     default:
       return state;
   }

@@ -4,9 +4,9 @@ import * as WidgetUtil from '../../WidgetUtil';
 import * as WidgetType from '../../../constants/WidgetType';
 import { DragSource } from 'react-dnd';
 
-const titleSource = {
+
+const source = {
   beginDrag(props) {
-    console.log("Begin Drag");
     return {
       id: props.id
     };
@@ -20,7 +20,7 @@ function collect(connect, monitor) {
   }
 }
 
-class Title extends Component {
+class TextInput extends Component {
   constructor(props, context) {
     super(props, context);
     this.handleClick = this.handleClick.bind(this);
@@ -29,7 +29,6 @@ class Title extends Component {
   componentDidMount(){
     const {id, actions} = this.props;
     const self = ReactDOM.findDOMNode(this);
-
     const width = self.offsetWidth;
     const height = self.offsetHeight;
     const marginTop = WidgetUtil.getTopMargin(self);
@@ -39,19 +38,20 @@ class Title extends Component {
   }
 
   render(){
-    const {id, text, x, y, tag, actions, isSelected, connectDragSource} = this.props;
+    const {id, x, y, isSelected, connectDragSource} = this.props;
     const style = {
       top: y,
-      left: x
+      left: x,
+      margin: 0,
+      width: '50%'
     }
-    let className = "widget abs-pos";
+
+    let className = "widget abs-pos form-control";
     if(isSelected){
       className = className + " selected";
     }
 
-    const Tag = tag;
-
-    return connectDragSource(<Tag className={className} id={id} style={style} onClick={this.handleClick}>{text}</Tag>)
+    return connectDragSource(<input type="text" className={className} style={style} onClick={this.handleClick} placeholder="Text Input Box" />);
   }
 
   handleClick(){
@@ -60,4 +60,4 @@ class Title extends Component {
   }
 }
 
-export default DragSource(WidgetType.WIDGET_DRAGGABLE, titleSource, collect)(Title);
+export default DragSource(WidgetType.WIDGET_DRAGGABLE, source, collect)(TextInput);
