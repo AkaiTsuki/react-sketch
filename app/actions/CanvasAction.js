@@ -30,6 +30,15 @@ export function createTextInput(){
   }
 }
 
+export function createPanel(){
+  return (dispatch, getState) => {
+    const action = {
+      type: CanvasActionType.NEW_PANEL
+    };
+    dispatch(action);
+  }
+}
+
 export function updateLayout(id, width, height, marginTop, marginBottom){
   return (dispatch, getState) => {
     const action = {

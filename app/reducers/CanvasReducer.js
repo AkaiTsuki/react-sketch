@@ -65,6 +65,25 @@ const newTextInput = (state) => {
   return newState;
 }
 
+const newPanel = (state) => {
+  const newState = Object.assign({}, state);
+  const id = uuid.v4();
+
+  const widget = {
+    id,
+    type: WIDGET_TYPE.WIDGET_PANEL,
+    x: 0,
+    y: getYPosition(newState),
+    width: 1000,
+    height: 800,
+    children: [
+    ]
+  }
+
+  newState[id] = widget;
+  return newState;
+}
+
 const updateLayoutService = (state, id, width, height, marginTop, marginBottom) => {
   const newState = Object.assign({}, state);
   newState[id].height = height;
@@ -105,6 +124,8 @@ const canvasReducer = (state = {}, action) => {
       return newLabel(state, action.text);
     case CanvasActionType.NEW_TEXT_INPUT:
       return newTextInput(state);
+    case CanvasActionType.NEW_PANEL:
+      return newPanel(state);
     case CanvasActionType.UPDATE_LAYOUT:
       return updateLayoutService(state, action.id, action.width, action.height, action.marginTop, action.marginBottom);
     case CanvasActionType.DRAG_WIDGET:

@@ -5,6 +5,8 @@ import Title from './widgets/text/Title.jsx';
 
 import TextInput from './widgets/form/TextInput.jsx';
 
+import Panel from './widgets/container/Panel.jsx';
+
 import { DropTarget } from 'react-dnd';
 
 const canvasTarget = {
@@ -70,6 +72,8 @@ class Canvas extends Component{
         return this.renderLabel(widget);
       case WIDGET_TYPE.WIDGET_INPUT_TEXT:
         return this.renderTextInput(widget);
+      case WIDGET_TYPE.WIDGET_PANEL:
+        return this.renderPanel(widget);
       default:
         console.error("Unsupport widget type: "+ widget.type);
         return null;
@@ -89,6 +93,11 @@ class Canvas extends Component{
   renderTextInput(widget){
     const {selected} = this.props;
     return <TextInput key={widget.id} id={widget.id} x={widget.x} y={widget.y} actions={this.props.actions} isSelected={selected[widget.id] === true} />
+  }
+
+  renderPanel(widget){
+    const {selected} = this.props;
+    return <Panel key={widget.id} id={widget.id} x={widget.x} y={widget.y} actions={this.props.actions} isSelected={selected[widget.id] === true} width={widget.width} height={widget.height} />
   }
 }
 
