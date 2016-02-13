@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import LayoutConsole from './console/LayoutConsole.jsx';
+import PropertyConsole from './console/PropertyConsole.jsx';
 
 const style = {
   backgroundColor: '#3498DB',
@@ -26,7 +27,13 @@ export default class WidgetConsole extends Component{
   }
 
   renderConsole(widget, actions) {
-    return <LayoutConsole widget={widget} actions={actions}/>
+    return (
+      <div>
+        <LayoutConsole widget={widget} actions={actions}/>
+        <PropertyConsole widget={widget} actions={actions} />
+      </div>
+
+    )
   }
 
 }

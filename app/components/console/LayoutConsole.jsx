@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 export default class LayoutConsole extends Component {
   constructor(props, context) {
     super(props, context);
-    const {widget} = this.props;
+
     this.state = {
       isEditingX: false,
       isEditingY: false
