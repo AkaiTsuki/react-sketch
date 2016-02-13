@@ -16,7 +16,7 @@ class App extends React.Component {
       <MainFrame>
         <WidgetLibPanel widgetLib={widgetLib} actions={actions} />
         <Canvas widgets={widgets} actions={actions} selected={selected} />
-        <WidgetConsole widget={widget} />
+        <WidgetConsole widget={widget} actions={actions} />
       </MainFrame>
     )
   }

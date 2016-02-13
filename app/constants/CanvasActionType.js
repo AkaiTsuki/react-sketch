@@ -6,3 +6,5 @@ export const UPDATE_LAYOUT = 'UPDATE_LAYOUT';
 
 export const SELECT_WIDGET = 'SELECT_WIDGET';
 export const MOVE_WIDGET = 'MOVE_WIDGET';
+export const DRAG_WIDGET = 'DRAG_WIDGET';
+export const UPDATE_WIDGET = 'UPDATE_WIDGET';

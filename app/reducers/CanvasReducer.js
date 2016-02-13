@@ -74,12 +74,26 @@ const updateLayoutService = (state, id, width, height, marginTop, marginBottom) 
   return newState;
 }
 
-const moveWidget = (state, id, offsetX, offsetY) => {
+const reviseToTens = (val) => {
+  if(val <= 10){
+    return 0;
+  }
+
+  return (val % 10) <= 5 ? val - (val % 10) : val + 10 - (val % 10);
+}
+
+const dragWidget = (state, id, offsetX, offsetY) => {
   const newState = Object.assign({}, state);
 
-  newState[id].x = newState[id].x + offsetX;
-  newState[id].y = newState[id].y + offsetY;
+  newState[id].x = reviseToTens(newState[id].x + offsetX);
+  newState[id].y = reviseToTens(newState[id].y + offsetY);
 
+  return newState;
+}
+
+const updateWidgetProperties = (state, id, key, value) => {
+  const newState = Object.assign({}, state);
+  newState[id][key] = value;
   return newState;
 }
 
@@ -93,8 +107,10 @@ const canvasReducer = (state = {}, action) => {
       return newTextInput(state);
     case CanvasActionType.UPDATE_LAYOUT:
       return updateLayoutService(state, action.id, action.width, action.height, action.marginTop, action.marginBottom);
-    case CanvasActionType.MOVE_WIDGET:
-      return moveWidget(state, action.id, action.offsetX, action.offsetY);
+    case CanvasActionType.DRAG_WIDGET:
+      return dragWidget(state, action.id, action.offsetX, action.offsetY);
+    case CanvasActionType.UPDATE_WIDGET:
+      return updateWidgetProperties(state, action.id, action.key, action.value);
     default:
       return state;
   }
