@@ -44,9 +44,12 @@ export function updateLayout(id, width, height, marginTop, marginBottom){
   }
 }
 
-export function selectWidget(id){
+export function selectWidget(id, multi){
   return (dispatch, getState) => {
-    const action = {
+    const action = multi ? {
+      type: CanvasActionType.MULTI_SELECT_WIDGET,
+      id
+    }:{
       type: CanvasActionType.SELECT_WIDGET,
       id
     }

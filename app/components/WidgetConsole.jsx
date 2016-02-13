@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import FunctionalConsole from './console/FunctionalConsole.jsx';
 import LayoutConsole from './console/LayoutConsole.jsx';
 import PropertyConsole from './console/PropertyConsole.jsx';
 
@@ -29,6 +30,7 @@ export default class WidgetConsole extends Component{
   renderConsole(widget, actions) {
     return (
       <div>
+        <FunctionalConsole widget={widget} actions={actions} />
         <LayoutConsole widget={widget} actions={actions}/>
         <PropertyConsole widget={widget} actions={actions} />
       </div>

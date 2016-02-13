@@ -23,7 +23,7 @@ export default class PropertyConsole extends Component {
 
     return(
       <div className="console-property-panel">
-        <h3>Functional Properties</h3>
+        <h3>Attribute Section</h3>
         <hr style={{margin: '0 0 5px  0'}} />
 
         <div className="form-horizontal">

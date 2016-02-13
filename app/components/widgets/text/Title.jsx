@@ -54,9 +54,10 @@ class Title extends Component {
     return connectDragSource(<Tag className={className} id={id} style={style} onClick={this.handleClick}>{text}</Tag>)
   }
 
-  handleClick(){
+  handleClick(e){
     const {id, actions} = this.props;
-    actions.selectWidget(id);
+    const multi = e.ctrlKey;
+    actions.selectWidget(id, multi);
   }
 }
 
