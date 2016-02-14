@@ -89,3 +89,24 @@ export function updateWidget(id, key, value){
     dispatch(action);
   }
 }
+
+export function alignWidgets(widgetIds, direction){
+  return (dispatch, getState) => {
+    const action = {
+      type : CanvasActionType.ALIGN_WIDGETS,
+      widgetIds,
+      direction
+    }
+    dispatch(action);
+  }
+}
+
+export function deleteSelectWidgets(widgetIds){
+  return (dispatch, getState) => {
+    const action = {
+      type : CanvasActionType.DELETE_WIDGETS,
+      widgetIds
+    }
+    dispatch(action);
+  }
+}

@@ -1,6 +1,7 @@
 import uuid from 'node-uuid';
 import * as WIDGET_TYPE from '../constants/WidgetType';
 import * as CanvasActionType from '../constants/CanvasActionType';
+import * as AlignmentSupport from '../support/AlignmentSupport';
 
 const getYPosition = (state) => {
   let maxY = 0;
@@ -116,6 +117,22 @@ const updateWidgetProperties = (state, id, key, value) => {
   return newState;
 }
 
+const alignWidgets = (state, ids, dir) => {
+  const newState = Object.assign({}, state);
+  return AlignmentSupport.alignWidgets(newState, ids, dir);
+}
+
+const deleteSelectWidgets = (state, ids) => {
+  const newState = {};
+
+  for(let id in state){
+    if(ids.indexOf(id) < 0)
+      newState[id] = state[id];
+  }
+
+  return newState;
+}
+
 const canvasReducer = (state = {}, action) => {
   switch(action.type){
     case CanvasActionType.NEW_TITLE:
@@ -132,6 +149,10 @@ const canvasReducer = (state = {}, action) => {
       return dragWidget(state, action.id, action.offsetX, action.offsetY);
     case CanvasActionType.UPDATE_WIDGET:
       return updateWidgetProperties(state, action.id, action.key, action.value);
+    case CanvasActionType.ALIGN_WIDGETS:
+      return alignWidgets(state, action.widgetIds, action.direction);
+    case CanvasActionType.DELETE_WIDGETS:
+      return deleteSelectWidgets(state, action.widgetIds);
     default:
       return state;
   }

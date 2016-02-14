@@ -10,3 +10,5 @@ export const SELECT_WIDGET = 'SELECT_WIDGET';
 export const MOVE_WIDGET = 'MOVE_WIDGET';
 export const DRAG_WIDGET = 'DRAG_WIDGET';
 export const UPDATE_WIDGET = 'UPDATE_WIDGET';
+export const ALIGN_WIDGETS = 'ALIGN_WIDGETS';
+export const DELETE_WIDGETS = 'DELETE_WIDGETS';

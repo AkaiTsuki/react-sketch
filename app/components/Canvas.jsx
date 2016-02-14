@@ -90,7 +90,7 @@ class Canvas extends Component{
 
   renderTextInput(widget){
     const {selected} = this.props;
-    return <TextInput key={widget.id} id={widget.id} x={widget.x} y={widget.y} actions={this.props.actions} isSelected={selected[widget.id] === true} />
+    return <TextInput onSelect={this.props.actions.selectWidget} key={widget.id} id={widget.id} x={widget.x} y={widget.y} actions={this.props.actions} isSelected={selected[widget.id] === true} />
   }
 
   renderPanel(widget){
