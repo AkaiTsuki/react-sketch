@@ -47,6 +47,8 @@ const selectedReducer = (state={}, action) => {
       return updateSelects(state, action.id, true);
     case CanvasActionType.DELETE_WIDGETS:
       return deleteSelects(state, action.widgetIds);
+    case CanvasActionType.UNSELECT_ALL:
+      return {};
     default:
       return state;
   }

@@ -110,3 +110,12 @@ export function deleteSelectWidgets(widgetIds){
     dispatch(action);
   }
 }
+
+export function unSelectAll(){
+  return (dispatch, getState) => {
+    const action = {
+      type : CanvasActionType.UNSELECT_ALL
+    }
+    dispatch(action);
+  }
+}

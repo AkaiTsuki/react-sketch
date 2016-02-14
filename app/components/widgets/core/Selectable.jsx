@@ -24,6 +24,7 @@ export const Selectable = ComposedComponent => {
     }
 
     _onClick(e){
+      e.stopPropagation();
       const {id, onSelect} = this.props;
       if(!id){
         console.error("No id field is defined in props");

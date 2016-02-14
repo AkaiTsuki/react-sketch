@@ -26,6 +26,7 @@ function collect(connect, monitor) {
 class Canvas extends Component{
   constructor(props, context) {
     super(props, context);
+    this._onClick = this._onClick.bind(this);
   }
 
   render() {
@@ -44,11 +45,16 @@ class Canvas extends Component{
 
     return connectDropTarget(
       <div className="col-md-7 full-height" style={style}>
-        <div className="paper full-height" style={paperStyle}>
+        <div className="paper full-height" style={paperStyle} onClick={this._onClick}>
           {this.renderWidgets()}
         </div>
       </div>
     )
+  }
+
+  _onClick(e) {
+    const {actions} = this.props;
+    actions.unSelectAll();
   }
 
   renderWidgets() {
