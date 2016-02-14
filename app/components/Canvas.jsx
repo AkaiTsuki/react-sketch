@@ -2,9 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import * as WIDGET_TYPE from '../constants/WidgetType';
 import Label from './widgets/text/Label.jsx';
 import Title from './widgets/text/Title.jsx';
-
 import TextInput from './widgets/form/TextInput.jsx';
-
 import Panel from './widgets/container/Panel.jsx';
 
 import { DropTarget } from 'react-dnd';
@@ -82,12 +80,12 @@ class Canvas extends Component{
 
   renderTitle(widget){
     const {selected} = this.props;
-    return <Title key={widget.id} id={widget.id} tag={widget.dom} text={widget.text} x={widget.x} y={widget.y} actions={this.props.actions} isSelected={selected[widget.id] === true} />
+    return <Title onSelect={this.props.actions.selectWidget} key={widget.id} id={widget.id} tag={widget.dom} text={widget.text} x={widget.x} y={widget.y} actions={this.props.actions} isSelected={selected[widget.id] === true} />
   }
 
   renderLabel(widget){
     const {selected} = this.props;
-    return <Label key={widget.id} id={widget.id} text={widget.text} x={widget.x} y={widget.y} actions={this.props.actions} isSelected={selected[widget.id] === true} />
+    return <Label onSelect={this.props.actions.selectWidget} key={widget.id} id={widget.id} text={widget.text} x={widget.x} y={widget.y} actions={this.props.actions} isSelected={selected[widget.id] === true} />
   }
 
   renderTextInput(widget){
@@ -97,7 +95,7 @@ class Canvas extends Component{
 
   renderPanel(widget){
     const {selected} = this.props;
-    return <Panel key={widget.id} id={widget.id} x={widget.x} y={widget.y} actions={this.props.actions} isSelected={selected[widget.id] === true} width={widget.width} height={widget.height} />
+    return <Panel onSelect={this.props.actions.selectWidget} key={widget.id} id={widget.id} x={widget.x} y={widget.y} actions={this.props.actions} isSelected={selected[widget.id] === true} width={widget.width} height={widget.height}></Panel>
   }
 }
 
