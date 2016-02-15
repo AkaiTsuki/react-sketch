@@ -113,7 +113,17 @@ const dragWidget = (state, id, offsetX, offsetY) => {
 
 const updateWidgetProperties = (state, id, key, value) => {
   const newState = Object.assign({}, state);
-  newState[id][key] = value;
+  switch(key){
+    case "x":
+    case "y":
+    case "width":
+    case "height":
+      newState[id][key] = parseInt(value);
+      break;
+    default:
+      newState[id][key] = value;
+  }
+
   return newState;
 }
 
