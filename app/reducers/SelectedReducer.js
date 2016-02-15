@@ -25,7 +25,17 @@ const updateSelects = (state, id, multi) => {
       unselect(newState, _id);
     }
   }
-  
+
+  return newState;
+}
+
+const deleteSelects = (state, ids) => {
+  const newState = {};
+
+  for(let id in state){
+    if(ids.indexOf(id) < 0) newState[id] = state[id];
+  }
+
   return newState;
 }
 
@@ -35,6 +45,10 @@ const selectedReducer = (state={}, action) => {
       return updateSelects(state, action.id, false);
     case CanvasActionType.MULTI_SELECT_WIDGET:
       return updateSelects(state, action.id, true);
+    case CanvasActionType.DELETE_WIDGETS:
+      return deleteSelects(state, action.widgetIds);
+    case CanvasActionType.UNSELECT_ALL:
+      return {};
     default:
       return state;
   }

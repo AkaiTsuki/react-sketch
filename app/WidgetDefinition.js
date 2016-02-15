@@ -43,6 +43,17 @@ const WidgetDefinition = {
         display: "Input Text Area"
       }
     ]
+  },
+  "container": {
+    name: "Container Widgets",
+    widgets: [
+      {
+        name: WIDGET_TYPE.WIDGET_PANEL,
+        icon: 'fa fa-columns',
+        display: "Panel Container",
+        action: 'createPanel'
+      }
+    ]
   }
 }
 

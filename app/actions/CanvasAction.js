@@ -30,6 +30,15 @@ export function createTextInput(){
   }
 }
 
+export function createPanel(){
+  return (dispatch, getState) => {
+    const action = {
+      type: CanvasActionType.NEW_PANEL
+    };
+    dispatch(action);
+  }
+}
+
 export function updateLayout(id, width, height, marginTop, marginBottom){
   return (dispatch, getState) => {
     const action = {
@@ -76,6 +85,36 @@ export function updateWidget(id, key, value){
       id,
       key,
       value
+    }
+    dispatch(action);
+  }
+}
+
+export function alignWidgets(widgetIds, direction){
+  return (dispatch, getState) => {
+    const action = {
+      type : CanvasActionType.ALIGN_WIDGETS,
+      widgetIds,
+      direction
+    }
+    dispatch(action);
+  }
+}
+
+export function deleteSelectWidgets(widgetIds){
+  return (dispatch, getState) => {
+    const action = {
+      type : CanvasActionType.DELETE_WIDGETS,
+      widgetIds
+    }
+    dispatch(action);
+  }
+}
+
+export function unSelectAll(){
+  return (dispatch, getState) => {
+    const action = {
+      type : CanvasActionType.UNSELECT_ALL
     }
     dispatch(action);
   }

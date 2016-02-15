@@ -1,61 +1,21 @@
 import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
-import * as WidgetUtil from '../../WidgetUtil';
-import * as WidgetType from '../../../constants/WidgetType';
-import { DragSource } from 'react-dnd';
-
-const labelSource = {
-  beginDrag(props) {
-    return {
-      id: props.id
-    };
-  }
-};
-
-function collect(connect, monitor) {
-  return {
-    connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging()
-  }
-}
+import {Measurable} from '../core/Measurable';
+import {Selectable} from '../core/Selectable';
+import {Draggable} from '../core/Draggable';
 
 class Label extends Component{
   constructor(props, context) {
     super(props, context);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  componentDidMount(){
-    const {id, actions} = this.props;
-    const self = ReactDOM.findDOMNode(this);
-    const width = self.offsetWidth;
-    const height = self.offsetHeight;
-    const marginTop = WidgetUtil.getTopMargin(self);
-    const marginBottom = WidgetUtil.getBottomMargin(self);
-
-    actions.updateLayout(id, width, height, marginTop, marginBottom);
   }
 
   render(){
-    const {id, text, x, y, isSelected, connectDragSource} = this.props;
+    const {id, text} = this.props;
     const style = {
-      top: y,
-      left: x,
       margin: 0
     }
 
-    let className = "widget abs-pos";
-    if(isSelected){
-      className = className + " selected";
-    }
-
-    return connectDragSource(<label className={className} style={style} onClick={this.handleClick}>{text}</label>);
-  }
-
-  handleClick(){
-    const {id, actions} = this.props;
-    actions.selectWidget(id);
+    return (<label className="widget" style={style} >{text}</label>);
   }
 }
 
-export default DragSource(WidgetType.WIDGET_DRAGGABLE, labelSource, collect)(Label);
+export default Draggable(Selectable(Measurable(Label)));

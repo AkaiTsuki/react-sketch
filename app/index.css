@@ -10,6 +10,7 @@ html, body, .full-height{
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
+  margin: 0;
 }
 
 .widget:hover {

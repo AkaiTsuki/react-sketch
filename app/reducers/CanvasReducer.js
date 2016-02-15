@@ -1,6 +1,7 @@
 import uuid from 'node-uuid';
 import * as WIDGET_TYPE from '../constants/WidgetType';
 import * as CanvasActionType from '../constants/CanvasActionType';
+import * as AlignmentSupport from '../support/AlignmentSupport';
 
 const getYPosition = (state) => {
   let maxY = 0;
@@ -65,6 +66,25 @@ const newTextInput = (state) => {
   return newState;
 }
 
+const newPanel = (state) => {
+  const newState = Object.assign({}, state);
+  const id = uuid.v4();
+
+  const widget = {
+    id,
+    type: WIDGET_TYPE.WIDGET_PANEL,
+    x: 0,
+    y: getYPosition(newState),
+    width: 1000,
+    height: 800,
+    children: [
+    ]
+  }
+
+  newState[id] = widget;
+  return newState;
+}
+
 const updateLayoutService = (state, id, width, height, marginTop, marginBottom) => {
   const newState = Object.assign({}, state);
   newState[id].height = height;
@@ -97,6 +117,22 @@ const updateWidgetProperties = (state, id, key, value) => {
   return newState;
 }
 
+const alignWidgets = (state, ids, dir) => {
+  const newState = Object.assign({}, state);
+  return AlignmentSupport.alignWidgets(newState, ids, dir);
+}
+
+const deleteSelectWidgets = (state, ids) => {
+  const newState = {};
+
+  for(let id in state){
+    if(ids.indexOf(id) < 0)
+      newState[id] = state[id];
+  }
+
+  return newState;
+}
+
 const canvasReducer = (state = {}, action) => {
   switch(action.type){
     case CanvasActionType.NEW_TITLE:
@@ -105,12 +141,18 @@ const canvasReducer = (state = {}, action) => {
       return newLabel(state, action.text);
     case CanvasActionType.NEW_TEXT_INPUT:
       return newTextInput(state);
+    case CanvasActionType.NEW_PANEL:
+      return newPanel(state);
     case CanvasActionType.UPDATE_LAYOUT:
       return updateLayoutService(state, action.id, action.width, action.height, action.marginTop, action.marginBottom);
     case CanvasActionType.DRAG_WIDGET:
       return dragWidget(state, action.id, action.offsetX, action.offsetY);
     case CanvasActionType.UPDATE_WIDGET:
       return updateWidgetProperties(state, action.id, action.key, action.value);
+    case CanvasActionType.ALIGN_WIDGETS:
+      return alignWidgets(state, action.widgetIds, action.direction);
+    case CanvasActionType.DELETE_WIDGETS:
+      return deleteSelectWidgets(state, action.widgetIds);
     default:
       return state;
   }
