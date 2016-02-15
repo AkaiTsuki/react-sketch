@@ -12,11 +12,11 @@ export default class Panel extends Component{
     const {id, width, height, x, y, isSelected} = this.props;
 
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'rgba(0,0,0,0)',
       width,
       height,
-      border: '1px solid #ccc',
-      padding: '5px',
+      border: '1px dashed #aaa',
+      padding: '5px'
     }
 
     return (
