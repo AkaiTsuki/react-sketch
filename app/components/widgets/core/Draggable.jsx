@@ -4,9 +4,14 @@ import * as WidgetType from '../../../constants/WidgetType';
 import { DragSource } from 'react-dnd';
 
 const source = {
+  canDrag(props) {
+    return props.selected[props.id];
+  },
+
   beginDrag(props) {
     return {
-      id: props.id
+      id: props.id,
+      selected: props.selected
     };
   }
 };

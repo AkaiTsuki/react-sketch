@@ -9,10 +9,9 @@ import { DropTarget } from 'react-dnd';
 
 const canvasTarget = {
   drop(props, monitor) {
-    console.log("Drop");
     const draggedItem = monitor.getItem();
     const offset = monitor.getDifferenceFromInitialOffset();
-    props.actions.moveWidget(draggedItem.id, offset.x, offset.y);
+    props.actions.moveSelectedWidgets(draggedItem.selected, offset.x, offset.y);
   }
 };
 
@@ -86,22 +85,22 @@ class Canvas extends Component{
 
   renderTitle(widget){
     const {selected} = this.props;
-    return <Title onSelect={this.props.actions.selectWidget} key={widget.id} id={widget.id} tag={widget.dom} text={widget.text} x={widget.x} y={widget.y} actions={this.props.actions} isSelected={selected[widget.id] === true} />
+    return <Title onSelect={this.props.actions.selectWidget} key={widget.id} id={widget.id} tag={widget.dom} text={widget.text} x={widget.x} y={widget.y} actions={this.props.actions} isSelected={selected[widget.id] === true} selected={selected} />
   }
 
   renderLabel(widget){
     const {selected} = this.props;
-    return <Label onSelect={this.props.actions.selectWidget} key={widget.id} id={widget.id} text={widget.text} x={widget.x} y={widget.y} actions={this.props.actions} isSelected={selected[widget.id] === true} />
+    return <Label onSelect={this.props.actions.selectWidget} key={widget.id} id={widget.id} text={widget.text} x={widget.x} y={widget.y} actions={this.props.actions} isSelected={selected[widget.id] === true} selected={selected} />
   }
 
   renderTextInput(widget){
     const {selected} = this.props;
-    return <TextInput onSelect={this.props.actions.selectWidget} width={widget.width} key={widget.id} id={widget.id} x={widget.x} y={widget.y} actions={this.props.actions} isSelected={selected[widget.id] === true} />
+    return <TextInput onSelect={this.props.actions.selectWidget} width={widget.width} key={widget.id} id={widget.id} x={widget.x} y={widget.y} actions={this.props.actions} isSelected={selected[widget.id] === true} selected={selected} />
   }
 
   renderPanel(widget){
     const {selected} = this.props;
-    return <Panel onSelect={this.props.actions.selectWidget} key={widget.id} id={widget.id} x={widget.x} y={widget.y} actions={this.props.actions} isSelected={selected[widget.id] === true} width={widget.width} height={widget.height}></Panel>
+    return <Panel onSelect={this.props.actions.selectWidget} key={widget.id} id={widget.id} x={widget.x} y={widget.y} actions={this.props.actions} isSelected={selected[widget.id] === true} width={widget.width} height={widget.height} selected={selected}></Panel>
   }
 }
 

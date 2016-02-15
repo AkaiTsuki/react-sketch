@@ -111,6 +111,19 @@ const dragWidget = (state, id, offsetX, offsetY) => {
   return newState;
 }
 
+const dragWidgets = (state, selected, offsetX, offsetY) => {
+  const newState = Object.assign({}, state);
+
+  for(let id in selected){
+    if(selected[id]){
+      newState[id].x = reviseToTens(newState[id].x + offsetX);
+      newState[id].y = reviseToTens(newState[id].y + offsetY);
+    }
+  }
+  
+  return newState;
+}
+
 const updateWidgetProperties = (state, id, key, value) => {
   const newState = Object.assign({}, state);
   switch(key){
@@ -157,6 +170,8 @@ const canvasReducer = (state = {}, action) => {
       return updateLayoutService(state, action.id, action.width, action.height, action.marginTop, action.marginBottom);
     case CanvasActionType.DRAG_WIDGET:
       return dragWidget(state, action.id, action.offsetX, action.offsetY);
+    case CanvasActionType.DRAG_WIDGETS:
+      return dragWidgets(state, action.selected, action.offsetX, action.offsetY);
     case CanvasActionType.UPDATE_WIDGET:
       return updateWidgetProperties(state, action.id, action.key, action.value);
     case CanvasActionType.ALIGN_WIDGETS:

@@ -78,6 +78,18 @@ export function moveWidget(id, offsetX, offsetY){
   }
 }
 
+export function moveSelectedWidgets(selected, offsetX, offsetY){
+  return (dispatch, getState) => {
+    const action = {
+      type : CanvasActionType.DRAG_WIDGETS,
+      selected,
+      offsetX,
+      offsetY
+    }
+    dispatch(action);
+  }
+}
+
 export function updateWidget(id, key, value){
   return (dispatch, getState) => {
     const action = {
