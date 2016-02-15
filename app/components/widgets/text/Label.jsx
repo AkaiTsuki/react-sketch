@@ -9,7 +9,7 @@ class Label extends Component{
   }
 
   render(){
-    const {id, text} = this.props;
+    const {id, text, width, height} = this.props;
     const style = {
       margin: 0
     }

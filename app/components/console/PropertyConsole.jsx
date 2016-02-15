@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import EditableDiv from './EditableDiv.jsx'
 
 export default class PropertyConsole extends Component {
   constructor(props, context) {
@@ -14,12 +15,7 @@ export default class PropertyConsole extends Component {
   }
 
   render(){
-    const {widget} = this.props
-
-    const inputStyle = {
-      width: 100,
-      marginRight: 10
-    }
+    const {widget, actions} = this.props
 
     return(
       <div className="console-property-panel">
@@ -27,15 +23,18 @@ export default class PropertyConsole extends Component {
         <hr style={{margin: '0 0 5px  0'}} />
 
         <div className="form-horizontal">
-          <div className="form-group">
-            <label htmlFor="console-property-text" className="col-sm-2 control-label">Text</label>
-            <div className="col-sm-10">
-              {
-                this.state.isEditingText ? <input type="text" className="form-control" id="console-property-text" autoFocus={true} defaultValue={widget.text} onBlur={this.onBlurText} onKeyUp={this.onKeyupText} />
-              : <div className="form-control" onClick={this.onClickText}>{widget.text}</div>
-              }
-            </div>
-          </div>
+          {widget.text ? this.renderTextPropertyInput(widget, actions) : null}
+        </div>
+      </div>
+    )
+  }
+
+  renderTextPropertyInput(widget, actions){
+    return (
+      <div className="form-group">
+        <label htmlFor="console-property-text" className="col-sm-2 control-label">Text</label>
+        <div className="col-sm-10">
+          <EditableDiv attr='text' value={widget.text} widgetId={widget.id} onUpdate={actions.updateWidget} width='100%' />
         </div>
       </div>
     )

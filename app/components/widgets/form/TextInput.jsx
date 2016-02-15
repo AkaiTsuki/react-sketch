@@ -9,9 +9,13 @@ class TextInput extends Component {
   }
 
   render(){
-    const {id} = this.props;
+    const {id, width} = this.props;
     const style = {
-      margin: 0
+      margin: 0,
+    }
+
+    if(width){
+      style.width = width;
     }
 
     let className = "widget form-control";

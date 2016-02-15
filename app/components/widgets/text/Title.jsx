@@ -9,10 +9,14 @@ class Title extends Component {
   }
 
   render(){
-    const {id, text, tag} = this.props;
+    const {id, text, tag, width, height} = this.props;
     const Tag = tag;
 
-    return <Tag className="widget" id={id}>{text}</Tag>
+    const style = {
+      margin: 0
+    }
+
+    return <Tag className="widget" id={id} style={style}>{text}</Tag>
   }
 }
 

@@ -1,24 +1,13 @@
 import React, { Component, PropTypes } from 'react';
+import EditableDiv from './EditableDiv.jsx'
 
 export default class LayoutConsole extends Component {
   constructor(props, context) {
     super(props, context);
-
-    this.state = {
-      isEditingX: false,
-      isEditingY: false
-    }
-    this.onClickX = this.onClickX.bind(this);
-    this.onBlurX = this.onBlurX.bind(this);
-    this.onKeyupX = this.onKeyupX.bind(this);
-    this.onClickY = this.onClickY.bind(this);
-    this.onBlurY = this.onBlurY.bind(this);
-    this.onKeyupY = this.onKeyupY.bind(this);
-    this.updateWidget = this.updateWidget.bind(this);
   }
 
   render() {
-    const {widget} = this.props;
+    const {widget, actions} = this.props;
 
     const inputStyle = {
       width: 100,
@@ -32,17 +21,11 @@ export default class LayoutConsole extends Component {
         <div className="form-inline">
           <div className="form-group">
             <label htmlFor="console-layout-x">left: </label>
-            {
-              this.state.isEditingX ? <input type="text" className="form-control" id="console-layout-x" defaultValue={widget.x} autoFocus={true} onBlur={this.onBlurX} onKeyUp={this.onKeyupX} style={inputStyle} />
-            : <div className="form-control" style={inputStyle} onClick={this.onClickX} >{widget.x}</div>
-            }
+            <EditableDiv attr='x' value={widget.x} widgetId={widget.id} onUpdate={actions.updateWidget} />
           </div>
           <div className="form-group">
             <label htmlFor="console-layout-y">top: </label>
-              {
-                this.state.isEditingY ? <input type="text" className="form-control" id="console-layout-y" defaultValue={widget.y} autoFocus={true} onBlur={this.onBlurY} onKeyUp={this.onKeyupY}  style={inputStyle} />
-              : <div className="form-control" style={inputStyle} onClick={this.onClickY}>{widget.y}</div>
-              }
+              <EditableDiv attr='y' value={widget.y} widgetId={widget.id} onUpdate={actions.updateWidget} />
           </div>
           <div className="form-group">
             <label htmlFor="console-layout-step">step: </label>
@@ -53,56 +36,15 @@ export default class LayoutConsole extends Component {
         <div className="form-inline">
           <div className="form-group">
             <label htmlFor="console-layout-width">width: </label>
-            <input type="text" className="form-control" id="console-layout-width" value={widget.width} readOnly style={inputStyle} />
+            <EditableDiv attr='width' value={widget.width} widgetId={widget.id} onUpdate={actions.updateWidget} />
           </div>
           <div className="form-group">
             <label htmlFor="console-layout-height">height: </label>
-            <input type="text" className="form-control" id="console-layout-height" value={widget.height} readOnly style={inputStyle} />
+            <EditableDiv attr='height' value={widget.height} widgetId={widget.id} onUpdate={actions.updateWidget} />
           </div>
         </div>
       </div>
     )
-  }
-
-  onClickX(){
-    this.setState({isEditingX: true});
-  }
-
-  onBlurX(e){
-    this.setState({isEditingX: false});
-    const value = e.target.value.trim();
-    this.updateWidget('x', parseInt(value));
-  }
-
-  onKeyupX(e){
-    if(e.keyCode === 13){
-      this.setState({isEditingX: false});
-      const value = e.target.value.trim();
-      this.updateWidget('x', parseInt(value));
-    }
-  }
-
-  onClickY(){
-    this.setState({isEditingY: true});
-  }
-
-  onBlurY(e){
-    this.setState({isEditingY: false});
-    const value = e.target.value.trim();
-    this.updateWidget('y', parseInt(value));
-  }
-
-  onKeyupY(e){
-    if(e.keyCode === 13){
-      this.setState({isEditingY: false});
-      const value = e.target.value.trim();
-      this.updateWidget('y', parseInt(value));
-    }
-  }
-
-  updateWidget(key, value){
-    const {widget, actions} = this.props;
-    actions.updateWidget(widget.id, key, value);
   }
 
 }
