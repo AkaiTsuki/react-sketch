@@ -131,3 +131,15 @@ export function unSelectAll(){
     dispatch(action);
   }
 }
+
+export function dragSelectWidgets(widgets, init, dimension){
+  return (dispatch, getState) => {
+    const action = {
+      type : CanvasActionType.DRAG_SELECT,
+      widgets,
+      initPos: init,
+      dimension
+    }
+    dispatch(action);
+  }
+}

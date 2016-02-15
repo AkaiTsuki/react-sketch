@@ -8,6 +8,7 @@ export const UPDATE_LAYOUT = 'UPDATE_LAYOUT';
 export const MULTI_SELECT_WIDGET = 'MULTI_SELECT_WIDGET';
 export const SELECT_WIDGET = 'SELECT_WIDGET';
 export const UNSELECT_ALL = 'UNSELECT_ALL';
+export const DRAG_SELECT = 'DRAG_SELECT';
 export const MOVE_WIDGET = 'MOVE_WIDGET';
 export const DRAG_WIDGET = 'DRAG_WIDGET';
 export const DRAG_WIDGETS = 'DRAG_WIDGETS';

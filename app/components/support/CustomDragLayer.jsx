@@ -4,7 +4,7 @@ import { DragLayer } from 'react-dnd';
 import {renderPreivew} from '../../support/WidgetRenderSupport'
 
 const layerStyles = {
-  position: 'fixed',
+  position: 'absolute',
   pointerEvents: 'none',
   zIndex: 100,
   left: 0,
@@ -22,15 +22,17 @@ class CustomDragLayer extends Component{
     const deltaX = draggedWidget.x - widget.x;
     const deltaY = draggedWidget.y - widget.y;
 
-    return {
+    const style = {
       position: 'absolute',
       // transform: transform,
       // WebkitTransform: transform
-      top: y- deltaY,
-      left: x - deltaX,
+      top: widget.y + y,
+      left: widget.x + x,
       boxShadow: '0 0 0 1px blue',
       opacity: 0.5
     };
+
+    return style;
   }
 
   renderItem(props, widget, draggedWidget) {
@@ -53,11 +55,38 @@ class CustomDragLayer extends Component{
     return selectedWidgets.map(widget => this.renderItem(props, widget, draggedWidget));
   }
 
+  renderCanvasPreview(props){
+    const {currentOffset, initClientOffset, initSourceClientOffset} = props;
+    const initOffset = {
+      x: initClientOffset.x - initSourceClientOffset.x,
+      y: initClientOffset.y - initSourceClientOffset.y,
+    }
+
+    const style = {
+      position: 'absolute',
+      top: initOffset.y,
+      left: initOffset.x,
+      width: currentOffset.x,
+      height: currentOffset.y,
+      boxShadow: '0 0 0 1px red'
+    };
+
+    return (
+      <div style={layerStyles}>
+        <div style={style}></div>
+      </div>
+    )
+  }
+
   render() {
     const { item, isDragging, currentOffset } = this.props;
 
     if (!isDragging || !currentOffset) {
       return null;
+    }
+
+    if(item.id === 'canvas'){
+      return this.renderCanvasPreview(this.props);
     }
 
     return (
@@ -71,7 +100,9 @@ class CustomDragLayer extends Component{
 function collect(monitor) {
   return {
     item: monitor.getItem(),
-    currentOffset: monitor.getSourceClientOffset(),
+    currentOffset: monitor.getDifferenceFromInitialOffset(),
+    initClientOffset: monitor.getInitialClientOffset(),
+    initSourceClientOffset: monitor.getInitialSourceClientOffset(),
     isDragging: monitor.isDragging()
   }
 }

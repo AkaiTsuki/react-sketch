@@ -120,7 +120,7 @@ const dragWidgets = (state, selected, offsetX, offsetY) => {
       newState[id].y = reviseToTens(newState[id].y + offsetY);
     }
   }
-  
+
   return newState;
 }
 

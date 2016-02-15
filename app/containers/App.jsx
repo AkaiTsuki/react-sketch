@@ -6,7 +6,6 @@ import MainFrame from '../components/MainFrame.jsx'
 import WidgetLibPanel from '../components/WidgetLibPanel.jsx'
 import WidgetConsole from '../components/WidgetConsole.jsx'
 import Canvas from '../components/Canvas.jsx'
-import CustomDragLayer from '../components/support/CustomDragLayer.jsx';
 
 class App extends React.Component {
   render() {
@@ -17,7 +16,7 @@ class App extends React.Component {
       <MainFrame>
         <WidgetLibPanel widgetLib={widgetLib} actions={actions} />
         <Canvas widgets={widgets} actions={actions} selected={selected} />
-        <CustomDragLayer widgets={widgets} />
+
         <WidgetConsole widget={widget} actions={actions} selected={selected} />
       </MainFrame>
     )
