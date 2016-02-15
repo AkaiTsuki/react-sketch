@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import {Measurable} from '../core/Measurable';
-import {Selectable} from '../core/Selectable';
-import {Draggable} from '../core/Draggable';
+import {Measurable} from '../../support/Measurable';
+import {Selectable} from '../../support/Selectable';
+import {Draggable} from '../../support/Draggable';
 
 class Title extends Component {
   constructor(props, context) {

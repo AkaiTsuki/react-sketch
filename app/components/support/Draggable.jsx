@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import * as WidgetType from '../../../constants/WidgetType';
+import * as WidgetType from '../../constants/WidgetType';
 import { DragSource } from 'react-dnd';
 
 const source = {
