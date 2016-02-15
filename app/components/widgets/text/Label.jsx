@@ -3,7 +3,7 @@ import {Measurable} from '../../support/Measurable';
 import {Selectable} from '../../support/Selectable';
 import {Draggable} from '../../support/Draggable';
 
-class Label extends Component{
+export default class Label extends Component{
   constructor(props, context) {
     super(props, context);
   }
@@ -17,5 +17,3 @@ class Label extends Component{
     return (<label className="widget" style={style} >{text}</label>);
   }
 }
-
-export default Draggable(Selectable(Measurable(Label)));

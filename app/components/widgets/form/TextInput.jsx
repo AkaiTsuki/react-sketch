@@ -3,7 +3,7 @@ import {Measurable} from '../../support/Measurable';
 import {Selectable} from '../../support/Selectable';
 import {Draggable} from '../../support/Draggable';
 
-class TextInput extends Component {
+export default class TextInput extends Component {
   constructor(props, context) {
     super(props, context);
   }
@@ -20,8 +20,6 @@ class TextInput extends Component {
 
     let className = "widget form-control";
 
-    return (<input type="text" className={className} style={style} onClick={this.handleClick} placeholder="Text Input Box" />);
+    return (<input type="text" className={className} style={style} placeholder="Text Input Box" />);
   }
 }
-
-export default Draggable(Selectable(Measurable(TextInput)));

@@ -1,9 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import * as WIDGET_TYPE from '../constants/WidgetType';
-import Label from './widgets/text/Label.jsx';
-import Title from './widgets/text/Title.jsx';
-import TextInput from './widgets/form/TextInput.jsx';
-import Panel from './widgets/container/Panel.jsx';
+import {renderDraggable} from '../support/WidgetRenderSupport'
 
 import { DropTarget } from 'react-dnd';
 
@@ -18,7 +15,8 @@ const canvasTarget = {
 function collect(connect, monitor) {
   return {
     connectDropTarget: connect.dropTarget(),
-    isOver: monitor.isOver()
+    isOver: monitor.isOver(),
+    currentOffset: monitor.getSourceClientOffset()
   };
 }
 
@@ -68,39 +66,7 @@ class Canvas extends Component{
   }
 
   renderWidget(widget) {
-    switch(widget.type){
-      case WIDGET_TYPE.WIDGET_TITLE:
-        return this.renderTitle(widget);
-      case WIDGET_TYPE.WIDGET_LABEL:
-        return this.renderLabel(widget);
-      case WIDGET_TYPE.WIDGET_INPUT_TEXT:
-        return this.renderTextInput(widget);
-      case WIDGET_TYPE.WIDGET_PANEL:
-        return this.renderPanel(widget);
-      default:
-        console.error("Unsupport widget type: "+ widget.type);
-        return null;
-    }
-  }
-
-  renderTitle(widget){
-    const {selected} = this.props;
-    return <Title onSelect={this.props.actions.selectWidget} key={widget.id} id={widget.id} tag={widget.dom} text={widget.text} x={widget.x} y={widget.y} actions={this.props.actions} isSelected={selected[widget.id] === true} selected={selected} />
-  }
-
-  renderLabel(widget){
-    const {selected} = this.props;
-    return <Label onSelect={this.props.actions.selectWidget} key={widget.id} id={widget.id} text={widget.text} x={widget.x} y={widget.y} actions={this.props.actions} isSelected={selected[widget.id] === true} selected={selected} />
-  }
-
-  renderTextInput(widget){
-    const {selected} = this.props;
-    return <TextInput onSelect={this.props.actions.selectWidget} width={widget.width} key={widget.id} id={widget.id} x={widget.x} y={widget.y} actions={this.props.actions} isSelected={selected[widget.id] === true} selected={selected} />
-  }
-
-  renderPanel(widget){
-    const {selected} = this.props;
-    return <Panel onSelect={this.props.actions.selectWidget} key={widget.id} id={widget.id} x={widget.x} y={widget.y} actions={this.props.actions} isSelected={selected[widget.id] === true} width={widget.width} height={widget.height} selected={selected}></Panel>
+    return renderDraggable(widget, this.props);
   }
 }
 

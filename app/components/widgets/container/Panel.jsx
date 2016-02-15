@@ -3,7 +3,7 @@ import {Measurable} from '../../support/Measurable';
 import {Selectable} from '../../support/Selectable';
 import {Draggable} from '../../support/Draggable';
 
-class Panel extends Component{
+export default class Panel extends Component{
   constructor(props, context) {
     super(props, context);
   }
@@ -21,12 +21,10 @@ class Panel extends Component{
 
     return (
       <div className="widget" style={style}>
-        <div style={{position:'relative'}}>
+        <div style={{position: 'relative'}}>
           {this.props.children}
         </div>
       </div>
     )
   }
 }
-
-export default Draggable(Selectable(Measurable(Panel)));
