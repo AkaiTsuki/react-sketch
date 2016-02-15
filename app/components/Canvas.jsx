@@ -37,15 +37,22 @@ const canvasTarget = {
     if(draggedItem.id !== 'canvas'){
       const offset = monitor.getDifferenceFromInitialOffset();
       props.actions.moveSelectedWidgets(draggedItem.selected, offset.x, offset.y);
-    }else {
+    } else {
       const initClientOffset = monitor.getInitialClientOffset();
       const initSourceClientOffset = monitor.getInitialSourceClientOffset();
+      const currentOffset = monitor.getDifferenceFromInitialOffset();
+
       const leftTopOffset = {
-        x: initClientOffset.x - initSourceClientOffset.x,
-        y: initClientOffset.y - initSourceClientOffset.y,
+        x: currentOffset.x < 0 ? initClientOffset.x - initSourceClientOffset.x + currentOffset.x : initClientOffset.x - initSourceClientOffset.x,
+        y: currentOffset.y < 0 ? initClientOffset.y - initSourceClientOffset.y + currentOffset.y : initClientOffset.y - initSourceClientOffset.y,
       }
-      const offset = monitor.getDifferenceFromInitialOffset();
-      props.actions.dragSelectWidgets(props.widgets, leftTopOffset, offset);
+
+      const absCurrentOffset = {
+        x: Math.abs(currentOffset.x),
+        y: Math.abs(currentOffset.y)
+      }
+
+      props.actions.dragSelectWidgets(props.widgets, leftTopOffset, absCurrentOffset);
     }
   }
 };

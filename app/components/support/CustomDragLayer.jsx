@@ -58,16 +58,16 @@ class CustomDragLayer extends Component{
   renderCanvasPreview(props){
     const {currentOffset, initClientOffset, initSourceClientOffset} = props;
     const initOffset = {
-      x: initClientOffset.x - initSourceClientOffset.x,
-      y: initClientOffset.y - initSourceClientOffset.y,
+      x: currentOffset.x < 0 ? initClientOffset.x - initSourceClientOffset.x + currentOffset.x : initClientOffset.x - initSourceClientOffset.x,
+      y: currentOffset.y < 0 ? initClientOffset.y - initSourceClientOffset.y + currentOffset.y : initClientOffset.y - initSourceClientOffset.y,
     }
 
     const style = {
       position: 'absolute',
       top: initOffset.y,
       left: initOffset.x,
-      width: currentOffset.x,
-      height: currentOffset.y,
+      width: Math.abs(currentOffset.x),
+      height: Math.abs(currentOffset.y),
       boxShadow: '0 0 0 1px red'
     };
 
