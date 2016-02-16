@@ -49,7 +49,8 @@ class Canvas extends Component{
 
     const {connectDropTarget, widgets, actions, selected} = this.props;
     const style = {
-      backgroundColor: 'rgba(0,0,0,0.7)'
+      backgroundColor: 'rgba(0,0,0,0.7)',
+      paddingTop: '15px'
     };
 
     return connectDropTarget(
