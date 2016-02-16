@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import * as WidgetUtil from '../../WidgetUtil';
-import * as WidgetType from '../../../constants/WidgetType';
+import * as WidgetUtil from '../WidgetUtil';
+import * as WidgetType from '../../constants/WidgetType';
 
 
 /**

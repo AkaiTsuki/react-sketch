@@ -39,6 +39,25 @@ const deleteSelects = (state, ids) => {
   return newState;
 }
 
+const dragSelectWidgets = (state, widgets, initPos, range) => {
+  const newState = {};
+
+  const startX = initPos.x;
+  const startY = initPos.y;
+  const endX = initPos.x + range.x;
+  const endY = initPos.y + range.y;
+
+  for(let id in widgets){
+    const widget = widgets[id];
+    if(startX <= widget.x && widget.x <= endX && startY <= widget.y && widget.y <= endY
+      && startX <= widget.x+widget.width && widget.x+widget.width <= endX && startY <= widget.y+widget.height && widget.y+widget.height <= endY){
+      newState[id] = true;
+    }
+  }
+
+  return newState;
+}
+
 const selectedReducer = (state={}, action) => {
   switch (action.type) {
     case CanvasActionType.SELECT_WIDGET:
@@ -49,6 +68,8 @@ const selectedReducer = (state={}, action) => {
       return deleteSelects(state, action.widgetIds);
     case CanvasActionType.UNSELECT_ALL:
       return {};
+    case CanvasActionType.DRAG_SELECT:
+      return dragSelectWidgets(state, action.widgets, action.initPos, action.dimension);
     default:
       return state;
   }
