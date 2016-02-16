@@ -7,6 +7,8 @@ import { DragSource } from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
 import CustomDragLayer from './support/CustomDragLayer.jsx';
 
+const CANVAS_ID = 'canvas';
+
 const canvasSource = {
   canDrag(props) {
     for(let id in props.selected){
@@ -17,7 +19,7 @@ const canvasSource = {
 
   beginDrag(props) {
     return {
-      id : 'canvas'
+      id : CANVAS_ID
     };
   }
 };
@@ -34,7 +36,7 @@ function sourceCollect(connect, monitor) {
 const canvasTarget = {
   drop(props, monitor) {
     const draggedItem = monitor.getItem();
-    if(draggedItem.id !== 'canvas'){
+    if(draggedItem.id !== CANVAS_ID){
       const offset = monitor.getDifferenceFromInitialOffset();
       props.actions.moveSelectedWidgets(draggedItem.selected, offset.x, offset.y);
     } else {
@@ -97,11 +99,14 @@ class Canvas extends Component{
 
     return (connectDropTarget(
       <div className="col-md-7 full-height" style={style}>
-        {connectDragSource(<div className="paper full-height" style={paperStyle} onClick={this._onClick}>
-          {this.renderWidgets()}
-          <CustomDragLayer widgets={widgets} />
-        </div>)}
-
+        {
+          connectDragSource(
+            <div className="paper full-height" style={paperStyle} onClick={this._onClick}>
+              {this.renderWidgets()}
+              <CustomDragLayer widgets={widgets} />
+            </div>
+          )
+        }
       </div>
     ))
   }
