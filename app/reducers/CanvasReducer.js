@@ -95,11 +95,8 @@ const updateLayoutService = (state, id, width, height, marginTop, marginBottom) 
 }
 
 const reviseToTens = (val) => {
-  if(val <= 10){
-    return 0;
-  }
-
-  return (val % 10) <= 5 ? val - (val % 10) : val + 10 - (val % 10);
+  const result = Math.round(val / 20) * 20;
+  return result < 0 ? 0 : result;
 }
 
 const dragWidget = (state, id, offsetX, offsetY) => {
