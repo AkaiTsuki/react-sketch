@@ -56,7 +56,7 @@ class CustomDragLayer extends Component{
   }
 
   renderCanvasPreview(props){
-    const {currentOffset, initClientOffset, initSourceClientOffset} = props;
+    const {currentOffset, initClientOffset, initSourceClientOffset, isDragging} = props;
     const initOffset = {
       x: currentOffset.x < 0 ? initClientOffset.x - initSourceClientOffset.x + currentOffset.x : initClientOffset.x - initSourceClientOffset.x,
       y: currentOffset.y < 0 ? initClientOffset.y - initSourceClientOffset.y + currentOffset.y : initClientOffset.y - initSourceClientOffset.y,
