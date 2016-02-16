@@ -2,6 +2,10 @@ import React, { Component, PropTypes } from 'react';
 // Drag and Drop Lib
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
+import WidgetLibPanel from './WidgetLibPanel.jsx'
+import WidgetConsole from './WidgetConsole.jsx'
+import Canvas from './Canvas.jsx'
+import ToolBar from './ToolBar.jsx'
 
 class MainFrame extends Component{
   constructor(props, context) {
@@ -9,13 +13,31 @@ class MainFrame extends Component{
   }
 
   render() {
+    const {widgetLib, widgets, selected, actions} = this.props;
+    const selectedWidgetId = this.getSelectWidgetId(widgets, selected);
+    const widget = selectedWidgetId == null ? null : widgets[selectedWidgetId];
+
     return (
       <div className="container-fluid full-height" >
+        <div className="row">
+          <ToolBar widgets={widgets} />
+        </div>
         <div className="row full-height">
-          {this.props.children}
+          <WidgetLibPanel widgetLib={widgetLib} actions={actions} />
+          <Canvas widgets={widgets} actions={actions} selected={selected} />
+          <WidgetConsole widget={widget} actions={actions} selected={selected} />
         </div>
       </div>
     )
+  }
+
+  getSelectWidgetId(widgets, selected){
+    for(let id in selected){
+      if(selected[id]){
+        return id;
+      }
+    }
+    return null;
   }
 }
 

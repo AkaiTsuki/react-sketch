@@ -1,5 +1,15 @@
 import * as CanvasActionType from '../constants/CanvasActionType';
 
+export function initApp(widgets){
+  return (dispatch, getState) => {
+    const action = {
+      type: CanvasActionType.INIT_APP,
+      widgets
+    };
+    dispatch(action);
+  }
+}
+
 export function createTitle(x, y){
   return (dispatch, getState) => {
     const action = {

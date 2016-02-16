@@ -3,6 +3,18 @@ import * as WIDGET_TYPE from '../constants/WidgetType';
 import * as CanvasActionType from '../constants/CanvasActionType';
 import * as AlignmentSupport from '../support/AlignmentSupport';
 
+const copyState = (state) => {
+  const newState = {};
+  for(let id in state){
+    newState[id] = Object.assign({}, state[id]);
+  }
+  return newState;
+}
+
+const initApp = (state, widgets) => {
+  return widgets;
+}
+
 const getYPosition = (state) => {
   let maxY = 0;
   let maxKey = null;
@@ -19,7 +31,7 @@ const getYPosition = (state) => {
 }
 
 const newTitle = (state, dom, text) => {
-  const newState = Object.assign({}, state);
+  const newState = copyState(state);
 
   const id = uuid.v4();
   const widget = {
@@ -36,7 +48,7 @@ const newTitle = (state, dom, text) => {
 }
 
 const newLabel = (state, text) => {
-  const newState = Object.assign({}, state);
+  const newState = copyState(state);
   const id = uuid.v4();
 
   const widget = {
@@ -52,7 +64,7 @@ const newLabel = (state, text) => {
 }
 
 const newTextInput = (state) => {
-  const newState = Object.assign({}, state);
+  const newState = copyState(state);
   const id = uuid.v4();
 
   const widget = {
@@ -67,7 +79,7 @@ const newTextInput = (state) => {
 }
 
 const newPanel = (state) => {
-  const newState = Object.assign({}, state);
+  const newState = copyState(state);
   const id = uuid.v4();
 
   const widget = {
@@ -76,9 +88,7 @@ const newPanel = (state) => {
     x: 0,
     y: getYPosition(newState),
     width: 1000,
-    height: 800,
-    children: [
-    ]
+    height: 800
   }
 
   newState[id] = widget;
@@ -86,7 +96,7 @@ const newPanel = (state) => {
 }
 
 const updateLayoutService = (state, id, width, height, marginTop, marginBottom) => {
-  const newState = Object.assign({}, state);
+  const newState = copyState(state);
   newState[id].height = height;
   newState[id].width = width;
   newState[id].marginTop = marginTop;
@@ -100,7 +110,7 @@ const reviseToTens = (val) => {
 }
 
 const dragWidget = (state, id, offsetX, offsetY) => {
-  const newState = Object.assign({}, state);
+  const newState = copyState(state);
 
   newState[id].x = reviseToTens(newState[id].x + offsetX);
   newState[id].y = reviseToTens(newState[id].y + offsetY);
@@ -109,7 +119,7 @@ const dragWidget = (state, id, offsetX, offsetY) => {
 }
 
 const dragWidgets = (state, selected, offsetX, offsetY) => {
-  const newState = Object.assign({}, state);
+  const newState = copyState(state);
 
   for(let id in selected){
     if(selected[id]){
@@ -122,7 +132,7 @@ const dragWidgets = (state, selected, offsetX, offsetY) => {
 }
 
 const updateWidgetProperties = (state, id, key, value) => {
-  const newState = Object.assign({}, state);
+  const newState = copyState(state);
   switch(key){
     case "x":
     case "y":
@@ -138,7 +148,7 @@ const updateWidgetProperties = (state, id, key, value) => {
 }
 
 const alignWidgets = (state, ids, dir) => {
-  const newState = Object.assign({}, state);
+  const newState = copyState(state);
   return AlignmentSupport.alignWidgets(newState, ids, dir);
 }
 
@@ -155,6 +165,8 @@ const deleteSelectWidgets = (state, ids) => {
 
 const canvasReducer = (state = {}, action) => {
   switch(action.type){
+    case CanvasActionType.INIT_APP:
+      return initApp(state, action.widgets);
     case CanvasActionType.NEW_TITLE:
       return newTitle(state, action.dom, action.type);
     case CanvasActionType.NEW_LABEL:

@@ -1,3 +1,5 @@
+export const INIT_APP = 'INIT_APP';
+
 export const NEW_TITLE = 'NEW_TITLE';
 export const NEW_LABEL = 'NEW_LABEL';
 export const NEW_TEXT_INPUT = 'NEW_TEXT_INPUT';
