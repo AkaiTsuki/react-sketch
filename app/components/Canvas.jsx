@@ -95,6 +95,8 @@ class Canvas extends Component{
       overflowY: 'auto',
       left: 0,
       top: 0
+      // background: 'linear-gradient(180deg, #ccc 10%, rgba(255, 255, 255, 0) 0),linear-gradient(90deg, #ccc 10%, #fff 0)',
+      // backgroundSize: '20px 20px'
     }
 
     return (connectDropTarget(
