@@ -44,7 +44,7 @@ const renderDraggableTextInput = (widget, props) => {
 
 const renderDraggablePanel = (widget, props) => {
   const {selected, actions} = props;
-  return <PanelDraggable onSelect={actions.selectWidget} key={widget.id} id={widget.id} x={widget.x} y={widget.y} actions={actions} isSelected={selected[widget.id] === true} width={widget.width} height={widget.height} selected={selected} />
+  return <PanelDraggable zIndex={3} onSelect={actions.selectWidget} key={widget.id} id={widget.id} x={widget.x} y={widget.y} actions={actions} isSelected={selected[widget.id] === true} width={widget.width} height={widget.height} selected={selected} />
 }
 
 export const renderDraggable = (widget, props) => {

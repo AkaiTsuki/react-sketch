@@ -46,15 +46,20 @@ export const Draggable = ComposedComponent => {
 
 
     render(){
-      const {connectDragSource, x, y, isDragging } = this.props;
+      const {connectDragSource, x, y, isDragging, zIndex } = this.props;
       const style = {
         position: 'absolute',
         top: y,
         left: x,
+        zIndex: 5,
         // IE fallback to hide the node
         opacity: isDragging ? 0 : 1,
         height: isDragging ? 0 : ''
       }
+      if(zIndex){
+        style.zIndex = zIndex;
+      }
+
       return connectDragSource(<div className="draggable" style={style} ><ComposedComponent {...this.props} /></div>);
     }
   }
