@@ -63,7 +63,6 @@ class Paper extends Component {
     return connectDragSource(
       <div className="paper full-height" style={paperStyle} onClick={this._onClick}>
         {this.renderWidgets()}
-        <CustomDragLayer widgets={widgets} />
       </div>
     )
   }

@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import * as WIDGET_TYPE from '../constants/WidgetType';
 import Paper from './Paper'
 import { DropTarget } from 'react-dnd';
-
+import CustomDragLayer from './support/CustomDragLayer.jsx';
 
 const CANVAS_ID = 'canvas';
 
@@ -55,6 +55,7 @@ class Canvas extends Component{
     return connectDropTarget(
       <div className="col-md-7 full-height" style={style}>
         <Paper widgets={widgets} actions={actions} selected={selected} />
+        <CustomDragLayer widgets={widgets} />
       </div>
     )
   }

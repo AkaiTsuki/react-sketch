@@ -7,6 +7,7 @@ const layerStyles = {
   position: 'absolute',
   pointerEvents: 'none',
   zIndex: 100,
+  margin: '0 15px',
   left: 0,
   top: 0,
   width: '100%',
