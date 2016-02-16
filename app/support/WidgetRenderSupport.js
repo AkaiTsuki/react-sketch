@@ -18,7 +18,7 @@ export const renderPreivew = (widget, style) => {
     case WidgetType.WIDGET_TITLE:
       return <TitlePreview key={widget.id} style={style} text={widget.text} tag={widget.dom} />
     case WidgetType.WIDGET_INPUT_TEXT:
-      return <TextInputPreview key={widget.id} style={style} />
+      return <TextInputPreview key={widget.id} style={style} width={widget.width} />
     case WidgetType.WIDGET_PANEL:
       return <PanelPreview key={widget.id} style={style} width={widget.width} height={widget.height}/>
     default:
