@@ -15,9 +15,10 @@ const source = {
     return true;
   },
 
-  beginDrag(props) {
+  beginDrag(props, monitor, component) {
     return {
-      id : CANVAS_ID
+      id : CANVAS_ID,
+      scrollTop: component.state.scrollTop
     };
   }
 };
@@ -35,6 +36,10 @@ class Paper extends Component {
   constructor(props, context) {
     super(props, context);
     this._onClick = this._onClick.bind(this);
+    this._onScroll = this._onScroll.bind(this);
+    this.state = {
+      scrollTop : 0
+    }
   }
 
   componentDidMount() {
@@ -61,10 +66,15 @@ class Paper extends Component {
     }
 
     return connectDragSource(
-      <div className="paper full-height" style={paperStyle} onClick={this._onClick}>
+      <div className="paper full-height" style={paperStyle} onScroll={this._onScroll} onClick={this._onClick}>
         {this.renderWidgets()}
+        <CustomDragLayer widgets={widgets} scrollTop={this.state.scrollTop}/>
       </div>
     )
+  }
+
+  _onScroll(e){
+    this.state.scrollTop = e.target.scrollTop;
   }
 
   _onClick(e) {

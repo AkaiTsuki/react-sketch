@@ -7,7 +7,7 @@ const layerStyles = {
   position: 'absolute',
   pointerEvents: 'none',
   zIndex: 100,
-  margin: '0 15px',
+  // margin: '0 15px',
   left: 0,
   top: 0,
   width: '100%',
@@ -60,12 +60,12 @@ class CustomDragLayer extends Component{
     const {currentOffset, initClientOffset, initSourceClientOffset, isDragging} = props;
     const initOffset = {
       x: currentOffset.x < 0 ? initClientOffset.x - initSourceClientOffset.x + currentOffset.x : initClientOffset.x - initSourceClientOffset.x,
-      y: currentOffset.y < 0 ? initClientOffset.y - initSourceClientOffset.y + currentOffset.y : initClientOffset.y - initSourceClientOffset.y,
+      y: currentOffset.y < 0 ? initClientOffset.y - initSourceClientOffset.y + currentOffset.y : initClientOffset.y - initSourceClientOffset.y
     }
 
     const style = {
       position: 'absolute',
-      top: initOffset.y,
+      top: initOffset.y + props.scrollTop,
       left: initOffset.x,
       width: Math.abs(currentOffset.x),
       height: Math.abs(currentOffset.y),

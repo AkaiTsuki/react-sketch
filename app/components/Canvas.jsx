@@ -13,13 +13,14 @@ const canvasTarget = {
       const offset = monitor.getDifferenceFromInitialOffset();
       props.actions.moveSelectedWidgets(draggedItem.selected, offset.x, offset.y);
     } else {
+      const scrollTop = draggedItem.scrollTop;
       const initClientOffset = monitor.getInitialClientOffset();
       const initSourceClientOffset = monitor.getInitialSourceClientOffset();
       const currentOffset = monitor.getDifferenceFromInitialOffset();
 
       const leftTopOffset = {
         x: currentOffset.x < 0 ? initClientOffset.x - initSourceClientOffset.x + currentOffset.x : initClientOffset.x - initSourceClientOffset.x,
-        y: currentOffset.y < 0 ? initClientOffset.y - initSourceClientOffset.y + currentOffset.y : initClientOffset.y - initSourceClientOffset.y,
+        y: currentOffset.y < 0 ? initClientOffset.y - initSourceClientOffset.y + currentOffset.y + scrollTop : initClientOffset.y - initSourceClientOffset.y + scrollTop,
       }
 
       const absCurrentOffset = {
@@ -55,7 +56,6 @@ class Canvas extends Component{
     return connectDropTarget(
       <div className="col-md-7 full-height" style={style}>
         <Paper widgets={widgets} actions={actions} selected={selected} />
-        <CustomDragLayer widgets={widgets} />
       </div>
     )
   }
