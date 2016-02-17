@@ -42,3 +42,13 @@ html, body, .full-height{
   cursor: pointer;
   text-decoration: none;
 }
+
+.save-link {
+  color: white;
+  font-size: 16px;
+}
+
+.save-link:hover{
+  text-decoration: none;
+  cursor: pointer;
+}

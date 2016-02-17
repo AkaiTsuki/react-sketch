@@ -12,6 +12,7 @@ export default class WidgetConsole extends Component{
   constructor(props, context) {
     super(props, context);
     this.renderConsole = this.renderConsole.bind(this);
+    this._onSave = this._onSave.bind(this);
   }
 
   render() {
@@ -24,7 +25,13 @@ export default class WidgetConsole extends Component{
   }
 
   renderEmptyConsole(){
-    return <h3 style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%', textAlign: 'center',margin: '0px'}}>Select a widget</h3>
+    return (
+      <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%', textAlign: 'center',margin: '0px'}}>
+        <h3>Select a widget</h3>
+        <a onClick={this._onSave} className="save-link" style={{color: 'white'}} onClick={this._onSave}>Click to Save</a>
+      </div>
+    )
+
   }
 
   renderConsole(widget, actions, selected) {
@@ -36,6 +43,11 @@ export default class WidgetConsole extends Component{
       </div>
 
     )
+  }
+
+  _onSave(e){
+    const {widgets} = this.props;
+    localStorage.widgets = JSON.stringify(widgets);
   }
 
 }

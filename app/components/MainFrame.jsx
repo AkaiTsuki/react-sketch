@@ -5,7 +5,6 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import WidgetLibPanel from './WidgetLibPanel.jsx'
 import WidgetConsole from './WidgetConsole.jsx'
 import Canvas from './Canvas.jsx'
-import ToolBar from './ToolBar.jsx'
 
 class MainFrame extends Component{
   constructor(props, context) {
@@ -19,13 +18,10 @@ class MainFrame extends Component{
 
     return (
       <div className="container-fluid full-height" >
-        <div className="row">
-          <ToolBar widgets={widgets} />
-        </div>
         <div className="row full-height">
           <WidgetLibPanel widgetLib={widgetLib} actions={actions} />
           <Canvas widgets={widgets} actions={actions} selected={selected} />
-          <WidgetConsole widget={widget} actions={actions} selected={selected} />
+          <WidgetConsole widgets={widgets} widget={widget} actions={actions} selected={selected} />
         </div>
       </div>
     )
