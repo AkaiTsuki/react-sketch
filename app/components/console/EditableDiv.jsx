@@ -19,8 +19,8 @@ export default class EditableDiv extends Component {
       width: width ? width : 100,
       marginRight: 10
     }
-    
-    return this.state.isEditing ? <input type="text" className="form-control"  defaultValue={value} autoFocus={true} onBlur={this._onBlur} onKeyUp={this._onKeyup} style={inputStyle} />
+
+    return this.state.isEditing ? <input type="text" className="form-control"  defaultValue={value} autoFocus={true} onFocus={this._onFocus} onBlur={this._onBlur} onKeyUp={this._onKeyup} style={inputStyle} />
   : <div className="form-control" style={inputStyle} onClick={this._onClick} >{value}</div>
   }
 
@@ -42,5 +42,9 @@ export default class EditableDiv extends Component {
 
   _onClick(e){
     this.setState({isEditing: true});
+  }
+
+  _onFocus(e){
+    e.target.select();
   }
 }
