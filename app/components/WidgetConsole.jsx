@@ -29,7 +29,10 @@ export default class WidgetConsole extends Component{
     return (
       <div className='empty-console'>
         <h3>Select a widget</h3>
-        <a onClick={this._onSave} className="save-link" style={{color: 'white'}} onClick={this._onSave}>Click to Save</a>
+        <div>
+          <a onClick={this._onSave} className="lib-button" onClick={this._onSave}>Save</a>
+        </div>
+
       </div>
     )
 
