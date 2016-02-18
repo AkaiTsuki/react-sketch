@@ -11,25 +11,29 @@ export default class LayoutConsole extends Component {
 
     return (
       <div className="row">
-        <div className="col-md-12"><h4>Position</h4></div>
-        <div className="col-md-6">
-            <label htmlFor="console-layout-x">left: </label>
-            <EditableDiv attr='x' value={widget.x} widgetId={widget.id} onUpdate={actions.updateWidget} />
-        </div>
-        <div className="col-md-6">
-          <label htmlFor="console-layout-y">top: </label>
-          <EditableDiv attr='y' value={widget.y} widgetId={widget.id} onUpdate={actions.updateWidget} />
+        <div className="console-section col-md-12">
+          <div className="col-md-12"><h4>Position</h4></div>
+          <div className="col-md-6">
+              <label htmlFor="console-layout-x">left: </label>
+              <EditableDiv attr='x' value={widget.x} widgetId={widget.id} onUpdate={actions.updateWidget} />
+          </div>
+          <div className="col-md-6">
+            <label htmlFor="console-layout-y">top: </label>
+            <EditableDiv attr='y' value={widget.y} widgetId={widget.id} onUpdate={actions.updateWidget} />
+          </div>
         </div>
 
-        <div className="col-md-12"><h4>Size</h4></div>
-          <div className="col-md-6">
-            <label htmlFor="console-layout-width">width: </label>
-            <EditableDiv attr='width' value={widget.width} widgetId={widget.id} onUpdate={actions.updateWidget} />
-          </div>
-          <div className="col-md-6">
-            <label htmlFor="console-layout-height">height: </label>
-            <EditableDiv attr='height' value={widget.height} widgetId={widget.id} onUpdate={actions.updateWidget} />
-          </div>
+        <div className="console-section col-md-12">
+          <div className="col-md-12"><h4>Size</h4></div>
+            <div className="col-md-6">
+              <label htmlFor="console-layout-width">width: </label>
+              <EditableDiv attr='width' value={widget.width} widgetId={widget.id} onUpdate={actions.updateWidget} />
+            </div>
+            <div className="col-md-6">
+              <label htmlFor="console-layout-height">height: </label>
+              <EditableDiv attr='height' value={widget.height} widgetId={widget.id} onUpdate={actions.updateWidget} />
+            </div>
+        </div>
 
       </div>
     )

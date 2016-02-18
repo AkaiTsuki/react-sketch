@@ -19,8 +19,10 @@ export default class PropertyConsole extends Component {
 
     return(
       <div className="row">
-        <div className="col-md-12"><h4>Attribute</h4></div>
-        {widget.text ? this.renderTextPropertyInput(widget, actions) : null}
+        <div className="console-section col-md-12">
+          <div className="col-md-12"><h4>Attribute</h4></div>
+          {widget.text ? this.renderTextPropertyInput(widget, actions) : null}
+        </div>
       </div>
     )
   }

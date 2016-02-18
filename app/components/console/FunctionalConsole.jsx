@@ -19,36 +19,38 @@ export default class FunctionalConsole extends Component {
 
     return(
       <div className="row">
-        <div className="col-md-12"><h4>Tools</h4></div>
-        <div className='col-md-6'>
-          <a className="lib-button" onClick={this._onAlighLeftClick}>
-            <div className="fa fa-align-left pull-left"></div>
-            <div>Align Left</div>
-          </a>
-        </div>
-        <div className='col-md-6'>
-          <a className="lib-button" onClick={this._onAlighRightClick}>
-            <div className="fa fa-align-right pull-left"></div>
-            <div>Align Right</div>
-          </a>
-        </div>
-        <div className='col-md-6'>
-          <a className="lib-button" onClick={this._onAlighTopClick}>
-            <div className="fa fa-align-left fa-align-top pull-left"></div>
-            <div>Align Top</div>
-          </a>
-        </div>
-        <div className='col-md-6'>
-          <a className="lib-button" onClick={this._onAlighBottomClick}>
-            <div className="fa fa-align-bottom fa-align-left pull-left"></div>
-            <div>Align Bottom</div>
-          </a>
-        </div>
-        <div className='col-md-6'>
-          <a className="lib-button" onClick={this._onDeleteClick}>
-            <div className="fa fa-trash pull-left"></div>
-            <div>Remove</div>
-          </a>
+        <div className="console-section col-md-12">
+          <div className="col-md-12"><h4>Tools</h4></div>
+          <div className='col-md-6'>
+            <a className="lib-button" onClick={this._onAlighLeftClick}>
+              <div className="fa fa-align-left pull-left"></div>
+              <div>Align Left</div>
+            </a>
+          </div>
+          <div className='col-md-6'>
+            <a className="lib-button" onClick={this._onAlighRightClick}>
+              <div className="fa fa-align-right pull-left"></div>
+              <div>Align Right</div>
+            </a>
+          </div>
+          <div className='col-md-6'>
+            <a className="lib-button" onClick={this._onAlighTopClick}>
+              <div className="fa fa-align-left fa-align-top pull-left"></div>
+              <div>Align Top</div>
+            </a>
+          </div>
+          <div className='col-md-6'>
+            <a className="lib-button" onClick={this._onAlighBottomClick}>
+              <div className="fa fa-align-bottom fa-align-left pull-left"></div>
+              <div>Align Bottom</div>
+            </a>
+          </div>
+          <div className='col-md-6'>
+            <a className="lib-button" onClick={this._onDeleteClick}>
+              <div className="fa fa-trash pull-left"></div>
+              <div>Remove</div>
+            </a>
+          </div>
         </div>
       </div>
     )
