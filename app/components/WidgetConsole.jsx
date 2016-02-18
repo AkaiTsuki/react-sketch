@@ -5,7 +5,7 @@ import PropertyConsole from './console/PropertyConsole.jsx';
 
 const style = {
   backgroundColor: '#2c2c2c',
-  color: 'white',
+  color: 'rgba(255,255,255,0.7)',
   padding: 0
 };
 
@@ -19,7 +19,7 @@ export default class WidgetConsole extends Component{
   render() {
     const {widget, actions, selected} = this.props;
     return (
-      <div className="col-md-3 full-height" style={style}>
+      <div className="col-md-2 full-height" style={style}>
         {widget ? this.renderConsole(widget, actions, selected) : this.renderEmptyConsole()}
       </div>
     )

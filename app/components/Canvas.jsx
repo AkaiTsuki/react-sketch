@@ -55,7 +55,7 @@ class Canvas extends Component{
     };
 
     return connectDropTarget(
-      <div className="col-md-7 full-height" style={style}>
+      <div className="col-md-8 full-height" style={style}>
         <Paper widgets={widgets} actions={actions} selected={selected} />
       </div>
     )

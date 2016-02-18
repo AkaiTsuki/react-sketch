@@ -16,12 +16,12 @@ export default class EditableDiv extends Component {
     const { value, width } = this.props;
 
     const inputStyle = {
-      width: width ? width : 100,
+      width: width ? width : '100%',
       marginRight: 10
     }
 
-    return this.state.isEditing ? <input type="text" className="form-control"  defaultValue={value} autoFocus={true} onFocus={this._onFocus} onBlur={this._onBlur} onKeyUp={this._onKeyup} style={inputStyle} />
-  : <div className="form-control" style={inputStyle} onClick={this._onClick} >{value}</div>
+    return this.state.isEditing ? <input type="text" className="edit-div" style={inputStyle} defaultValue={value} autoFocus={true} onFocus={this._onFocus} onBlur={this._onBlur} onKeyUp={this._onKeyup} style={inputStyle} />
+  : <div className='edit-div' style={inputStyle} onClick={this._onClick} >{value}</div>
   }
 
   _onBlur(e){
