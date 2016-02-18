@@ -4,8 +4,9 @@ import LayoutConsole from './console/LayoutConsole.jsx';
 import PropertyConsole from './console/PropertyConsole.jsx';
 
 const style = {
-  backgroundColor: '#3498DB',
-  color: 'white'
+  backgroundColor: '#2c2c2c',
+  color: 'rgba(255,255,255,0.7)',
+  padding: 0
 };
 
 export default class WidgetConsole extends Component{
@@ -18,7 +19,7 @@ export default class WidgetConsole extends Component{
   render() {
     const {widget, actions, selected} = this.props;
     return (
-      <div className="col-md-3 full-height" style={style}>
+      <div className="col-md-2 full-height" style={style}>
         {widget ? this.renderConsole(widget, actions, selected) : this.renderEmptyConsole()}
       </div>
     )
@@ -26,9 +27,12 @@ export default class WidgetConsole extends Component{
 
   renderEmptyConsole(){
     return (
-      <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%', textAlign: 'center',margin: '0px'}}>
+      <div className='empty-console'>
         <h3>Select a widget</h3>
-        <a onClick={this._onSave} className="save-link" style={{color: 'white'}} onClick={this._onSave}>Click to Save</a>
+        <div>
+          <a onClick={this._onSave} className="lib-button" onClick={this._onSave}>Save</a>
+        </div>
+
       </div>
     )
 
@@ -36,7 +40,7 @@ export default class WidgetConsole extends Component{
 
   renderConsole(widget, actions, selected) {
     return (
-      <div>
+      <div className='console'>
         <FunctionalConsole widget={widget} actions={actions} selected={selected} />
         <LayoutConsole widget={widget} actions={actions}/>
         <PropertyConsole widget={widget} actions={actions} />

@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
 const style = {
-  backgroundColor: '#3498DB',
-  color: 'white'
+
 };
 
 export default class WidgetLibPanel extends Component{
@@ -12,8 +11,9 @@ export default class WidgetLibPanel extends Component{
 
   render() {
     return (
-      <div className="col-md-2 full-height" style={style}>
-        <h3>Available Widgets</h3>
+      <div className="col-md-2 full-height lib-panel" style={style}>
+        <div className="col-md-12"><h4>Libraries</h4></div>
+
         {this.renderWidgetComponents()}
       </div>
     )
@@ -34,31 +34,23 @@ export default class WidgetLibPanel extends Component{
     const widgets = group.widgets;
     const groupName = group.name;
 
-    return (
-      <div key={groupName} style={{marginTop: '5px'}}>
-        {groupName}
-        <hr style={{margin: '0 0 5px  0'}} />
-        {widgets.map((widget) =>this.renderWidget(widget))}
-      </div>
-    )
-    return ;
+    return widgets.map((widget) =>this.renderWidget(widget));
   }
 
   renderWidget(widget){
     const actions = this.props.actions;
-
-    const buttonStyle = {
-      width : '100%',
-      marginBottom: '5px'
-    };
-
     const onClickHandler = actions[widget.action];
 
+    let className = 'lib-button';
+    if(!widget.enable){
+      className += ' lib-button-disable'
+    }
+
     return (
-      <div key={widget.name}>
-        <a className="btn btn-default" style={buttonStyle} onClick={onClickHandler}>
-          <i className={widget.icon +" pull-left"}></i>
-          {widget.display}
+      <div key={widget.name} className="col-md-6" style={{padding: 15}}>
+        <a className={className} onClick={onClickHandler}>
+          <div className={widget.icon} style={{height: '50px', lineHeight: '50px'}}></div>
+          <div>{widget.display}</div>
         </a>
       </div>
     );

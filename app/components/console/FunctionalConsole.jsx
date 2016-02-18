@@ -18,30 +18,40 @@ export default class FunctionalConsole extends Component {
     }
 
     return(
-      <div className="console-functional-panel">
-        <h3>Canvas Functions</h3>
-        <hr style={{margin: '0 0 5px  0'}} />
-
-        <a className="btn btn-default" style={btnStyle} onClick={this._onAlighLeftClick}>
-          <i className="fa fa-align-left pull-left"></i>
-          Align Left
-        </a>
-        <a className="btn btn-default" style={btnStyle} onClick={this._onAlighRightClick}>
-          <i className="fa fa-align-right pull-left"></i>
-          Align Right
-        </a>
-        <a className="btn btn-default" style={btnStyle} onClick={this._onAlighTopClick}>
-          <i className="fa fa-align-top pull-left"></i>
-          Align Top
-        </a>
-        <a className="btn btn-default" style={btnStyle} onClick={this._onAlighBottomClick}>
-          <i className="fa fa-align-bottom pull-left"></i>
-          Align Bottom
-        </a>
-        <a className="btn btn-default" style={btnStyle} onClick={this._onDeleteClick}>
-          <i className="fa fa-trash pull-left"></i>
-          Remove Widgets
-        </a>
+      <div className="row">
+        <div className="console-section col-md-12">
+          <div className="col-md-12"><h4>Tools</h4></div>
+          <div className='col-md-6'>
+            <a className="lib-button" onClick={this._onAlighLeftClick}>
+              <div className="fa fa-align-left pull-left"></div>
+              <div>Align Left</div>
+            </a>
+          </div>
+          <div className='col-md-6'>
+            <a className="lib-button" onClick={this._onAlighRightClick}>
+              <div className="fa fa-align-right pull-left"></div>
+              <div>Align Right</div>
+            </a>
+          </div>
+          <div className='col-md-6'>
+            <a className="lib-button" onClick={this._onAlighTopClick}>
+              <div className="fa fa-align-left fa-align-top pull-left"></div>
+              <div>Align Top</div>
+            </a>
+          </div>
+          <div className='col-md-6'>
+            <a className="lib-button" onClick={this._onAlighBottomClick}>
+              <div className="fa fa-align-bottom fa-align-left pull-left"></div>
+              <div>Align Bottom</div>
+            </a>
+          </div>
+          <div className='col-md-6'>
+            <a className="lib-button" onClick={this._onDeleteClick}>
+              <div className="fa fa-trash pull-left"></div>
+              <div>Remove</div>
+            </a>
+          </div>
+        </div>
       </div>
     )
   }

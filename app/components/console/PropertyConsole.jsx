@@ -18,11 +18,9 @@ export default class PropertyConsole extends Component {
     const {widget, actions} = this.props
 
     return(
-      <div className="console-property-panel">
-        <h3>Attribute Section</h3>
-        <hr style={{margin: '0 0 5px  0'}} />
-
-        <div className="form-horizontal">
+      <div className="row">
+        <div className="console-section col-md-12">
+          <div className="col-md-12"><h4>Attribute</h4></div>
           {widget.text ? this.renderTextPropertyInput(widget, actions) : null}
         </div>
       </div>
@@ -31,11 +29,9 @@ export default class PropertyConsole extends Component {
 
   renderTextPropertyInput(widget, actions){
     return (
-      <div className="form-group">
-        <label htmlFor="console-property-text" className="col-sm-2 control-label">Text</label>
-        <div className="col-sm-10">
-          <EditableDiv attr='text' value={widget.text} widgetId={widget.id} onUpdate={actions.updateWidget} width='100%' />
-        </div>
+      <div className="col-md-12">
+        <label htmlFor="console-property-text">Text</label>
+        <EditableDiv attr='text' value={widget.text} widgetId={widget.id} onUpdate={actions.updateWidget} width='100%' />
       </div>
     )
   }
