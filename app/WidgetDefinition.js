@@ -8,12 +8,14 @@ const WidgetDefinition = {
         name: WIDGET_TYPE.WIDGET_TITLE,
         icon: 'fa fa-header',
         display: 'Title',
-        action: 'createTitle'
+        action: 'createTitle',
+        enable: true
       },{
         name: WIDGET_TYPE.WIDGET_LABEL,
         icon: 'fa fa-font',
         display: 'Label',
-        action: 'createLabel'
+        action: 'createLabel',
+        enable: true
       }
     ]
   },
@@ -23,24 +25,29 @@ const WidgetDefinition = {
       {
         name: WIDGET_TYPE.WIDGET_INPUT_TEXT,
         icon: 'fa fa-pencil-square-o',
-        display: "Input Text Field",
-        action: 'createTextInput'
+        display: "Text Field",
+        action: 'createTextInput',
+        enable: true
       },{
         name: WIDGET_TYPE.WIDGET_INPUT_RADIO,
         icon: 'fa fa-dot-circle-o',
-        display: "Input Radio Button"
+        display: "Radio",
+        enable: false
       },{
         name: WIDGET_TYPE.WIDGET_INPUT_CHECKBOX,
         icon: 'fa fa-check-square',
-        display: "Input Checkbox"
+        display: "Checkbox",
+        enable: false
       },{
         name: WIDGET_TYPE.WIDGET_INPUT_PASSWORD,
         icon: 'fa fa-lock',
-        display: "Input Password"
+        display: "Password",
+        enable: false
       },{
         name: WIDGET_TYPE.WIDGET_INPUT_TEXTAREA,
         icon: 'fa fa-align-justify',
-        display: "Input Text Area"
+        display: "Text Area",
+        enable: false
       }
     ]
   },
@@ -50,8 +57,9 @@ const WidgetDefinition = {
       {
         name: WIDGET_TYPE.WIDGET_PANEL,
         icon: 'fa fa-columns',
-        display: "Panel Container",
-        action: 'createPanel'
+        display: "Outline",
+        action: 'createPanel',
+        enable: true
       }
     ]
   }
