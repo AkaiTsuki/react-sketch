@@ -9,18 +9,13 @@ const CANVAS_ID = 'canvas';
 const canvasTarget = {
   drop(props, monitor) {
     const draggedItem = monitor.getItem();
-    if(draggedItem.id !== CANVAS_ID){
-      const offset = monitor.getDifferenceFromInitialOffset();
-      props.actions.moveSelectedWidgets(draggedItem.selected, offset.x, offset.y);
-    } else {
-      const scrollTop = draggedItem.scrollTop;
+    if(draggedItem.id === CANVAS_ID) {
       const initClientOffset = monitor.getInitialClientOffset();
       const initSourceClientOffset = monitor.getInitialSourceClientOffset();
       const currentOffset = monitor.getDifferenceFromInitialOffset();
-
       const leftTopOffset = {
         x: currentOffset.x < 0 ? initClientOffset.x - initSourceClientOffset.x + currentOffset.x : initClientOffset.x - initSourceClientOffset.x,
-        y: currentOffset.y < 0 ? initClientOffset.y - initSourceClientOffset.y + currentOffset.y + scrollTop : initClientOffset.y - initSourceClientOffset.y + scrollTop,
+        y: currentOffset.y < 0 ? initClientOffset.y - initSourceClientOffset.y + currentOffset.y : initClientOffset.y - initSourceClientOffset.y,
       }
 
       const absCurrentOffset = {
@@ -29,8 +24,11 @@ const canvasTarget = {
       }
 
       props.actions.dragSelectWidgets(props.widgets, leftTopOffset, absCurrentOffset);
+    } else {
+      const offset = monitor.getDifferenceFromInitialOffset();
+      props.actions.moveSelectedWidgets(draggedItem.selected, offset.x, offset.y);
     }
-  }
+  },
 };
 
 function collect(connect, monitor) {
@@ -48,7 +46,7 @@ class Canvas extends Component{
 
   render() {
 
-    const {connectDropTarget, widgets, actions, selected,selectedWidgets} = this.props;
+    const {connectDropTarget, widgets, actions, selected,selectedWidgets, selectIndicator} = this.props;
     const style = {
       backgroundColor: '#212121',
       overflow: 'auto'
@@ -56,7 +54,7 @@ class Canvas extends Component{
 
     return connectDropTarget(
       <div className="col-md-8 full-height" style={style}>
-        <Paper widgets={widgets} actions={actions} selected={selected} selectedWidgets={selectedWidgets}/>
+        <Paper widgets={widgets} actions={actions} selected={selected} selectedWidgets={selectedWidgets} selectIndicator={selectIndicator}/>
       </div>
     )
   }

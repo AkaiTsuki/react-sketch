@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import * as WidgetType from '../constants/WidgetType';
 
-import LabelDraggable from '../components/widgets/text/LabelDraggable.jsx';
-import TitleDraggable from '../components/widgets/text/TitleDraggable.jsx';
-import TextInputDraggable from '../components/widgets/form/TextInputDraggable.jsx';
-import PanelDraggable from '../components/widgets/container/PanelDraggable.jsx';
+import LabelAbsolutify from '../components/widgets/text/LabelAbsolutify.jsx';
+import TitleAbsolutify from '../components/widgets/text/TitleAbsolutify.jsx';
+import TextInputAbsolutify from '../components/widgets/form/TextInputAbsolutify.jsx';
+import PanelAbsolutify from '../components/widgets/container/PanelAbsolutify.jsx';
 
 import LabelPreview from '../components/widgets/text/LabelPreview.jsx';
 import TitlePreview from '../components/widgets/text/TitlePreview.jsx';
@@ -29,22 +29,22 @@ export const renderPreivew = (widget, style) => {
 
 const renderDraggableTitle = (widget, props) => {
   const {selected, actions} = props;
-  return <TitleDraggable onSelect={actions.selectWidget} width={widget.width} height={widget.height} key={widget.id} id={widget.id} tag={widget.dom} text={widget.text} x={widget.x} y={widget.y} actions={actions} isSelected={selected[widget.id] === true} selected={selected} />
+  return <TitleAbsolutify onSelect={actions.selectWidget} width={widget.width} height={widget.height} key={widget.id} id={widget.id} tag={widget.dom} text={widget.text} x={widget.x} y={widget.y} actions={actions} isSelected={selected[widget.id] === true} selected={selected} />
 }
 
 const renderDraggableLabel = (widget, props) => {
   const {selected, actions} = props;
-  return <LabelDraggable onSelect={actions.selectWidget} width={widget.width} height={widget.height} key={widget.id} id={widget.id} text={widget.text} x={widget.x} y={widget.y} actions={actions} isSelected={selected[widget.id] === true} selected={selected} widgetType={widget.type} />
+  return <LabelAbsolutify onSelect={actions.selectWidget} width={widget.width} height={widget.height} key={widget.id} id={widget.id} text={widget.text} x={widget.x} y={widget.y} actions={actions} isSelected={selected[widget.id] === true} selected={selected} widgetType={widget.type} />
 }
 
 const renderDraggableTextInput = (widget, props) => {
   const {selected, actions} = props;
-  return <TextInputDraggable onSelect={actions.selectWidget} width={widget.width} height={widget.height} key={widget.id} id={widget.id} x={widget.x} y={widget.y} actions={actions} isSelected={selected[widget.id] === true} selected={selected} />
+  return <TextInputAbsolutify onSelect={actions.selectWidget} width={widget.width} height={widget.height} key={widget.id} id={widget.id} x={widget.x} y={widget.y} actions={actions} isSelected={selected[widget.id] === true} selected={selected} />
 }
 
 const renderDraggablePanel = (widget, props) => {
   const {selected, actions} = props;
-  return <PanelDraggable zIndex={3} onSelect={actions.selectWidget} key={widget.id} id={widget.id} x={widget.x} y={widget.y} actions={actions} isSelected={selected[widget.id] === true} width={widget.width} height={widget.height} selected={selected} />
+  return <PanelAbsolutify zIndex={3} onSelect={actions.selectWidget} key={widget.id} id={widget.id} x={widget.x} y={widget.y} actions={actions} isSelected={selected[widget.id] === true} width={widget.width} height={widget.height} selected={selected} />
 }
 
 export const renderDraggable = (widget, props) => {

@@ -12,7 +12,7 @@ class MainFrame extends Component{
   }
 
   render() {
-    const {widgetLib, widgets, selected, actions, selectedWidgets} = this.props;
+    const {widgetLib, widgets, selected, actions, selectedWidgets, selectIndicator} = this.props;
     const selectedWidgetId = this.getSelectWidgetId(selectedWidgets);
     const widget = selectedWidgetId == null ? null : widgets[selectedWidgetId];
 
@@ -22,7 +22,7 @@ class MainFrame extends Component{
         <div className="row full-height">
           <div className='row full-height viewport'>
             <WidgetLibPanel widgetLib={widgetLib} actions={actions} />
-            <Canvas widgets={widgets} actions={actions} selected={selected} selectedWidgets={selectedWidgets} />
+            <Canvas widgets={widgets} actions={actions} selected={selected} selectedWidgets={selectedWidgets} selectIndicator={selectIndicator} />
             <WidgetConsole widgets={widgets} widget={widget} actions={actions} selected={selected} />
           </div>
         </div>
