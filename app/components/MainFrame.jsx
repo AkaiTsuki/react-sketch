@@ -12,8 +12,8 @@ class MainFrame extends Component{
   }
 
   render() {
-    const {widgetLib, widgets, selected, actions} = this.props;
-    const selectedWidgetId = this.getSelectWidgetId(widgets, selected);
+    const {widgetLib, widgets, selected, actions, selectedWidgets} = this.props;
+    const selectedWidgetId = this.getSelectWidgetId(selectedWidgets);
     const widget = selectedWidgetId == null ? null : widgets[selectedWidgetId];
 
     return (
@@ -30,13 +30,12 @@ class MainFrame extends Component{
     )
   }
 
-  getSelectWidgetId(widgets, selected){
-    for(let id in selected){
-      if(selected[id]){
-        return id;
-      }
+  getSelectWidgetId(selectedWidgets){
+    let selectId = null;
+    for(let id in selectedWidgets){
+      selectId = id;
     }
-    return null;
+    return selectId;
   }
 }
 
