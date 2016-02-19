@@ -53,7 +53,7 @@ class Paper extends Component {
   }
 
   render() {
-    const {connectDropTarget, connectDragSource, widgets} = this.props;
+    const {connectDropTarget, connectDragSource, widgets,selectedWidgets} = this.props;
 
     const paperStyle = {
       position:'relative',
@@ -69,7 +69,7 @@ class Paper extends Component {
     return connectDragSource(
       <div className="paper full-height" style={paperStyle} onScroll={this._onScroll} onClick={this._onClick}>
         {this.renderWidgets()}
-        <CustomDragLayer widgets={widgets} scrollTop={this.state.scrollTop}/>
+        <CustomDragLayer selectedWidgets={selectedWidgets} scrollTop={this.state.scrollTop}/>
       </div>
     )
   }

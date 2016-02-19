@@ -48,7 +48,7 @@ class Canvas extends Component{
 
   render() {
 
-    const {connectDropTarget, widgets, actions, selected} = this.props;
+    const {connectDropTarget, widgets, actions, selected,selectedWidgets} = this.props;
     const style = {
       backgroundColor: '#212121',
       overflow: 'auto'
@@ -56,7 +56,7 @@ class Canvas extends Component{
 
     return connectDropTarget(
       <div className="col-md-8 full-height" style={style}>
-        <Paper widgets={widgets} actions={actions} selected={selected} />
+        <Paper widgets={widgets} actions={actions} selected={selected} selectedWidgets={selectedWidgets}/>
       </div>
     )
   }

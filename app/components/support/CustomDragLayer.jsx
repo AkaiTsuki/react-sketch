@@ -42,18 +42,10 @@ class CustomDragLayer extends Component{
   }
 
   renderItems(props, item){
-    const {widgets} = props;
+    const {selectedWidgets} = props;
     const selected = item.selected;
-    const draggedWidget = widgets[item.id];
-
-    const selectedWidgets = [];
-    for(let id in selected){
-      if(selected[id]){
-        selectedWidgets.push(widgets[id]);
-      }
-    }
-
-    return selectedWidgets.map(widget => this.renderItem(props, widget, draggedWidget));
+    const draggedWidget = selectedWidgets.filter(w => w.id === item.id)[0];
+    return selectedWidgets.map(widget => this.renderItem(props, widget, draggedWidget));;
   }
 
   renderCanvasPreview(props){

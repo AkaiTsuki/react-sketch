@@ -22,7 +22,7 @@ class MainFrame extends Component{
         <div className="row full-height">
           <div className='row full-height viewport'>
             <WidgetLibPanel widgetLib={widgetLib} actions={actions} />
-            <Canvas widgets={widgets} actions={actions} selected={selected} />
+            <Canvas widgets={widgets} actions={actions} selected={selected} selectedWidgets={selectedWidgets} />
             <WidgetConsole widgets={widgets} widget={widget} actions={actions} selected={selected} />
           </div>
         </div>
@@ -32,9 +32,7 @@ class MainFrame extends Component{
 
   getSelectWidgetId(selectedWidgets){
     let selectId = null;
-    for(let id in selectedWidgets){
-      selectId = id;
-    }
+    if(selectedWidgets.length > 0) selectId = selectedWidgets[0].id;
     return selectId;
   }
 }

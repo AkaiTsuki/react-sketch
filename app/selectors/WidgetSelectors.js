@@ -23,10 +23,10 @@ const selectedWidgetsSelector = createSelector(
   widgetSelector,
   selectedSelector,
   (widgets, selected) => {
-    const selectedWidgets = {};
+    const selectedWidgets = [];
     for(let id in selected){
       if(selected[id]){
-        selectedWidgets[id] = widgets[id];
+        selectedWidgets.push(widgets[id]);
       }
     }
     return selectedWidgets;
