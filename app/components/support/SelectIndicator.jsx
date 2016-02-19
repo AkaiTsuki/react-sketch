@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { DragSource } from 'react-dnd';
 import * as WidgetType from '../../constants/WidgetType';
+import { getEmptyImage } from 'react-dnd-html5-backend';
 
 const source = {
   beginDrag(props) {
@@ -18,6 +19,7 @@ const source = {
 function collect(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
+    connectDragPreview: connect.dragPreview(),
     isDragging: monitor.isDragging()
   }
 }
@@ -25,6 +27,16 @@ function collect(connect, monitor) {
 class SelectIndicator extends Component {
   constructor(props, context) {
     super(props, context);
+  }
+
+  componentDidMount() {
+    // Use empty image as a drag preview so browsers don't draw it
+    // and we can draw whatever we want on the custom drag layer instead.
+    this.props.connectDragPreview(getEmptyImage(), {
+      // IE fallback: specify that we'd rather screenshot the node
+      // when it already knows it's being dragged so we can hide it with CSS.
+      captureDraggingState: true
+    });
   }
 
   render(){

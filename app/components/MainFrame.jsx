@@ -4,7 +4,7 @@ import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import WidgetLibPanel from './WidgetLibPanel.jsx'
 import WidgetConsole from './WidgetConsole.jsx'
-import Canvas from './Canvas.jsx'
+import Viewport from './Viewport.jsx'
 
 class MainFrame extends Component{
   constructor(props, context) {
@@ -22,7 +22,7 @@ class MainFrame extends Component{
         <div className="row full-height">
           <div className='row full-height viewport'>
             <WidgetLibPanel widgetLib={widgetLib} actions={actions} />
-            <Canvas widgets={widgets} actions={actions} selected={selected} selectedWidgets={selectedWidgets} selectIndicator={selectIndicator} />
+            <Viewport widgets={widgets} actions={actions} selected={selected} selectedWidgets={selectedWidgets} selectIndicator={selectIndicator} />
             <WidgetConsole widgets={widgets} widget={widget} actions={actions} selected={selected} />
           </div>
         </div>

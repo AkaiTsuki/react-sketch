@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import ReactDOM from 'react-dom';
 import * as WIDGET_TYPE from '../constants/WidgetType';
 import Paper from './Paper'
 import { DropTarget } from 'react-dnd';
@@ -7,7 +8,7 @@ import CustomDragLayer from './support/CustomDragLayer.jsx';
 const CANVAS_ID = 'canvas';
 
 const canvasTarget = {
-  drop(props, monitor) {
+  drop(props, monitor, component) {
     const draggedItem = monitor.getItem();
     if(draggedItem.id === CANVAS_ID) {
       const initClientOffset = monitor.getInitialClientOffset();
@@ -49,11 +50,15 @@ class Canvas extends Component{
     const {connectDropTarget, widgets, actions, selected,selectedWidgets, selectIndicator} = this.props;
     const style = {
       backgroundColor: '#212121',
-      overflow: 'auto'
+      width: 5000,
+      height: 10000,
+      position: 'absolute',
+      top: 0,
+      left: 0
     };
 
     return connectDropTarget(
-      <div className="col-md-8 full-height" style={style}>
+      <div className="canvas" style={style}>
         <Paper widgets={widgets} actions={actions} selected={selected} selectedWidgets={selectedWidgets} selectIndicator={selectIndicator}/>
       </div>
     )
