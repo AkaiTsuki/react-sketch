@@ -68,7 +68,7 @@ class Paper extends Component {
     }
 
     return connectDragSource(
-      <div className="paper full-height" style={paperStyle} onScroll={this._onScroll} onClick={this._onClick}>
+      <div className="paper" style={paperStyle} onScroll={this._onScroll} onClick={this._onClick}>
         {this.renderWidgets()}
         <SelectIndicator selectIndicator={selectIndicator} selected={selected}/>
         <CustomDragLayer selectedWidgets={selectedWidgets} scrollTop={this.state.scrollTop}/>

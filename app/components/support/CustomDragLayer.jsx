@@ -14,12 +14,15 @@ const layerStyles = {
   height: '100%'
 };
 
+const RENDER_STEP = 20;
+
 
 class CustomDragLayer extends Component{
   getItemStyles(props, widget, draggedWidget){
     const { currentOffset } = props;
     let { x, y } = currentOffset;
-
+    x = Math.round(x/RENDER_STEP) * RENDER_STEP;
+    y = Math.round(y/RENDER_STEP) * RENDER_STEP;
     const style = {
       position: 'absolute',
       // transform: transform,
@@ -71,10 +74,14 @@ class CustomDragLayer extends Component{
   renderSelectIndicator(props){
     const {currentOffset, item} = props;
 
+    let { x, y } = currentOffset;
+    x = Math.round(x/RENDER_STEP) * RENDER_STEP;
+    y = Math.round(y/RENDER_STEP) * RENDER_STEP;
+
     const style = {
       position: 'absolute',
-      top: item.top + currentOffset.y,
-      left: item.left + currentOffset.x,
+      top: item.top + y,
+      left: item.left + x,
       width: item.width,
       height: item.height,
       boxShadow: '0 0 0 1px #0D47A1'

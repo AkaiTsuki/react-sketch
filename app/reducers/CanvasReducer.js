@@ -42,7 +42,7 @@ const newTitle = (state, dom, text) => {
     type: WIDGET_TYPE.WIDGET_TITLE,
     dom,
     text,
-    x: 0,
+    x: 20,
     y: getYPosition(newState),
     height: 39
   }
@@ -58,7 +58,7 @@ const newLabel = (state, text) => {
     id: id,
     type: WIDGET_TYPE.WIDGET_LABEL,
     text,
-    x: 0,
+    x: 20,
     y: getYPosition(newState)
   }
 
@@ -73,7 +73,7 @@ const newTextInput = (state) => {
   const widget = {
     id,
     type: WIDGET_TYPE.WIDGET_INPUT_TEXT,
-    x: 0,
+    x: 20,
     y: getYPosition(newState)
   }
 
@@ -88,7 +88,7 @@ const newPanel = (state) => {
   const widget = {
     id,
     type: WIDGET_TYPE.WIDGET_PANEL,
-    x: 0,
+    x: 20,
     y: getYPosition(newState),
     width: 400,
     height: 500
