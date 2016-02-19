@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import * as CanvasAction from '../actions/CanvasAction.js'
 import MainFrame from '../components/MainFrame.jsx'
 
+import {rootSelector} from '../selectors/WidgetSelectors'
+
 class App extends React.Component {
 
   componentDidMount(){
@@ -15,18 +17,10 @@ class App extends React.Component {
   }
 
   render() {
-    const {widgetLib, widgets, selected, actions, dispatch} = this.props;
+    const {widgetLib, widgets, selected, actions, dispatch, selectedWidgets} = this.props;
     return (
-      <MainFrame widgetLib={widgetLib} actions={actions} widgets={widgets} selected={selected} />
+      <MainFrame widgetLib={widgetLib} actions={actions} widgets={widgets} selected={selected} selectedWidgets={selectedWidgets} />
     )
-  }
-}
-
-function mapStateToProps(state) {
-  return {
-    widgetLib: state.widgetLib,
-    widgets: state.widgets,
-    selected: state.selected
   }
 }
 
@@ -38,6 +32,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(
-  mapStateToProps,
+  rootSelector,
   mapDispatchToProps
 )(App)
