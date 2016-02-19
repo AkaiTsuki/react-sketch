@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { DragSource } from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
 import CustomDragLayer from './support/CustomDragLayer.jsx';
+import SelectIndicator from './support/SelectIndicator';
 import {renderDraggable} from '../support/WidgetRenderSupport'
 import * as WIDGET_TYPE from '../constants/WidgetType';
 
@@ -53,7 +54,7 @@ class Paper extends Component {
   }
 
   render() {
-    const {connectDropTarget, connectDragSource, widgets} = this.props;
+    const {connectDropTarget, selected, connectDragSource, widgets,selectedWidgets,selectIndicator} = this.props;
 
     const paperStyle = {
       position:'relative',
@@ -69,7 +70,8 @@ class Paper extends Component {
     return connectDragSource(
       <div className="paper full-height" style={paperStyle} onScroll={this._onScroll} onClick={this._onClick}>
         {this.renderWidgets()}
-        <CustomDragLayer widgets={widgets} scrollTop={this.state.scrollTop}/>
+        <SelectIndicator selectIndicator={selectIndicator} selected={selected}/>
+        <CustomDragLayer selectedWidgets={selectedWidgets} scrollTop={this.state.scrollTop}/>
       </div>
     )
   }

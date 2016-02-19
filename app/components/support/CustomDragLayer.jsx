@@ -6,7 +6,7 @@ import {renderPreivew} from '../../support/WidgetRenderSupport'
 const layerStyles = {
   position: 'absolute',
   pointerEvents: 'none',
-  zIndex: 100,
+  zIndex: 65535,
   // margin: '0 15px',
   left: 0,
   top: 0,
@@ -19,9 +19,6 @@ class CustomDragLayer extends Component{
   getItemStyles(props, widget, draggedWidget){
     const { currentOffset } = props;
     let { x, y } = currentOffset;
-
-    const deltaX = draggedWidget.x - widget.x;
-    const deltaY = draggedWidget.y - widget.y;
 
     const style = {
       position: 'absolute',
@@ -42,18 +39,10 @@ class CustomDragLayer extends Component{
   }
 
   renderItems(props, item){
-    const {widgets} = props;
+    const {selectedWidgets} = props;
     const selected = item.selected;
-    const draggedWidget = widgets[item.id];
-
-    const selectedWidgets = [];
-    for(let id in selected){
-      if(selected[id]){
-        selectedWidgets.push(widgets[id]);
-      }
-    }
-
-    return selectedWidgets.map(widget => this.renderItem(props, widget, draggedWidget));
+    const draggedWidget = selectedWidgets.filter(w => w.id === item.id)[0];
+    return selectedWidgets.map(widget => this.renderItem(props, widget, draggedWidget));;
   }
 
   renderCanvasPreview(props){
@@ -65,7 +54,7 @@ class CustomDragLayer extends Component{
 
     const style = {
       position: 'absolute',
-      top: initOffset.y + props.scrollTop,
+      top: initOffset.y,
       left: initOffset.x,
       width: Math.abs(currentOffset.x),
       height: Math.abs(currentOffset.y),
@@ -79,12 +68,36 @@ class CustomDragLayer extends Component{
     )
   }
 
+  renderSelectIndicator(props){
+    const {currentOffset, item} = props;
+
+    const style = {
+      position: 'absolute',
+      top: item.top + currentOffset.y,
+      left: item.left + currentOffset.x,
+      width: item.width,
+      height: item.height,
+      boxShadow: '0 0 0 1px #0D47A1'
+    }
+
+    return (
+      <div style={layerStyles}>
+        <div style={style}></div>
+        {this.renderItems(props, item)}
+      </div>
+    )
+  }
+
   render() {
     const { item, isDragging, currentOffset } = this.props;
 
     if (!isDragging || !currentOffset) {
       return null;
     }
+
+    if(item.id === 'SELECT_INDICATOR'){
+      return this.renderSelectIndicator(this.props);
+    };
 
     if(item.id === 'canvas'){
       return this.renderCanvasPreview(this.props);

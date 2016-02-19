@@ -22,7 +22,10 @@ const getYPosition = (state) => {
   for(let key in state){
     const ele = state[key];
     if(ele.y + ele.height >= maxY){
-      maxY = ele.y + ele.height + ele.marginTop + ele.marginBottom;
+      maxY = ele.y + ele.height;
+      if(ele.marginTop && ele.marginBottom){
+        maxY += ele.marginTop + ele.marginBottom;
+      }
       maxKey = key;
     }
   }
@@ -87,8 +90,8 @@ const newPanel = (state) => {
     type: WIDGET_TYPE.WIDGET_PANEL,
     x: 0,
     y: getYPosition(newState),
-    width: 1000,
-    height: 800
+    width: 400,
+    height: 500
   }
 
   newState[id] = widget;
