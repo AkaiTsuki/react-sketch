@@ -12,18 +12,27 @@ export const Measurable = ComposedComponent => {
   class MeasurableProvider extends Component{
     constructor(props, context) {
       super(props, context);
+      this.updateLayout = this.updateLayout.bind(this);
     }
 
     componentDidMount(){
-      const {id, actions} = this.props;
+      this.updateLayout();
+    }
+
+    componentDidUpdate(prevProps){
+      this.updateLayout();
+    }
+
+    updateLayout(){
+      const {id, actions, width, height} = this.props;
       const self = ReactDOM.findDOMNode(this);
-      const width = self.offsetWidth;
-      const height = self.offsetHeight;
+      const offsetWidth = self.offsetWidth;
+      const offsetHeight = self.offsetHeight;
       const marginTop = WidgetUtil.getTopMargin(self);
       const marginBottom = WidgetUtil.getBottomMargin(self);
-      console.log("Update Layout")
-
-      actions.updateLayout(id, width, height, marginTop, marginBottom);
+      if(width !== offsetWidth || height !== offsetHeight){
+        actions.updateLayout(id, offsetWidth, offsetHeight, marginTop, marginBottom);
+      }
     }
 
     render(){

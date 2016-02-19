@@ -29,17 +29,17 @@ export const renderPreivew = (widget, style) => {
 
 const renderDraggableTitle = (widget, props) => {
   const {selected, actions} = props;
-  return <TitleDraggable onSelect={actions.selectWidget} key={widget.id} id={widget.id} tag={widget.dom} text={widget.text} x={widget.x} y={widget.y} actions={actions} isSelected={selected[widget.id] === true} selected={selected} />
+  return <TitleDraggable onSelect={actions.selectWidget} width={widget.width} height={widget.height} key={widget.id} id={widget.id} tag={widget.dom} text={widget.text} x={widget.x} y={widget.y} actions={actions} isSelected={selected[widget.id] === true} selected={selected} />
 }
 
 const renderDraggableLabel = (widget, props) => {
   const {selected, actions} = props;
-  return <LabelDraggable onSelect={actions.selectWidget} key={widget.id} id={widget.id} text={widget.text} x={widget.x} y={widget.y} actions={actions} isSelected={selected[widget.id] === true} selected={selected} widgetType={widget.type} />
+  return <LabelDraggable onSelect={actions.selectWidget} width={widget.width} height={widget.height} key={widget.id} id={widget.id} text={widget.text} x={widget.x} y={widget.y} actions={actions} isSelected={selected[widget.id] === true} selected={selected} widgetType={widget.type} />
 }
 
 const renderDraggableTextInput = (widget, props) => {
   const {selected, actions} = props;
-  return <TextInputDraggable onSelect={actions.selectWidget} width={widget.width} key={widget.id} id={widget.id} x={widget.x} y={widget.y} actions={actions} isSelected={selected[widget.id] === true} selected={selected} />
+  return <TextInputDraggable onSelect={actions.selectWidget} width={widget.width} height={widget.height} key={widget.id} id={widget.id} x={widget.x} y={widget.y} actions={actions} isSelected={selected[widget.id] === true} selected={selected} />
 }
 
 const renderDraggablePanel = (widget, props) => {
