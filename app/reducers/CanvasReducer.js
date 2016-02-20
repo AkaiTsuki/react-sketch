@@ -2,6 +2,7 @@ import uuid from 'node-uuid';
 import * as WIDGET_TYPE from '../constants/WidgetType';
 import * as CanvasActionType from '../constants/CanvasActionType';
 import * as AlignmentSupport from '../support/AlignmentSupport';
+import {snapToGrid, nextAvailableYPosition, nextAvailableXPosition} from '../support/PositionSupport.js';
 
 const copyState = (state) => {
   const newState = {};
@@ -15,24 +16,6 @@ const initApp = (state, widgets) => {
   return widgets;
 }
 
-const getYPosition = (state) => {
-  let maxY = 0;
-  let maxKey = null;
-
-  for(let key in state){
-    const ele = state[key];
-    if(ele.y + ele.height >= maxY){
-      maxY = ele.y + ele.height;
-      if(ele.marginTop && ele.marginBottom){
-        maxY += ele.marginTop + ele.marginBottom;
-      }
-      maxKey = key;
-    }
-  }
-
-  return maxY;
-}
-
 const newTitle = (state, dom, text) => {
   const newState = copyState(state);
 
@@ -42,8 +25,8 @@ const newTitle = (state, dom, text) => {
     type: WIDGET_TYPE.WIDGET_TITLE,
     dom,
     text,
-    x: 20,
-    y: getYPosition(newState),
+    x: nextAvailableXPosition(newState),
+    y: nextAvailableYPosition(newState),
     height: 39
   }
   newState[id] = widget;
@@ -58,8 +41,8 @@ const newLabel = (state, text) => {
     id: id,
     type: WIDGET_TYPE.WIDGET_LABEL,
     text,
-    x: 20,
-    y: getYPosition(newState)
+    x: nextAvailableXPosition(newState),
+    y: nextAvailableYPosition(newState)
   }
 
   newState[id] = widget;
@@ -73,8 +56,8 @@ const newTextInput = (state) => {
   const widget = {
     id,
     type: WIDGET_TYPE.WIDGET_INPUT_TEXT,
-    x: 20,
-    y: getYPosition(newState)
+    x: nextAvailableXPosition(newState),
+    y: nextAvailableYPosition(newState)
   }
 
   newState[id] = widget;
@@ -88,8 +71,8 @@ const newPanel = (state) => {
   const widget = {
     id,
     type: WIDGET_TYPE.WIDGET_PANEL,
-    x: 20,
-    y: getYPosition(newState),
+    x: nextAvailableXPosition(newState),
+    y: nextAvailableYPosition(newState),
     width: 400,
     height: 500
   }
@@ -107,16 +90,16 @@ const updateLayoutService = (state, id, width, height, marginTop, marginBottom) 
   return newState;
 }
 
-const reviseToTens = (val) => {
-  const result = Math.round(val / 20) * 20;
+const revise = (val) => {
+  const result = snapToGrid(val);
   return result < 0 ? 0 : result;
 }
 
 const dragWidget = (state, id, offsetX, offsetY) => {
   const newState = copyState(state);
 
-  newState[id].x = reviseToTens(newState[id].x + offsetX);
-  newState[id].y = reviseToTens(newState[id].y + offsetY);
+  newState[id].x = revise(newState[id].x + offsetX);
+  newState[id].y = revise(newState[id].y + offsetY);
 
   return newState;
 }
@@ -126,8 +109,8 @@ const dragWidgets = (state, selected, offsetX, offsetY) => {
 
   for(let id in selected){
     if(selected[id]){
-      newState[id].x = reviseToTens(newState[id].x + offsetX);
-      newState[id].y = reviseToTens(newState[id].y + offsetY);
+      newState[id].x = revise(newState[id].x + offsetX);
+      newState[id].y = revise(newState[id].y + offsetY);
     }
   }
 

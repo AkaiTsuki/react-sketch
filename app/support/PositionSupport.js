@@ -22,3 +22,20 @@ export const calculateDragSelectRectLeftTopPosition = (currentOffset, initClient
     y: currentOffset.y < 0 ? initClientOffset.y - initSourceClientOffset.y + currentOffset.y : initClientOffset.y - initSourceClientOffset.y,
   };
 }
+
+export const nextAvailableYPosition = (widgets) => {
+  let maxY = 0;
+
+  for(let key in widgets){
+    const ele = widgets[key];
+    if(ele.y + ele.height >= maxY){
+      maxY = ele.y + ele.height;
+    }
+  }
+
+  return maxY+REVISE_STEP;
+}
+
+export const nextAvailableXPosition = (widgets) => {
+  return REVISE_STEP;
+}
