@@ -1,7 +1,9 @@
 import uuid from 'node-uuid';
 import * as WIDGET_TYPE from '../constants/WidgetType';
+import * as ResizeConstants from '../constants/ResizeConstants';
 import * as CanvasActionType from '../constants/CanvasActionType';
 import * as AlignmentSupport from '../support/AlignmentSupport';
+import * as ResizeSupport from '../support/ResizeSupport';
 import {snapToGrid, nextAvailableYPosition, nextAvailableXPosition} from '../support/PositionSupport.js';
 
 const copyState = (state) => {
@@ -56,6 +58,7 @@ const newTextInput = (state) => {
   const widget = {
     id,
     width: 200,
+    minWidth: 200,
     type: WIDGET_TYPE.WIDGET_INPUT_TEXT,
     x: nextAvailableXPosition(newState),
     y: nextAvailableYPosition(newState)
@@ -75,6 +78,7 @@ const newPanel = (state) => {
     x: nextAvailableXPosition(newState),
     y: nextAvailableYPosition(newState),
     width: 400,
+    minWidth: 20,
     height: 500
   }
 
@@ -150,6 +154,19 @@ const deleteSelectWidgets = (state, ids) => {
   return newState;
 }
 
+const resizeWidget = (state, id, direction, deltaX, deltaY) => {
+  const newState = copyState(state);
+
+  switch(direction){
+    case ResizeConstants.R:
+      return ResizeSupport.resizeWidthFromRight(newState, id, deltaX);
+    case ResizeConstants.L:
+      return ResizeSupport.resizeWidthFromLeft(newState, id, deltaX);
+    default:
+      console.log("Unsupported resize direction: " + direction);
+  }
+}
+
 const canvasReducer = (state = {}, action) => {
   switch(action.type){
     case CanvasActionType.INIT_APP:
@@ -174,6 +191,8 @@ const canvasReducer = (state = {}, action) => {
       return alignWidgets(state, action.widgetIds, action.direction);
     case CanvasActionType.DELETE_WIDGETS:
       return deleteSelectWidgets(state, action.widgetIds);
+    case CanvasActionType.RESIZE_WIDGET:
+      return resizeWidget(state, action.id, action.direction, action.x, action.y);
     default:
       return state;
   }

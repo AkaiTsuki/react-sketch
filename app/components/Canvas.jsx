@@ -6,29 +6,37 @@ import { DropTarget } from 'react-dnd';
 import CustomDragLayer from './support/CustomDragLayer.jsx';
 import {calculateDragSelectRectLeftTopPosition,snapToGridHalf} from '../support/PositionSupport'
 
+const handleSelectWidgetInReact = (props, monitor, draggedItem) => {
+  const initClientOffset = monitor.getInitialClientOffset();
+  const initSourceClientOffset = monitor.getInitialSourceClientOffset();
+  const currentOffset = monitor.getDifferenceFromInitialOffset();
+
+  const leftTopPosition = calculateDragSelectRectLeftTopPosition(currentOffset, initClientOffset, initSourceClientOffset);
+
+  const absCurrentOffset = {
+    x: Math.abs(currentOffset.x),
+    y: Math.abs(currentOffset.y)
+  }
+
+  props.actions.selectWidgetsInRect(props.widgets, leftTopPosition, absCurrentOffset);
+}
+
+const handleReisze = (props, monitor, draggedItem) => {
+  const offset = monitor.getDifferenceFromInitialOffset();
+  let {x, y} = offset;
+  x = snapToGridHalf(x);
+  y = snapToGridHalf(y);
+
+  props.actions.resizeWidget(draggedItem.id, draggedItem.direction, x, y);
+}
+
 const canvasTarget = {
   drop(props, monitor, component) {
     const draggedItem = monitor.getItem();
     if(draggedItem.id === WIDGET_TYPE.DRAG_SELECT_RECT) {
-      const initClientOffset = monitor.getInitialClientOffset();
-      const initSourceClientOffset = monitor.getInitialSourceClientOffset();
-      const currentOffset = monitor.getDifferenceFromInitialOffset();
-
-      const leftTopPosition = calculateDragSelectRectLeftTopPosition(currentOffset, initClientOffset, initSourceClientOffset);
-
-      const absCurrentOffset = {
-        x: Math.abs(currentOffset.x),
-        y: Math.abs(currentOffset.y)
-      }
-
-      props.actions.selectWidgetsInRect(props.widgets, leftTopPosition, absCurrentOffset);
+      handleSelectWidgetInReact(props, monitor, draggedItem);
     } else if(draggedItem.direction){
-      const offset = monitor.getDifferenceFromInitialOffset();
-      let {x, y} = offset;
-      x = snapToGridHalf(x);
-      y = snapToGridHalf(y);
-
-      props.actions.updateWidget(draggedItem.id, 'width', draggedItem.width + x);
+      handleReisze(props, monitor, draggedItem);
     } else {
       const offset = monitor.getDifferenceFromInitialOffset();
       props.actions.moveSelectedWidgets(props.selected, offset.x, offset.y);

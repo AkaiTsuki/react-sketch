@@ -13,6 +13,7 @@ export const Resizable = ComposedComponent => {
         <div className="resizable">
           <ComposedComponent {...this.props} />
           <ResizeIndicator direction={ResizeConstants.R} {...this.props} />
+          <ResizeIndicator direction={ResizeConstants.L} {...this.props} />
         </div>
       );
     }

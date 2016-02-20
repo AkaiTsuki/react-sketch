@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import * as WidgetType from '../constants/WidgetType';
+import * as ResizeConstants from '../constants/ResizeConstants';
 
 import LabelAbsolutify from '../components/widgets/text/LabelAbsolutify.jsx';
 import TitleAbsolutify from '../components/widgets/text/TitleAbsolutify.jsx';
@@ -10,6 +11,8 @@ import LabelPreview from '../components/widgets/text/LabelPreview.jsx';
 import TitlePreview from '../components/widgets/text/TitlePreview.jsx';
 import TextInputPreview from '../components/widgets/form/TextInputPreview.jsx';
 import PanelPreview from '../components/widgets/container/PanelPreview.jsx';
+
+import {snapToGrid, snapToGridHalf, calculateDragSelectRectLeftTopPosition} from './PositionSupport'
 
 export const renderPreivew = (widget, style) => {
   switch (widget.type) {
@@ -60,5 +63,58 @@ export const renderDraggable = (widget, props) => {
     default:
       console.error("Unsupport widget type: "+ widget.type);
       return null;
+  }
+}
+
+
+const renderRightResizePreview = (props) => {
+  const {currentOffset, item} = props;
+  let { x, y } = currentOffset;
+  x = snapToGridHalf(x);
+  y = snapToGridHalf(y);
+
+  const style = {
+    position: 'absolute',
+    top: item.y,
+    left: item.x,
+    width: item.width + x,
+    height: item.height,
+    boxShadow: '0 0 0 1px #0D47A1'
+  }
+
+  return (
+      <div style={style}></div>
+  )
+}
+
+const renderLeftResizePreview = (props) => {
+  const {currentOffset, item} = props;
+  let { x, y } = currentOffset;
+  x = snapToGridHalf(x);
+  y = snapToGridHalf(y);
+
+  const style = {
+    position: 'absolute',
+    top: item.y,
+    left: item.x + x,
+    width: item.width - x,
+    height: item.height,
+    boxShadow: '0 0 0 1px #0D47A1'
+  }
+
+  return (
+      <div style={style}></div>
+  )
+}
+
+export const renderResizePreview = (props) => {
+  const {item} = props;
+  switch (item.direction) {
+    case ResizeConstants.R:
+      return renderRightResizePreview(props);
+    case ResizeConstants.L:
+      return renderLeftResizePreview(props);
+    default:
+      console.error("unsupported resize direction:" + direction);
   }
 }
