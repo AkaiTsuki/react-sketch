@@ -4,7 +4,7 @@ import * as WIDGET_TYPE from '../constants/WidgetType';
 import Paper from './Paper'
 import { DropTarget } from 'react-dnd';
 import CustomDragLayer from './support/CustomDragLayer.jsx';
-import {calculateDragSelectRectLeftTopPosition} from '../support/PositionSupport'
+import {calculateDragSelectRectLeftTopPosition,snapToGridHalf} from '../support/PositionSupport'
 
 const canvasTarget = {
   drop(props, monitor, component) {
@@ -22,6 +22,13 @@ const canvasTarget = {
       }
 
       props.actions.selectWidgetsInRect(props.widgets, leftTopPosition, absCurrentOffset);
+    } else if(draggedItem.direction){
+      const offset = monitor.getDifferenceFromInitialOffset();
+      let {x, y} = offset;
+      x = snapToGridHalf(x);
+      y = snapToGridHalf(y);
+
+      props.actions.updateWidget(draggedItem.id, 'width', draggedItem.width + x);
     } else {
       const offset = monitor.getDifferenceFromInitialOffset();
       props.actions.moveSelectedWidgets(props.selected, offset.x, offset.y);

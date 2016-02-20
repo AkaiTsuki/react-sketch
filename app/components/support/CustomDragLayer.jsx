@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import * as WidgetType from '../../constants/WidgetType';
 import { DragLayer } from 'react-dnd';
 import {renderPreivew} from '../../support/WidgetRenderSupport'
-import {snapToGrid, calculateDragSelectRectLeftTopPosition} from '../../support/PositionSupport'
+import {snapToGrid, snapToGridHalf, calculateDragSelectRectLeftTopPosition} from '../../support/PositionSupport'
 
 const layerStyles = {
   position: 'absolute',
@@ -85,6 +85,28 @@ class CustomDragLayer extends Component{
     )
   }
 
+  renderResizePreview(props){
+    const {currentOffset, item} = props;
+    let { x, y } = currentOffset;
+    x = snapToGridHalf(x);
+    y = snapToGridHalf(y);
+
+    const style = {
+      position: 'absolute',
+      top: item.y,
+      left: item.x,
+      width: item.width + x,
+      height: item.height,
+      boxShadow: '0 0 0 1px #0D47A1'
+    }
+
+    return (
+      <div style={layerStyles}>
+        <div style={style}></div>
+      </div>
+    )
+  }
+
   render() {
     const { item, isDragging, currentOffset } = this.props;
 
@@ -98,6 +120,10 @@ class CustomDragLayer extends Component{
 
     if(item.id === WidgetType.DRAG_SELECT_RECT){
       return this.renderCanvasPreview(this.props);
+    }
+
+    if(item.direction){
+      return this.renderResizePreview(this.props);
     }
 
     return null;

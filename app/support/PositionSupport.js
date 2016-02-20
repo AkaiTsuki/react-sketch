@@ -1,7 +1,14 @@
+import * as ResizeConstants from '../constants/ResizeConstants';
+
 export const REVISE_STEP = 20;
+export const REVISE_STEP_HALF = REVISE_STEP / 2;
 
 export const snapToGrid = (val) => {
   return Math.round(val / REVISE_STEP) * REVISE_STEP;
+}
+
+export const snapToGridHalf = (val) => {
+  return Math.round(val / REVISE_STEP_HALF) * REVISE_STEP_HALF;
 }
 
 /**
@@ -38,4 +45,17 @@ export const nextAvailableYPosition = (widgets) => {
 
 export const nextAvailableXPosition = (widgets) => {
   return REVISE_STEP;
+}
+
+export const calculateResizeIndicatorPosition = (width, height, indicatorLen, direction) => {
+  switch (direction) {
+    case ResizeConstants.R:
+      return {
+        x: width - indicatorLen / 2,
+        y: (height - indicatorLen) / 2
+      }
+    default:
+      console.log("Unsupported Reisze Direction: "+ direction);
+      return null;
+  }
 }

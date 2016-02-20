@@ -55,6 +55,7 @@ const newTextInput = (state) => {
 
   const widget = {
     id,
+    width: 200,
     type: WIDGET_TYPE.WIDGET_INPUT_TEXT,
     x: nextAvailableXPosition(newState),
     y: nextAvailableYPosition(newState)
