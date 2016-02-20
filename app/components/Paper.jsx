@@ -34,10 +34,6 @@ class Paper extends Component {
   constructor(props, context) {
     super(props, context);
     this._onClick = this._onClick.bind(this);
-    this._onScroll = this._onScroll.bind(this);
-    this.state = {
-      scrollTop : 0
-    }
   }
 
   componentDidMount() {
