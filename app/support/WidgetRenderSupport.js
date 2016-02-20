@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import * as WidgetType from '../constants/WidgetType';
+import * as ResizeConstants from '../constants/ResizeConstants';
 
 import LabelAbsolutify from '../components/widgets/text/LabelAbsolutify.jsx';
 import TitleAbsolutify from '../components/widgets/text/TitleAbsolutify.jsx';
@@ -10,6 +11,8 @@ import LabelPreview from '../components/widgets/text/LabelPreview.jsx';
 import TitlePreview from '../components/widgets/text/TitlePreview.jsx';
 import TextInputPreview from '../components/widgets/form/TextInputPreview.jsx';
 import PanelPreview from '../components/widgets/container/PanelPreview.jsx';
+
+import {snapToGrid, snapToGridHalf, calculateDragSelectRectLeftTopPosition} from './PositionSupport'
 
 export const renderPreivew = (widget, style) => {
   switch (widget.type) {
@@ -60,5 +63,68 @@ export const renderDraggable = (widget, props) => {
     default:
       console.error("Unsupport widget type: "+ widget.type);
       return null;
+  }
+}
+
+const getReizsePreviewCommonStyle = () => {
+  return {
+    position: 'absolute',
+    boxShadow: '0 0 0 1px #0D47A1'
+  }
+}
+
+const calculateRightResizePreviewStyle = (item, x, y) => {
+  const style = getReizsePreviewCommonStyle();
+  style.top = item.y;
+  style.left = item.x;
+  style.width = item.width + x;
+  style.height = item.height;
+  return style;
+}
+
+const calculateLeftResizePreviewStyle = (item, x, y) => {
+  const style = getReizsePreviewCommonStyle();
+  style.top = item.y;
+  style.left = item.x + x;
+  style.width = item.width - x;
+  style.height = item.height;
+  return style;
+}
+
+const calculateTopResizePreviewStyle = (item, x, y) => {
+  const style = getReizsePreviewCommonStyle();
+  style.top = item.y + y;
+  style.left = item.x;
+  style.width = item.width;
+  style.height = item.height - y;
+  return style;
+}
+
+const calculateBottomResizePreviewStyle =  (item, x, y) => {
+  const style = getReizsePreviewCommonStyle();
+  style.top = item.y;
+  style.left = item.x;
+  style.width = item.width;
+  style.height = item.height + y;
+  return style;
+}
+
+export const calculateResizePreviewStyle = (props) => {
+  const {currentOffset, item} = props;
+  let { x, y } = currentOffset;
+  x = snapToGridHalf(x);
+  y = snapToGridHalf(y);
+
+  switch (item.direction) {
+    case ResizeConstants.R:
+      return calculateRightResizePreviewStyle(item, x, y);
+    case ResizeConstants.L:
+      return calculateLeftResizePreviewStyle(item, x, y);
+    case ResizeConstants.T:
+      return calculateTopResizePreviewStyle(item, x, y);
+    case ResizeConstants.B:
+      return calculateBottomResizePreviewStyle(item, x, y);
+    default:
+      console.error("unsupported resize direction:" + item.direction);
   }
 }

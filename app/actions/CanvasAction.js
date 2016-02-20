@@ -153,3 +153,16 @@ export function selectWidgetsInRect(widgets, init, dimension){
     dispatch(action);
   }
 }
+
+export function resizeWidget(id, direction, x, y){
+  return (dispatch, getState) => {
+    const action = {
+      type : CanvasActionType.RESIZE_WIDGET,
+      id,
+      direction,
+      x,
+      y
+    }
+    dispatch(action);
+  }
+}
