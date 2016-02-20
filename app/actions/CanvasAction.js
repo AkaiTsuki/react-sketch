@@ -142,7 +142,7 @@ export function unSelectAll(){
   }
 }
 
-export function dragSelectWidgets(widgets, init, dimension){
+export function selectWidgetsInRect(widgets, init, dimension){
   return (dispatch, getState) => {
     const action = {
       type : CanvasActionType.DRAG_SELECT,

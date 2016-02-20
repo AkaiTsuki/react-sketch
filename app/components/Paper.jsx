@@ -6,8 +6,6 @@ import SelectIndicator from './support/SelectIndicator';
 import {renderDraggable} from '../support/WidgetRenderSupport'
 import * as WIDGET_TYPE from '../constants/WidgetType';
 
-const CANVAS_ID = 'canvas';
-
 const source = {
   canDrag(props) {
     for(let id in props.selected){
@@ -18,8 +16,7 @@ const source = {
 
   beginDrag(props, monitor, component) {
     return {
-      id : CANVAS_ID,
-      scrollTop: component.state.scrollTop
+      id : WIDGET_TYPE.DRAG_SELECT_RECT
     };
   }
 };
@@ -37,10 +34,6 @@ class Paper extends Component {
   constructor(props, context) {
     super(props, context);
     this._onClick = this._onClick.bind(this);
-    this._onScroll = this._onScroll.bind(this);
-    this.state = {
-      scrollTop : 0
-    }
   }
 
   componentDidMount() {
@@ -68,16 +61,12 @@ class Paper extends Component {
     }
 
     return connectDragSource(
-      <div className="paper" style={paperStyle} onScroll={this._onScroll} onClick={this._onClick}>
+      <div className="paper" style={paperStyle} onClick={this._onClick}>
         {this.renderWidgets()}
-        <SelectIndicator selectIndicator={selectIndicator} selected={selected}/>
-        <CustomDragLayer selectedWidgets={selectedWidgets} scrollTop={this.state.scrollTop}/>
+        <SelectIndicator selectIndicator={selectIndicator} />
+        <CustomDragLayer selectedWidgets={selectedWidgets} />
       </div>
     )
-  }
-
-  _onScroll(e){
-    this.state.scrollTop = e.target.scrollTop;
   }
 
   _onClick(e) {
