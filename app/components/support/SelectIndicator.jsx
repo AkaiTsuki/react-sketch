@@ -6,12 +6,11 @@ import { getEmptyImage } from 'react-dnd-html5-backend';
 const source = {
   beginDrag(props) {
     return {
-      id: 'SELECT_INDICATOR',
+      id: WidgetType.SELECT_INDICATOR,
       left: props.selectIndicator.left,
       top: props.selectIndicator.top,
       width: props.selectIndicator.width,
-      height: props.selectIndicator.height,
-      selected: props.selected
+      height: props.selectIndicator.height
     };
   }
 };

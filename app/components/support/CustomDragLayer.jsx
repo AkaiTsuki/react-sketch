@@ -2,58 +2,48 @@ import React, { Component, PropTypes } from 'react';
 import * as WidgetType from '../../constants/WidgetType';
 import { DragLayer } from 'react-dnd';
 import {renderPreivew} from '../../support/WidgetRenderSupport'
+import {snapToGrid, calculateDragSelectRectLeftTopPosition} from '../../support/PositionSupport'
 
 const layerStyles = {
   position: 'absolute',
   pointerEvents: 'none',
   zIndex: 65535,
-  // margin: '0 15px',
   left: 0,
   top: 0,
   width: '100%',
   height: '100%'
 };
 
-const RENDER_STEP = 20;
-
-
 class CustomDragLayer extends Component{
-  getItemStyles(props, widget, draggedWidget){
+  getItemStyles(props, widget){
     const { currentOffset } = props;
+
     let { x, y } = currentOffset;
-    x = Math.round(x/RENDER_STEP) * RENDER_STEP;
-    y = Math.round(y/RENDER_STEP) * RENDER_STEP;
-    const style = {
+    x = snapToGrid(x);
+    y = snapToGrid(y)
+
+    return {
       position: 'absolute',
-      // transform: transform,
-      // WebkitTransform: transform
       top: widget.y + y,
       left: widget.x + x,
       boxShadow: '0 0 0 1px blue',
       opacity: 0.5
     };
-
-    return style;
   }
 
-  renderItem(props, widget, draggedWidget) {
-    const style = this.getItemStyles(props, widget, draggedWidget);
+  renderItem(props, widget) {
+    const style = this.getItemStyles(props, widget);
     return renderPreivew(widget, style);
   }
 
-  renderItems(props, item){
+  renderItems(props){
     const {selectedWidgets} = props;
-    const selected = item.selected;
-    const draggedWidget = selectedWidgets.filter(w => w.id === item.id)[0];
-    return selectedWidgets.map(widget => this.renderItem(props, widget, draggedWidget));;
+    return selectedWidgets.map(widget => this.renderItem(props, widget));;
   }
 
   renderCanvasPreview(props){
-    const {currentOffset, initClientOffset, initSourceClientOffset, isDragging} = props;
-    const initOffset = {
-      x: currentOffset.x < 0 ? initClientOffset.x - initSourceClientOffset.x + currentOffset.x : initClientOffset.x - initSourceClientOffset.x,
-      y: currentOffset.y < 0 ? initClientOffset.y - initSourceClientOffset.y + currentOffset.y : initClientOffset.y - initSourceClientOffset.y
-    }
+    const {currentOffset, initClientOffset, initSourceClientOffset} = props;
+    const initOffset = calculateDragSelectRectLeftTopPosition(currentOffset, initClientOffset, initSourceClientOffset);
 
     const style = {
       position: 'absolute',
@@ -75,8 +65,8 @@ class CustomDragLayer extends Component{
     const {currentOffset, item} = props;
 
     let { x, y } = currentOffset;
-    x = Math.round(x/RENDER_STEP) * RENDER_STEP;
-    y = Math.round(y/RENDER_STEP) * RENDER_STEP;
+    x = snapToGrid(x);
+    y = snapToGrid(y);
 
     const style = {
       position: 'absolute',
@@ -90,7 +80,7 @@ class CustomDragLayer extends Component{
     return (
       <div style={layerStyles}>
         <div style={style}></div>
-        {this.renderItems(props, item)}
+        {this.renderItems(props)}
       </div>
     )
   }
@@ -102,19 +92,15 @@ class CustomDragLayer extends Component{
       return null;
     }
 
-    if(item.id === 'SELECT_INDICATOR'){
+    if(item.id === WidgetType.SELECT_INDICATOR){
       return this.renderSelectIndicator(this.props);
     };
 
-    if(item.id === 'canvas'){
+    if(item.id === WidgetType.DRAG_SELECT_RECT){
       return this.renderCanvasPreview(this.props);
     }
 
-    return (
-      <div style={layerStyles}>
-          {this.renderItems(this.props, item)}
-      </div>
-    );
+    return null;
   }
 }
 

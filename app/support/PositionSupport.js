@@ -1,0 +1,24 @@
+export const REVISE_STEP = 20;
+
+export const snapToGrid = (val) => {
+  return Math.round(val / REVISE_STEP) * REVISE_STEP;
+}
+
+/**
+* calculate the left top coordination for drag select rectangle.
+*
+* Drag select is dragging paper and drop on canvas, the paper and canvas share
+* same dimension. The init client offset is the left top position of mouse in corresponding to
+* the browser window. The init source client offset is the left top position of paper in corresponding to
+* the browser window.
+*
+* @param currentOffset: the current mouse move delta offset relate to the init drag position
+* @param initClientOffset: the init left top position when drag start
+* @param initSourceClientOffset: the init left top position of dragging source when drag start
+*/
+export const calculateDragSelectRectLeftTopPosition = (currentOffset, initClientOffset, initSourceClientOffset) => {
+  return {
+    x: currentOffset.x < 0 ? initClientOffset.x - initSourceClientOffset.x + currentOffset.x : initClientOffset.x - initSourceClientOffset.x,
+    y: currentOffset.y < 0 ? initClientOffset.y - initSourceClientOffset.y + currentOffset.y : initClientOffset.y - initSourceClientOffset.y,
+  };
+}
