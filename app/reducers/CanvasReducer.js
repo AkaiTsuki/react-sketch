@@ -59,6 +59,7 @@ const newTextInput = (state) => {
     id,
     width: 200,
     minWidth: 200,
+    minHeight: 34,
     type: WIDGET_TYPE.WIDGET_INPUT_TEXT,
     x: nextAvailableXPosition(newState),
     y: nextAvailableYPosition(newState)
@@ -164,7 +165,9 @@ const resizeWidget = (state, id, direction, deltaX, deltaY) => {
     case ResizeConstants.L:
       return ResizeSupport.resizeWidthFromLeft(newState, id, deltaX);
     case ResizeConstants.T:
-      return ResizeSupport.resizeWidthFromTop(newState, id, deltaY);
+      return ResizeSupport.resizeHeightFromTop(newState, id, deltaY);
+      case ResizeConstants.B:
+        return ResizeSupport.resizeHeightFromBottom(newState, id, deltaY);
     default:
       console.error("Unsupported resize direction: " + direction);
   }

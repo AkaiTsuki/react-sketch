@@ -64,6 +64,11 @@ export const calculateResizeIndicatorPosition = (width, height, indicatorLen, di
         x: (width - indicatorLen) / 2,
         y: 0 - indicatorLen / 2
       }
+    case ResizeConstants.B:
+      return {
+        x: (width - indicatorLen) / 2,
+        y: height - indicatorLen / 2
+      }
     default:
       console.log("Unsupported Reisze Direction: "+ direction);
       return null;

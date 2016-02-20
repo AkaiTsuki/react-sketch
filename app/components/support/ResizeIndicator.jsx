@@ -51,6 +51,7 @@ class ResizeIndicator extends Component {
       case ResizeConstants.R:
         return 'ew-resize';
       case ResizeConstants.T:
+      case ResizeConstants.B:
         return 'ns-resize';
       default:
         return 'pointer';
