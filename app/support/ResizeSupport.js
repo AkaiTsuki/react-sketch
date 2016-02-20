@@ -20,3 +20,14 @@ export const resizeWidthFromLeft = (widgets, id, deltaX) => {
 
   return widgets;
 }
+
+export const resizeWidthFromTop = (widgets, id, deltaY) => {
+  const target = widgets[id];
+  const {height, y, minHeight} = target;
+
+  const newHeight = height - deltaY < minHeight ? minHeight : height - deltaY;
+  const newY = y + deltaY < 0 ? 0 : y + deltaY;
+  widgets[id].y = newY;
+  widgets[id].height = newHeight;
+  return widgets;
+}

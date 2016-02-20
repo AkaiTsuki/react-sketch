@@ -14,6 +14,7 @@ export const Resizable = ComposedComponent => {
           <ComposedComponent {...this.props} />
           <ResizeIndicator direction={ResizeConstants.R} {...this.props} />
           <ResizeIndicator direction={ResizeConstants.L} {...this.props} />
+          <ResizeIndicator direction={ResizeConstants.T} {...this.props} />
         </div>
       );
     }

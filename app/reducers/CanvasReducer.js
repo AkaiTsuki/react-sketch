@@ -79,7 +79,8 @@ const newPanel = (state) => {
     y: nextAvailableYPosition(newState),
     width: 400,
     minWidth: 20,
-    height: 500
+    height: 500,
+    minHeight: 20
   }
 
   newState[id] = widget;
@@ -162,8 +163,10 @@ const resizeWidget = (state, id, direction, deltaX, deltaY) => {
       return ResizeSupport.resizeWidthFromRight(newState, id, deltaX);
     case ResizeConstants.L:
       return ResizeSupport.resizeWidthFromLeft(newState, id, deltaX);
+    case ResizeConstants.T:
+      return ResizeSupport.resizeWidthFromTop(newState, id, deltaY);
     default:
-      console.log("Unsupported resize direction: " + direction);
+      console.error("Unsupported resize direction: " + direction);
   }
 }
 

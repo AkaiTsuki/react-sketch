@@ -91,6 +91,15 @@ const calculateLeftResizePreviewStyle = (item, x, y) => {
   return style;
 }
 
+const calculateTopResizePreviewStyle = (item, x, y) => {
+  const style = getReizsePreviewCommonStyle();
+  style.top = item.y + y;
+  style.left = item.x;
+  style.width = item.width;
+  style.height = item.height - y;
+  return style;
+}
+
 export const calculateResizePreviewStyle = (props) => {
   const {currentOffset, item} = props;
   let { x, y } = currentOffset;
@@ -102,7 +111,9 @@ export const calculateResizePreviewStyle = (props) => {
       return calculateRightResizePreviewStyle(item, x, y);
     case ResizeConstants.L:
       return calculateLeftResizePreviewStyle(item, x, y);
+    case ResizeConstants.T:
+      return calculateTopResizePreviewStyle(item, x, y);
     default:
-      console.error("unsupported resize direction:" + direction);
+      console.error("unsupported resize direction:" + item.direction);
   }
 }
