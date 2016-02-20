@@ -66,54 +66,42 @@ export const renderDraggable = (widget, props) => {
   }
 }
 
+const getReizsePreviewCommonStyle = () => {
+  return {
+    position: 'absolute',
+    boxShadow: '0 0 0 1px #0D47A1'
+  }
+}
 
-const renderRightResizePreview = (props) => {
+const calculateRightResizePreviewStyle = (item, x, y) => {
+  const style = getReizsePreviewCommonStyle();
+  style.top = item.y;
+  style.left = item.x;
+  style.width = item.width + x;
+  style.height = item.height;
+  return style;
+}
+
+const calculateLeftResizePreviewStyle = (item, x, y) => {
+  const style = getReizsePreviewCommonStyle();
+  style.top = item.y;
+  style.left = item.x + x;
+  style.width = item.width - x;
+  style.height = item.height;
+  return style;
+}
+
+export const calculateResizePreviewStyle = (props) => {
   const {currentOffset, item} = props;
   let { x, y } = currentOffset;
   x = snapToGridHalf(x);
   y = snapToGridHalf(y);
 
-  const style = {
-    position: 'absolute',
-    top: item.y,
-    left: item.x,
-    width: item.width + x,
-    height: item.height,
-    boxShadow: '0 0 0 1px #0D47A1'
-  }
-
-  return (
-      <div style={style}></div>
-  )
-}
-
-const renderLeftResizePreview = (props) => {
-  const {currentOffset, item} = props;
-  let { x, y } = currentOffset;
-  x = snapToGridHalf(x);
-  y = snapToGridHalf(y);
-
-  const style = {
-    position: 'absolute',
-    top: item.y,
-    left: item.x + x,
-    width: item.width - x,
-    height: item.height,
-    boxShadow: '0 0 0 1px #0D47A1'
-  }
-
-  return (
-      <div style={style}></div>
-  )
-}
-
-export const renderResizePreview = (props) => {
-  const {item} = props;
   switch (item.direction) {
     case ResizeConstants.R:
-      return renderRightResizePreview(props);
+      return calculateRightResizePreviewStyle(item, x, y);
     case ResizeConstants.L:
-      return renderLeftResizePreview(props);
+      return calculateLeftResizePreviewStyle(item, x, y);
     default:
       console.error("unsupported resize direction:" + direction);
   }

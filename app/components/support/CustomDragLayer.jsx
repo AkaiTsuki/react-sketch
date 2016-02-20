@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import * as WidgetType from '../../constants/WidgetType';
 import { DragLayer } from 'react-dnd';
-import {renderPreivew, renderResizePreview} from '../../support/WidgetRenderSupport'
+import {renderPreivew, calculateResizePreviewStyle} from '../../support/WidgetRenderSupport'
 import {snapToGrid, snapToGridHalf, calculateDragSelectRectLeftTopPosition} from '../../support/PositionSupport'
 
 const layerStyles = {
@@ -86,9 +86,10 @@ class CustomDragLayer extends Component{
   }
 
   renderResizePreview(props){
+    const style = calculateResizePreviewStyle(props);
     return (
       <div style={layerStyles}>
-        { renderResizePreview(props)}
+        <div style={style}></div>
       </div>
     )
 
