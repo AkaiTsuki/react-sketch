@@ -23,6 +23,7 @@ export default class PropertyConsole extends Component {
           <div className="col-md-12"><h4>Attribute</h4></div>
           {widget.text ? this.renderTextPropertyInput(widget, actions) : null}
           {widget.fieldName ? this.renderFieldNamePropertyInput(widget, actions) : null}
+          {widget.label ? this.renderLabelPropertyInput(widget, actions) : null}
         </div>
       </div>
     )
@@ -31,7 +32,7 @@ export default class PropertyConsole extends Component {
   renderTextPropertyInput(widget, actions){
     return (
       <div className="col-md-12">
-        <label htmlFor="console-property-text">Text</label>
+        <label>Text</label>
         <EditableDiv attr='text' value={widget.text} widgetId={widget.id} onUpdate={actions.updateWidget} width='100%' />
       </div>
     )
@@ -40,8 +41,21 @@ export default class PropertyConsole extends Component {
   renderFieldNamePropertyInput(widget, actions){
     return (
       <div className="col-md-12">
-        <label htmlFor="console-property-text">Field Name</label>
+        <label>Field Name</label>
         <EditableDiv attr='fieldName' value={widget.fieldName} widgetId={widget.id} onUpdate={actions.updateWidget} width='100%' />
+      </div>
+    )
+  }
+
+  renderLabelPropertyInput(widget, actions){
+    return this.renderPropertyInput('label', 'label', widget.label, widget.id, actions.updateWidget);
+  }
+
+  renderPropertyInput(label, attr, value, id, onUpdate){
+    return (
+      <div className="col-md-12">
+        <label>{label}</label>
+        <EditableDiv attr={attr} value={value} widgetId={id} onUpdate={onUpdate} width='100%' />
       </div>
     )
   }

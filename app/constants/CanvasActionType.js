@@ -4,6 +4,7 @@ export const NEW_TITLE = 'NEW_TITLE';
 export const NEW_LABEL = 'NEW_LABEL';
 export const NEW_TEXT_INPUT = 'NEW_TEXT_INPUT';
 export const NEW_PANEL= 'NEW_PANEL';
+export const NEW_CHECKBOX = 'NEW_CHECKBOX';
 
 export const UPDATE_LAYOUT = 'UPDATE_LAYOUT';
 

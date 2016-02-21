@@ -50,6 +50,15 @@ export function createPanel(){
   }
 }
 
+export function createCheckbox(){
+  return (dispatch, getState) => {
+    const action = {
+      type: CanvasActionType.NEW_CHECKBOX
+    };
+    dispatch(action);
+  }
+}
+
 export function updateLayout(id, width, height, marginTop, marginBottom){
   return (dispatch, getState) => {
     const action = {

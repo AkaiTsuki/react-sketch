@@ -90,6 +90,20 @@ const newPanel = (state) => {
   return newState;
 }
 
+const newCheckbox = (state) => {
+  const newState = copyState(state);
+  const id = uuid.v4();
+  newState[id] = {
+    id,
+    type: WIDGET_TYPE.WIDGET_INPUT_CHECKBOX,
+    x: nextAvailableXPosition(newState),
+    y: nextAvailableYPosition(newState),
+    label: 'Checkbox',
+    fieldName: 'undefined'
+  }
+  return newState;
+}
+
 const updateLayoutService = (state, id, width, height, marginTop, marginBottom) => {
   const newState = copyState(state);
   newState[id].height = height;
@@ -187,6 +201,8 @@ const canvasReducer = (state = {}, action) => {
       return newTextInput(state);
     case CanvasActionType.NEW_PANEL:
       return newPanel(state);
+    case CanvasActionType.NEW_CHECKBOX:
+      return newCheckbox(state);
     case CanvasActionType.UPDATE_LAYOUT:
       return updateLayoutService(state, action.id, action.width, action.height, action.marginTop, action.marginBottom);
     case CanvasActionType.DRAG_WIDGET:

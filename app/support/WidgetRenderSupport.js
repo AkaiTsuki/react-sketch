@@ -6,11 +6,13 @@ import LabelAbsolutify from '../components/widgets/text/LabelAbsolutify.jsx';
 import TitleAbsolutify from '../components/widgets/text/TitleAbsolutify.jsx';
 import TextInputAbsolutify from '../components/widgets/form/TextInputAbsolutify.jsx';
 import PanelAbsolutify from '../components/widgets/container/PanelAbsolutify.jsx';
+import CheckboxAbsolutify from '../components/widgets/form/CheckboxAbsolutify.jsx';
 
 import LabelPreview from '../components/widgets/text/LabelPreview.jsx';
 import TitlePreview from '../components/widgets/text/TitlePreview.jsx';
 import TextInputPreview from '../components/widgets/form/TextInputPreview.jsx';
 import PanelPreview from '../components/widgets/container/PanelPreview.jsx';
+import CheckboxPreview from '../components/widgets/form/CheckboxPreview.jsx';
 
 import {snapToGrid, snapToGridHalf, calculateDragSelectRectLeftTopPosition} from './PositionSupport'
 
@@ -24,6 +26,8 @@ export const renderPreivew = (widget, style) => {
       return <TextInputPreview key={widget.id} style={style} width={widget.width} height={widget.height}/>
     case WidgetType.WIDGET_PANEL:
       return <PanelPreview key={widget.id} style={style} width={widget.width} height={widget.height}/>
+    case WidgetType.WIDGET_INPUT_CHECKBOX:
+      return <CheckboxPreview key={widget.id} style={style} width={widget.width} height={widget.height} label={widget.label} />
     default:
       return null;
   }
@@ -50,6 +54,11 @@ const renderDraggablePanel = (widget, props) => {
   return <PanelAbsolutify zIndex={3} onSelect={actions.selectWidget} key={widget.id} id={widget.id} x={widget.x} y={widget.y} actions={actions} isSelected={selected[widget.id] === true} width={widget.width} height={widget.height} selected={selected} />
 }
 
+const renderDraggableCheckbox = (widget, props) => {
+  const {selected, actions} = props;
+  return <CheckboxAbsolutify onSelect={actions.selectWidget} width={widget.width} height={widget.height} key={widget.id} id={widget.id} x={widget.x} y={widget.y} actions={actions} isSelected={selected[widget.id] === true} selected={selected} label={widget.label} />
+}
+
 export const renderDraggable = (widget, props) => {
   switch(widget.type){
     case WidgetType.WIDGET_TITLE:
@@ -60,6 +69,8 @@ export const renderDraggable = (widget, props) => {
       return renderDraggableTextInput(widget, props);
     case WidgetType.WIDGET_PANEL:
       return renderDraggablePanel(widget, props);
+    case WidgetType.WIDGET_INPUT_CHECKBOX:
+      return renderDraggableCheckbox(widget, props);
     default:
       console.error("Unsupport widget type: "+ widget.type);
       return null;
