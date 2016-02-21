@@ -6,6 +6,7 @@ export const NEW_TEXT_INPUT = 'NEW_TEXT_INPUT';
 export const NEW_PANEL= 'NEW_PANEL';
 export const NEW_CHECKBOX = 'NEW_CHECKBOX';
 export const NEW_RADIO = 'NEW_RADIO';
+export const NEW_TEXTAREA = 'NEW_TEXTAREA';
 
 export const UPDATE_LAYOUT = 'UPDATE_LAYOUT';
 

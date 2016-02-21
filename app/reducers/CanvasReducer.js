@@ -120,6 +120,23 @@ const newRadio = (state) => {
   return newState;
 }
 
+const newTextArea = (state) => {
+  const newState = copyState(state);
+  const id = uuid.v4();
+  newState[id] = {
+    id,
+    type: WIDGET_TYPE.WIDGET_INPUT_TEXTAREA,
+    x: nextAvailableXPosition(newState),
+    y: nextAvailableYPosition(newState),
+    fieldName: 'undefined',
+    width: 300,
+    minWidth: 20,
+    height: 200,
+    minHeight: 20
+  }
+  return newState;
+}
+
 const updateLayoutService = (state, id, width, height, marginTop, marginBottom) => {
   const newState = copyState(state);
   newState[id].height = height;
@@ -221,6 +238,8 @@ const canvasReducer = (state = {}, action) => {
       return newCheckbox(state);
     case CanvasActionType.NEW_RADIO:
       return newRadio(state);
+    case CanvasActionType.NEW_TEXTAREA:
+      return newTextArea(state);
     case CanvasActionType.UPDATE_LAYOUT:
       return updateLayoutService(state, action.id, action.width, action.height, action.marginTop, action.marginBottom);
     case CanvasActionType.DRAG_WIDGET:

@@ -68,6 +68,15 @@ export function createRadio(){
   }
 }
 
+export function createTextArea(){
+  return (dispatch, getState) => {
+    const action = {
+      type: CanvasActionType.NEW_TEXTAREA
+    };
+    dispatch(action);
+  }
+}
+
 export function updateLayout(id, width, height, marginTop, marginBottom){
   return (dispatch, getState) => {
     const action = {
