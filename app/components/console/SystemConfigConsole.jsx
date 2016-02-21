@@ -27,13 +27,22 @@ export default class SystemConfigConsole extends Component{
         <div className="console-section">
           <div className="col-md-12"><h4>Main Menu</h4></div>
           <div className="col-md-4">
-            <a className="lib-button noselect" onClick={this._onSave}>Save</a>
+            <a className="lib-button noselect" onClick={this._onSave}>
+              <div className='fa fa-floppy-o pull-left'></div>
+              Save
+            </a>
           </div>
           <div className="col-md-4">
-            <a className={undoBtnClassName} onClick={this._onUndo}>Undo</a>
+            <a className={undoBtnClassName} onClick={this._onUndo}>
+              <div className='fa fa-undo pull-left'></div>
+              Undo
+              </a>
           </div>
           <div className="col-md-4">
-            <a className={redoBtnClassName} onClick={this._onRedo}>Redo</a>
+            <a className={redoBtnClassName} onClick={this._onRedo}>
+              <div className='fa fa-repeat pull-left'></div>
+              Redo
+            </a>
           </div>
         </div>
         <div className="console-section">
