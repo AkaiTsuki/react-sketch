@@ -12,12 +12,12 @@ export default class SystemConfigConsole extends Component{
   render(){
     const {config} = this.props;
 
-    let undoBtnClassName = 'lib-button';
+    let undoBtnClassName = 'lib-button noselect';
     if(!config.canUndo){
       undoBtnClassName += ' lib-button-disable'
     }
 
-    let redoBtnClassName = 'lib-button';
+    let redoBtnClassName = 'lib-button noselect';
     if(!config.canRedo){
       redoBtnClassName += ' lib-button-disable'
     }
@@ -27,7 +27,7 @@ export default class SystemConfigConsole extends Component{
         <div className="console-section">
           <div className="col-md-12"><h4>Main Menu</h4></div>
           <div className="col-md-4">
-            <a className="lib-button" onClick={this._onSave}>Save</a>
+            <a className="lib-button noselect" onClick={this._onSave}>Save</a>
           </div>
           <div className="col-md-4">
             <a className={undoBtnClassName} onClick={this._onUndo}>Undo</a>
