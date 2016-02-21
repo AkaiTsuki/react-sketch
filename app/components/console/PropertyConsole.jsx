@@ -22,6 +22,7 @@ export default class PropertyConsole extends Component {
         <div className="console-section col-md-12">
           <div className="col-md-12"><h4>Attribute</h4></div>
           {widget.text ? this.renderTextPropertyInput(widget, actions) : null}
+          {widget.fieldName ? this.renderFieldNamePropertyInput(widget, actions) : null}
         </div>
       </div>
     )
@@ -32,6 +33,15 @@ export default class PropertyConsole extends Component {
       <div className="col-md-12">
         <label htmlFor="console-property-text">Text</label>
         <EditableDiv attr='text' value={widget.text} widgetId={widget.id} onUpdate={actions.updateWidget} width='100%' />
+      </div>
+    )
+  }
+
+  renderFieldNamePropertyInput(widget, actions){
+    return (
+      <div className="col-md-12">
+        <label htmlFor="console-property-text">Field Name</label>
+        <EditableDiv attr='fieldName' value={widget.fieldName} widgetId={widget.id} onUpdate={actions.updateWidget} width='100%' />
       </div>
     )
   }

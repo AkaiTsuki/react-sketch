@@ -61,6 +61,7 @@ const newTextInput = (state) => {
     width: 200,
     minWidth: 200,
     minHeight: 34,
+    fieldName: 'undefined',
     type: WIDGET_TYPE.WIDGET_INPUT_TEXT,
     x: nextAvailableXPosition(newState),
     y: nextAvailableYPosition(newState)
