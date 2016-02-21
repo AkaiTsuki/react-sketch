@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import FunctionalConsole from './console/FunctionalConsole.jsx';
 import LayoutConsole from './console/LayoutConsole.jsx';
 import PropertyConsole from './console/PropertyConsole.jsx';
+import SystemConfigConsole from './console/SystemConfigConsole.jsx';
 
 const style = {
   backgroundColor: '#2c2c2c',
@@ -26,14 +27,9 @@ export default class WidgetConsole extends Component{
   }
 
   renderEmptyConsole(){
+    const {widgets, config, actions} = this.props;
     return (
-      <div className='empty-console'>
-        <h3>Select a widget</h3>
-        <div>
-          <a onClick={this._onSave} className="lib-button" onClick={this._onSave}>Save</a>
-        </div>
-
-      </div>
+      <div className='console'><SystemConfigConsole widgets={widgets} config={config} actions={actions}/></div>
     )
 
   }

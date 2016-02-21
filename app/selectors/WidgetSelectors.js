@@ -3,6 +3,7 @@ import { createSelector } from 'reselect'
 const widgetSelector = state => state.widgets
 const selectedSelector = state => state.selected
 const widgetLibSelector = state => state.widgetLib
+const systemConfigSelector = state => state.config
 
 const widgetsSelector = createSelector(
   widgetSelector,
@@ -17,6 +18,11 @@ const selectsSelector = createSelector(
 const libWidgetsSelector = createSelector(
   widgetLibSelector,
   w => w
+)
+
+const systemSelector = createSelector(
+  systemConfigSelector,
+  config => config
 )
 
 const selectedWidgetsSelector = createSelector(
@@ -58,6 +64,6 @@ const selectIndicatorSelector = createSelector(
 )
 
 export const rootSelector = createSelector(
-  [libWidgetsSelector, widgetsSelector, selectsSelector, selectedWidgetsSelector, selectIndicatorSelector],
-  (widgetLib, widgets, selected, selectedWidgets, selectIndicator) => ({widgetLib, widgets, selected, selectedWidgets, selectIndicator})
+  [libWidgetsSelector, widgetsSelector, selectsSelector, selectedWidgetsSelector, selectIndicatorSelector, systemSelector],
+  (widgetLib, widgets, selected, selectedWidgets, selectIndicator, config) => ({widgetLib, widgets, selected, selectedWidgets, selectIndicator, config})
 )

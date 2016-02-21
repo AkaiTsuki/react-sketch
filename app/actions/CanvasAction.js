@@ -166,3 +166,12 @@ export function resizeWidget(id, direction, x, y){
     dispatch(action);
   }
 }
+
+export function toggleShowGrid() {
+  return (dispatch, getState) => {
+    const action = {
+      type : CanvasActionType.SYSTEM_TOGGLE_GRID
+    }
+    dispatch(action);
+  }
+}

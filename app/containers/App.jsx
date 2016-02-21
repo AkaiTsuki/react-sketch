@@ -17,9 +17,9 @@ class App extends React.Component {
   }
 
   render() {
-    const {widgetLib, widgets, selected, actions, dispatch, selectedWidgets,selectIndicator} = this.props;
+    const {widgetLib, widgets, selected, actions, dispatch, selectedWidgets,selectIndicator, config} = this.props;
     return (
-      <MainFrame widgetLib={widgetLib} actions={actions} widgets={widgets} selected={selected} selectedWidgets={selectedWidgets} selectIndicator={selectIndicator}/>
+      <MainFrame widgetLib={widgetLib} actions={actions} widgets={widgets} selected={selected} selectedWidgets={selectedWidgets} selectIndicator={selectIndicator} config={config}/>
     )
   }
 }
