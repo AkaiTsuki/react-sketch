@@ -143,7 +143,7 @@ const updateWidgetProperties = (state, id, key, value) => {
 
 const alignWidgets = (state, ids, dir) => {
   const newState = copyState(state);
-  return AlignmentSupport.alignWidgets(newState, ids, dir);
+  return AlignmentSupport.alignWidgets(state, newState, ids, dir);
 }
 
 const deleteSelectWidgets = (state, ids) => {
