@@ -23,25 +23,34 @@ export default class PropertyConsole extends Component {
           <div className="col-md-12"><h4>Attribute</h4></div>
           {widget.text ? this.renderTextPropertyInput(widget, actions) : null}
           {widget.fieldName ? this.renderFieldNamePropertyInput(widget, actions) : null}
+          {widget.fieldValue ? this.renderFieldValuePropertyInput(widget, actions) : null}
+          {widget.label ? this.renderLabelPropertyInput(widget, actions) : null}
         </div>
       </div>
     )
   }
 
   renderTextPropertyInput(widget, actions){
-    return (
-      <div className="col-md-12">
-        <label htmlFor="console-property-text">Text</label>
-        <EditableDiv attr='text' value={widget.text} widgetId={widget.id} onUpdate={actions.updateWidget} width='100%' />
-      </div>
-    )
+    return this.renderPropertyInput('Text', 'text', widget.text, widget.id, actions.updateWidget);
   }
 
   renderFieldNamePropertyInput(widget, actions){
+    return this.renderPropertyInput('Field Name', 'fieldName', widget.fieldName, widget.id, actions.updateWidget);
+  }
+
+  renderFieldValuePropertyInput(widget, actions){
+    return this.renderPropertyInput('Field Value', 'fieldValue', widget.fieldValue, widget.id, actions.updateWidget);
+  }
+
+  renderLabelPropertyInput(widget, actions){
+    return this.renderPropertyInput('label', 'label', widget.label, widget.id, actions.updateWidget);
+  }
+
+  renderPropertyInput(label, attr, value, id, onUpdate){
     return (
       <div className="col-md-12">
-        <label htmlFor="console-property-text">Field Name</label>
-        <EditableDiv attr='fieldName' value={widget.fieldName} widgetId={widget.id} onUpdate={actions.updateWidget} width='100%' />
+        <label>{label}</label>
+        <EditableDiv attr={attr} value={value} widgetId={id} onUpdate={onUpdate} width='100%' />
       </div>
     )
   }

@@ -32,12 +32,14 @@ const WidgetDefinition = {
         name: WIDGET_TYPE.WIDGET_INPUT_RADIO,
         icon: 'fa fa-dot-circle-o',
         display: "Radio",
-        enable: false
+        action: 'createRadio',
+        enable: true
       },{
         name: WIDGET_TYPE.WIDGET_INPUT_CHECKBOX,
         icon: 'fa fa-check-square',
         display: "Checkbox",
-        enable: false
+        action: 'createCheckbox',
+        enable: true
       },{
         name: WIDGET_TYPE.WIDGET_INPUT_PASSWORD,
         icon: 'fa fa-lock',
@@ -47,7 +49,8 @@ const WidgetDefinition = {
         name: WIDGET_TYPE.WIDGET_INPUT_TEXTAREA,
         icon: 'fa fa-align-justify',
         display: "Text Area",
-        enable: false
+        action: 'createTextArea',
+        enable: true
       }
     ]
   },
