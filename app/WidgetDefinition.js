@@ -25,7 +25,7 @@ const WidgetDefinition = {
       {
         name: WIDGET_TYPE.WIDGET_INPUT_TEXT,
         icon: 'fa fa-pencil-square-o',
-        display: "Text Field",
+        display: "Input - Text",
         action: 'createTextInput',
         enable: true
       },{
