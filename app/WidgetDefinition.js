@@ -32,7 +32,8 @@ const WidgetDefinition = {
         name: WIDGET_TYPE.WIDGET_INPUT_RADIO,
         icon: 'fa fa-dot-circle-o',
         display: "Radio",
-        enable: false
+        action: 'createRadio',
+        enable: true
       },{
         name: WIDGET_TYPE.WIDGET_INPUT_CHECKBOX,
         icon: 'fa fa-check-square',

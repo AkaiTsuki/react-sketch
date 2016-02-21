@@ -99,7 +99,23 @@ const newCheckbox = (state) => {
     x: nextAvailableXPosition(newState),
     y: nextAvailableYPosition(newState),
     label: 'Checkbox',
-    fieldName: 'undefined'
+    fieldName: 'undefined',
+    fieldValue: 'undefined'
+  }
+  return newState;
+}
+
+const newRadio = (state) => {
+  const newState = copyState(state);
+  const id = uuid.v4();
+  newState[id] = {
+    id,
+    type: WIDGET_TYPE.WIDGET_INPUT_RADIO,
+    x: nextAvailableXPosition(newState),
+    y: nextAvailableYPosition(newState),
+    label: 'Radio',
+    fieldName: 'undefined',
+    fieldValue: 'undefined'
   }
   return newState;
 }
@@ -203,6 +219,8 @@ const canvasReducer = (state = {}, action) => {
       return newPanel(state);
     case CanvasActionType.NEW_CHECKBOX:
       return newCheckbox(state);
+    case CanvasActionType.NEW_RADIO:
+      return newRadio(state);
     case CanvasActionType.UPDATE_LAYOUT:
       return updateLayoutService(state, action.id, action.width, action.height, action.marginTop, action.marginBottom);
     case CanvasActionType.DRAG_WIDGET:

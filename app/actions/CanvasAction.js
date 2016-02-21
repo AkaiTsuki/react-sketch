@@ -59,6 +59,15 @@ export function createCheckbox(){
   }
 }
 
+export function createRadio(){
+  return (dispatch, getState) => {
+    const action = {
+      type: CanvasActionType.NEW_RADIO
+    };
+    dispatch(action);
+  }
+}
+
 export function updateLayout(id, width, height, marginTop, marginBottom){
   return (dispatch, getState) => {
     const action = {
