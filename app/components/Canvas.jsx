@@ -59,7 +59,7 @@ class Canvas extends Component{
 
   render() {
 
-    const {connectDropTarget, widgets, actions, selected,selectedWidgets, selectIndicator} = this.props;
+    const {connectDropTarget, widgets, actions, selected,selectedWidgets, selectIndicator, config} = this.props;
     const style = {
       backgroundColor: '#212121',
       width: 5000,
@@ -71,7 +71,7 @@ class Canvas extends Component{
 
     return connectDropTarget(
       <div className="canvas" style={style}>
-        <Paper widgets={widgets} actions={actions} selected={selected} selectedWidgets={selectedWidgets} selectIndicator={selectIndicator}/>
+        <Paper widgets={widgets} actions={actions} selected={selected} selectedWidgets={selectedWidgets} selectIndicator={selectIndicator} config={config}/>
       </div>
     )
   }

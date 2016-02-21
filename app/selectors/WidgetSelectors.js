@@ -1,8 +1,21 @@
 import { createSelector } from 'reselect'
 
-const widgetSelector = state => state.widgets
-const selectedSelector = state => state.selected
-const widgetLibSelector = state => state.widgetLib
+const selectWidgetPast = state => state.widgets.past;
+const selectWidgetFuture = state => state.widgets.future;
+const widgetSelector = state => state.widgets.present;
+const selectedSelector = state => state.selected;
+const widgetLibSelector = state => state.widgetLib;
+const systemConfigSelector = state => state.config;
+
+const widgetPastSelector = createSelector(
+  selectWidgetPast,
+  past => past
+)
+
+const widgetFutureSelector = createSelector(
+  selectWidgetFuture,
+  future => future
+)
 
 const widgetsSelector = createSelector(
   widgetSelector,
@@ -17,6 +30,18 @@ const selectsSelector = createSelector(
 const libWidgetsSelector = createSelector(
   widgetLibSelector,
   w => w
+)
+
+const systemSelector = createSelector(
+  systemConfigSelector,
+  widgetPastSelector,
+  widgetFutureSelector,
+  (config, past, future) => {
+    return Object.assign({}, config, {
+      canUndo: past.length > 0,
+      canRedo: future.length > 0
+    })
+  }
 )
 
 const selectedWidgetsSelector = createSelector(
@@ -58,6 +83,6 @@ const selectIndicatorSelector = createSelector(
 )
 
 export const rootSelector = createSelector(
-  [libWidgetsSelector, widgetsSelector, selectsSelector, selectedWidgetsSelector, selectIndicatorSelector],
-  (widgetLib, widgets, selected, selectedWidgets, selectIndicator) => ({widgetLib, widgets, selected, selectedWidgets, selectIndicator})
+  [libWidgetsSelector, widgetsSelector, selectsSelector, selectedWidgetsSelector, selectIndicatorSelector, systemSelector],
+  (widgetLib, widgets, selected, selectedWidgets, selectIndicator, config) => ({widgetLib, widgets, selected, selectedWidgets, selectIndicator, config})
 )

@@ -47,17 +47,24 @@ class Paper extends Component {
   }
 
   render() {
-    const {connectDropTarget, selected, connectDragSource, widgets,selectedWidgets,selectIndicator} = this.props;
+    const {connectDropTarget, selected, connectDragSource, widgets,selectedWidgets,selectIndicator, config} = this.props;
 
     const paperStyle = {
       position:'relative',
-      backgroundColor: 'white',
+
       left: 0,
       top: 0,
       width: 5000,
       height: 10000
       // background: 'linear-gradient(180deg, #ccc 10%, rgba(255, 255, 255, 0) 0),linear-gradient(90deg, #ccc 10%, #fff 0)',
       // backgroundSize: '20px 20px'
+    }
+
+    if(config.showGrid){
+      paperStyle.background = 'linear-gradient(180deg, #ddd 10%, rgba(255, 255, 255, 0) 0),linear-gradient(90deg, #ddd 10%, #eee 0)';
+      paperStyle.backgroundSize = config.gridStep + 'px ' + config.gridStep + 'px';
+    } else {
+      paperStyle.backgroundColor = '#eee';
     }
 
     return connectDragSource(
@@ -70,8 +77,8 @@ class Paper extends Component {
   }
 
   _onClick(e) {
-    const {actions} = this.props;
-    actions.unSelectAll();
+    const {actions, selectedWidgets} = this.props;
+    if(selectedWidgets.length > 0) actions.unSelectAll();
   }
 
   renderWidgets() {

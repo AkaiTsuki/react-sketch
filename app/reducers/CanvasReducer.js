@@ -5,6 +5,7 @@ import * as CanvasActionType from '../constants/CanvasActionType';
 import * as AlignmentSupport from '../support/AlignmentSupport';
 import * as ResizeSupport from '../support/ResizeSupport';
 import {snapToGrid, nextAvailableYPosition, nextAvailableXPosition} from '../support/PositionSupport.js';
+import undoable, { distinctState, excludeAction } from 'redux-undo';
 
 const copyState = (state) => {
   const newState = {};
@@ -204,4 +205,8 @@ const canvasReducer = (state = {}, action) => {
   }
 }
 
-export default canvasReducer;
+export default undoable(canvasReducer, {
+  filter: function filterState(action, currentState, previousState) {
+    return currentState !== previousState && action.type !== CanvasActionType.UPDATE_LAYOUT && action.type !== CanvasActionType.INIT_APP
+  }
+});
