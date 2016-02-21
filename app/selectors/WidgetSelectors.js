@@ -1,9 +1,21 @@
 import { createSelector } from 'reselect'
 
-const widgetSelector = state => state.widgets
-const selectedSelector = state => state.selected
-const widgetLibSelector = state => state.widgetLib
-const systemConfigSelector = state => state.config
+const selectWidgetPast = state => state.widgets.past;
+const selectWidgetFuture = state => state.widgets.future;
+const widgetSelector = state => state.widgets.present;
+const selectedSelector = state => state.selected;
+const widgetLibSelector = state => state.widgetLib;
+const systemConfigSelector = state => state.config;
+
+const widgetPastSelector = createSelector(
+  selectWidgetPast,
+  past => past
+)
+
+const widgetFutureSelector = createSelector(
+  selectWidgetFuture,
+  future => future
+)
 
 const widgetsSelector = createSelector(
   widgetSelector,
@@ -22,7 +34,14 @@ const libWidgetsSelector = createSelector(
 
 const systemSelector = createSelector(
   systemConfigSelector,
-  config => config
+  widgetPastSelector,
+  widgetFutureSelector,
+  (config, past, future) => {
+    return Object.assign({}, config, {
+      canUndo: past.length > 0,
+      canRedo: future.length > 0
+    })
+  }
 )
 
 const selectedWidgetsSelector = createSelector(

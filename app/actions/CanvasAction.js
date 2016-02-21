@@ -1,4 +1,5 @@
 import * as CanvasActionType from '../constants/CanvasActionType';
+import { ActionCreators as UndoActionCreators } from 'redux-undo'
 
 export function initApp(widgets){
   return (dispatch, getState) => {
@@ -173,5 +174,17 @@ export function toggleShowGrid() {
       type : CanvasActionType.SYSTEM_TOGGLE_GRID
     }
     dispatch(action);
+  }
+}
+
+export function undo(){
+  return (dispatch, getState) => {
+    dispatch(UndoActionCreators.undo());
+  }
+}
+
+export function redo(){
+  return (dispatch, getState) => {
+    dispatch(UndoActionCreators.redo());
   }
 }

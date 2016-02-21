@@ -77,8 +77,8 @@ class Paper extends Component {
   }
 
   _onClick(e) {
-    const {actions} = this.props;
-    actions.unSelectAll();
+    const {actions, selectedWidgets} = this.props;
+    if(selectedWidgets.length > 0) actions.unSelectAll();
   }
 
   renderWidgets() {
