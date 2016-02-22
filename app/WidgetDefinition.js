@@ -41,10 +41,11 @@ const WidgetDefinition = {
         action: 'createCheckbox',
         enable: true
       },{
-        name: WIDGET_TYPE.WIDGET_INPUT_PASSWORD,
-        icon: 'fa fa-lock',
-        display: "Password",
-        enable: false
+        name: WIDGET_TYPE.WIDGET_INPUT_DROPDOWN,
+        icon: 'fa fa-server',
+        display: "Dropdown",
+        action: 'createDropDown',
+        enable: true
       },{
         name: WIDGET_TYPE.WIDGET_INPUT_TEXTAREA,
         icon: 'fa fa-align-justify',

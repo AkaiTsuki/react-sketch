@@ -26,6 +26,7 @@ export default class PropertyConsole extends Component {
           {widget.fieldValue ? this.renderFieldValuePropertyInput(widget, actions) : null}
           {widget.label ? this.renderLabelPropertyInput(widget, actions) : null}
         </div>
+        {widget.options ? this.renderOptionsPropertySection(widget, actions) : null}
       </div>
     )
   }
@@ -53,6 +54,35 @@ export default class PropertyConsole extends Component {
         <EditableDiv attr={attr} value={value} widgetId={id} onUpdate={onUpdate} width='100%' />
       </div>
     )
+  }
+
+  renderOptionsPropertySection(widget, actions){
+    return(
+      <div className="console-section col-md-12">
+        <div className="row"><div className='col-md-12'><h4>Options</h4></div></div>
+        {this.renderOptionInputs(widget, actions)}
+      </div>
+    )
+  }
+
+  renderOptionInputs(widget, actions) {
+    return widget.options.map(opt => {
+      return (
+        <div key={opt.id} className="row" style={{marginBottom: 10}}>
+          <div className="col-md-12">
+            <label>Value</label>
+            <EditableDiv attr='value' value={opt.value} widgetId={widget.id} optionId={opt.id} onUpdate={actions.updateDropDownOption} width='100%' />
+          </div>
+          <div className="col-md-12">
+            <label>Display</label>
+            <EditableDiv attr='display' value={opt.display} widgetId={widget.id} optionId={opt.id} onUpdate={actions.updateDropDownOption} width='100%' />
+          </div>
+          <div className="col-md-12">
+            <div className='fa fa-trash'></div>
+          </div>
+        </div>
+      )
+    });
   }
 
   onClickText(e){

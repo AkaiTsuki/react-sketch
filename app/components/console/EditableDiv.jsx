@@ -33,11 +33,17 @@ export default class EditableDiv extends Component {
   }
 
   updateAttribute(value){
-    const {widgetId, onUpdate, attr} = this.props;
+    const {widgetId, onUpdate, attr, optionId} = this.props;
     this.setState({
       isEditing: false
     });
-    onUpdate(widgetId, attr, value);
+    if(!optionId){
+      onUpdate(widgetId, attr, value);
+    }else{
+      console.log({widgetId, optionId, attr, value})
+      onUpdate(widgetId, optionId, attr, value);
+    }
+
   }
 
   _onClick(e){
