@@ -237,3 +237,24 @@ export function redo(){
     dispatch(UndoActionCreators.redo());
   }
 }
+
+export function deleteDropDownOption(widgetId, optionId){
+  return (dispatch, getState) => {
+    const action = {
+      type : CanvasActionType.DELETE_DROPDOWN_OPTION,
+      widgetId,
+      optionId
+    }
+    dispatch(action);
+  }
+}
+
+export function addDropDownOption(widgetId) {
+  return (dispatch, getState) => {
+    const action = {
+      type : CanvasActionType.ADD_DROPDOWN_OPTION,
+      widgetId
+    }
+    dispatch(action);
+  }
+}

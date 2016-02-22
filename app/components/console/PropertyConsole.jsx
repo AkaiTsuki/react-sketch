@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import EditableDiv from './EditableDiv.jsx'
+import OptionConsole from './OptionConsole.jsx'
 
 export default class PropertyConsole extends Component {
   constructor(props, context) {
@@ -66,23 +67,7 @@ export default class PropertyConsole extends Component {
   }
 
   renderOptionInputs(widget, actions) {
-    return widget.options.map(opt => {
-      return (
-        <div key={opt.id} className="row" style={{marginBottom: 10}}>
-          <div className="col-md-12">
-            <label>Value</label>
-            <EditableDiv attr='value' value={opt.value} widgetId={widget.id} optionId={opt.id} onUpdate={actions.updateDropDownOption} width='100%' />
-          </div>
-          <div className="col-md-12">
-            <label>Display</label>
-            <EditableDiv attr='display' value={opt.display} widgetId={widget.id} optionId={opt.id} onUpdate={actions.updateDropDownOption} width='100%' />
-          </div>
-          <div className="col-md-12">
-            <div className='fa fa-trash'></div>
-          </div>
-        </div>
-      )
-    });
+    return <OptionConsole widgetId={widget.id} options={widget.options} actions={actions} />
   }
 
   onClickText(e){

@@ -227,6 +227,25 @@ const updateDropDownOption = (state, id, optionId, key, value) => {
   return newState;
 }
 
+const deleteDropDownOption = (state, widgetId, optionId) => {
+  const newState = copyState(state);
+
+  newState[widgetId].options = newState[widgetId].options.filter(opt => opt.id !== optionId);
+
+  return newState;
+}
+
+const addDropDownOption = (state, widgetId) => {
+  const newState = copyState(state);
+  newState[widgetId].options = newState[widgetId].options.map(opt => opt);
+  newState[widgetId].options.push({
+    id: uuid.v4(),
+    value: 'New Option',
+    display: 'New Option'
+  })
+  return newState;
+}
+
 const alignWidgets = (state, ids, dir) => {
   const newState = copyState(state);
   return AlignmentSupport.alignWidgets(state, newState, ids, dir);
@@ -290,6 +309,10 @@ const canvasReducer = (state = {}, action) => {
       return updateWidgetProperties(state, action.id, action.key, action.value);
     case CanvasActionType.UPDATE_DROPDOWN_OPTION:
       return updateDropDownOption(state, action.id, action.optionId, action.key, action.value);
+    case CanvasActionType.DELETE_DROPDOWN_OPTION:
+      return deleteDropDownOption(state, action.widgetId, action.optionId);
+    case CanvasActionType.ADD_DROPDOWN_OPTION:
+      return addDropDownOption(state, action.widgetId);
     case CanvasActionType.ALIGN_WIDGETS:
       return alignWidgets(state, action.widgetIds, action.direction);
     case CanvasActionType.DELETE_WIDGETS:
