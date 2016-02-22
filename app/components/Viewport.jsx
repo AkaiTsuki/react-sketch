@@ -7,7 +7,7 @@ export default class Viewport extends Component{
   }
 
   render(){
-    const {widgets, actions, selected,selectedWidgets, selectIndicator, config} = this.props;
+    const {widgets, actions, selected,selectedWidgets, selectIndicator, config, alignments} = this.props;
     const style = {
       backgroundColor: '#212121',
       overflow: 'auto'
@@ -15,7 +15,7 @@ export default class Viewport extends Component{
 
     return (
       <div className="col-md-8 full-height view" style={style}>
-        <Canvas widgets={widgets} actions={actions} selected={selected} selectedWidgets={selectedWidgets} selectIndicator={selectIndicator} config={config}/>
+        <Canvas widgets={widgets} actions={actions} selected={selected} selectedWidgets={selectedWidgets} selectIndicator={selectIndicator} config={config} alignments={alignments}/>
       </div>
     )
   }

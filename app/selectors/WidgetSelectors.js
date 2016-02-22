@@ -82,7 +82,61 @@ const selectIndicatorSelector = createSelector(
   }
 )
 
+const setupVertialAlignment = (alignments, widget) => {
+  const {x, y} = widget;
+
+  if(!alignments.vertical[x]) {
+    alignments.vertical[x] = {
+      min: 50000,
+      max: -1
+    };
+  }
+
+  if(y < alignments.vertical[x].min) {
+    alignments.vertical[x].min = y;
+  }
+
+  if(widget.height && alignments.vertical[x].max < (widget.height + y)){
+    alignments.vertical[x].max = widget.height + y;
+  }
+
+
+  if(widget.width){
+    const rightBound = x + widget.width;
+
+    if(!alignments.vertical[rightBound]) {
+      alignments.vertical[rightBound] = {
+        min: 50000,
+        max: -1
+      };
+    }
+
+    if(y < alignments.vertical[rightBound].min) {
+      alignments.vertical[rightBound].min = y;
+    }
+
+    if(widget.height && alignments.vertical[rightBound].max < (widget.height + y)){
+      alignments.vertical[rightBound].max = widget.height + y;
+    }
+  }
+}
+
+const alignAssistSelector = createSelector(
+  widgetsSelector,
+  widgets => {
+    const alignments = {
+      vertical: {}
+    }
+
+    for(let id in widgets){
+      const widget = widgets[id];
+      setupVertialAlignment(alignments, widget);
+    }
+    return alignments;
+  }
+);
+
 export const rootSelector = createSelector(
-  [libWidgetsSelector, widgetsSelector, selectsSelector, selectedWidgetsSelector, selectIndicatorSelector, systemSelector],
-  (widgetLib, widgets, selected, selectedWidgets, selectIndicator, config) => ({widgetLib, widgets, selected, selectedWidgets, selectIndicator, config})
+  [libWidgetsSelector, widgetsSelector, selectsSelector, selectedWidgetsSelector, selectIndicatorSelector, systemSelector, alignAssistSelector],
+  (widgetLib, widgets, selected, selectedWidgets, selectIndicator, config, alignments) => ({widgetLib, widgets, selected, selectedWidgets, selectIndicator, config, alignments})
 )
