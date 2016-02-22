@@ -60,7 +60,6 @@ export default class PropertyConsole extends Component {
   renderOptionsPropertySection(widget, actions){
     return(
       <div className="console-section col-md-12">
-        <div className="row"><div className='col-md-12'><h4>Options</h4></div></div>
         {this.renderOptionInputs(widget, actions)}
       </div>
     )
