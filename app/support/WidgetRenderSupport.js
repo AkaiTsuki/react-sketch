@@ -9,6 +9,7 @@ import PanelAbsolutify from '../components/widgets/container/PanelAbsolutify.jsx
 import CheckboxAbsolutify from '../components/widgets/form/CheckboxAbsolutify.jsx';
 import RadioAbsolutify from '../components/widgets/form/RadioAbsolutify.jsx';
 import TextAreaAbsolutify from '../components/widgets/form/TextAreaAbsolutify.jsx';
+import DropDownAbsolutify from '../components/widgets/form/DropDownAbsolutify.jsx';
 
 import LabelPreview from '../components/widgets/text/LabelPreview.jsx';
 import TitlePreview from '../components/widgets/text/TitlePreview.jsx';
@@ -17,6 +18,7 @@ import PanelPreview from '../components/widgets/container/PanelPreview.jsx';
 import CheckboxPreview from '../components/widgets/form/CheckboxPreview.jsx';
 import RadioPreview from '../components/widgets/form/RadioPreview.jsx';
 import TextAreaPreview from '../components/widgets/form/TextAreaPreview.jsx';
+import DropDownPreview from '../components/widgets/form/DropDownPreview.jsx';
 
 import {snapToGrid, snapToGridHalf, calculateDragSelectRectLeftTopPosition} from './PositionSupport'
 
@@ -36,6 +38,8 @@ export const renderPreivew = (widget, style) => {
       return <RadioPreview key={widget.id} style={style} width={widget.width} height={widget.height} label={widget.label} />
     case WidgetType.WIDGET_INPUT_TEXTAREA:
       return <TextAreaPreview key={widget.id} style={style} width={widget.width} height={widget.height} />
+    case WidgetType.WIDGET_INPUT_DROPDOWN:
+      return <DropDownPreview key={widget.id} style={style} width={widget.width} height={widget.height} options={widget.options}/>
     default:
       return null;
   }
@@ -77,6 +81,11 @@ const renderDraggableTextArea = (widget, props) => {
   return <TextAreaAbsolutify onSelect={actions.selectWidget} width={widget.width} height={widget.height} key={widget.id} id={widget.id} x={widget.x} y={widget.y} actions={actions} isSelected={selected[widget.id] === true} selected={selected} fieldName={widget.fieldName} />
 }
 
+const renderDraggableDropDown = (widget, props) => {
+  const {selected, actions} = props;
+  return <DropDownAbsolutify onSelect={actions.selectWidget} width={widget.width} height={widget.height} key={widget.id} id={widget.id} x={widget.x} y={widget.y} actions={actions} isSelected={selected[widget.id] === true} selected={selected} fieldName={widget.fieldName} options={widget.options} disabled={widget.disabled}/>
+}
+
 export const renderDraggable = (widget, props) => {
   switch(widget.type){
     case WidgetType.WIDGET_TITLE:
@@ -93,6 +102,8 @@ export const renderDraggable = (widget, props) => {
       return renderDraggableRadio(widget, props);
     case WidgetType.WIDGET_INPUT_TEXTAREA:
       return renderDraggableTextArea(widget, props);
+      case WidgetType.WIDGET_INPUT_DROPDOWN:
+        return renderDraggableDropDown(widget, props);
     default:
       console.error("Unsupport widget type: "+ widget.type);
       return null;

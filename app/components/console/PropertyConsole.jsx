@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import EditableDiv from './EditableDiv.jsx'
+import OptionConsole from './OptionConsole.jsx'
 
 export default class PropertyConsole extends Component {
   constructor(props, context) {
@@ -26,6 +27,7 @@ export default class PropertyConsole extends Component {
           {widget.fieldValue ? this.renderFieldValuePropertyInput(widget, actions) : null}
           {widget.label ? this.renderLabelPropertyInput(widget, actions) : null}
         </div>
+        {widget.options ? this.renderOptionsPropertySection(widget, actions) : null}
       </div>
     )
   }
@@ -53,6 +55,19 @@ export default class PropertyConsole extends Component {
         <EditableDiv attr={attr} value={value} widgetId={id} onUpdate={onUpdate} width='100%' />
       </div>
     )
+  }
+
+  renderOptionsPropertySection(widget, actions){
+    return(
+      <div className="console-section col-md-12">
+        <div className="row"><div className='col-md-12'><h4>Options</h4></div></div>
+        {this.renderOptionInputs(widget, actions)}
+      </div>
+    )
+  }
+
+  renderOptionInputs(widget, actions) {
+    return <OptionConsole widgetId={widget.id} options={widget.options} actions={actions} />
   }
 
   onClickText(e){

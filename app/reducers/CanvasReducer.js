@@ -137,6 +137,25 @@ const newTextArea = (state) => {
   return newState;
 }
 
+const newDropDown = (state) => {
+  const newState = copyState(state);
+  const id = uuid.v4();
+  newState[id] = {
+    id,
+    type: WIDGET_TYPE.WIDGET_INPUT_DROPDOWN,
+    x: nextAvailableXPosition(newState),
+    y: nextAvailableYPosition(newState),
+    fieldName: 'undefined',
+    options: [
+      {id: uuid.v4(), value: 'Option 1', display: 'Option 1'},
+      {id: uuid.v4(), value: 'Option 2', display: 'Option 2'}
+    ],
+    disabled: true,
+    width: 200
+  }
+  return newState;
+}
+
 const updateLayoutService = (state, id, width, height, marginTop, marginBottom) => {
   const newState = copyState(state);
   newState[id].height = height;
@@ -186,6 +205,44 @@ const updateWidgetProperties = (state, id, key, value) => {
       newState[id][key] = value;
   }
 
+  return newState;
+}
+
+const updateDropDownOption = (state, id, optionId, key, value) => {
+  const newState = copyState(state);
+
+  if(newState[id].options){
+    newState[id].options = newState[id].options.map(opt => {
+      if(opt.id === optionId) {
+        const newOpt = Object.assign({}, opt, {
+          [key] : value
+        });
+        return newOpt;
+      }else {
+        return opt;
+      }
+    })
+  }
+
+  return newState;
+}
+
+const deleteDropDownOption = (state, widgetId, optionId) => {
+  const newState = copyState(state);
+
+  newState[widgetId].options = newState[widgetId].options.filter(opt => opt.id !== optionId);
+
+  return newState;
+}
+
+const addDropDownOption = (state, widgetId) => {
+  const newState = copyState(state);
+  newState[widgetId].options = newState[widgetId].options.map(opt => opt);
+  newState[widgetId].options.push({
+    id: uuid.v4(),
+    value: 'New Option',
+    display: 'New Option'
+  })
   return newState;
 }
 
@@ -240,6 +297,8 @@ const canvasReducer = (state = {}, action) => {
       return newRadio(state);
     case CanvasActionType.NEW_TEXTAREA:
       return newTextArea(state);
+    case CanvasActionType.NEW_DROPDOWN:
+      return newDropDown(state);
     case CanvasActionType.UPDATE_LAYOUT:
       return updateLayoutService(state, action.id, action.width, action.height, action.marginTop, action.marginBottom);
     case CanvasActionType.DRAG_WIDGET:
@@ -248,6 +307,12 @@ const canvasReducer = (state = {}, action) => {
       return dragWidgets(state, action.selected, action.offsetX, action.offsetY);
     case CanvasActionType.UPDATE_WIDGET:
       return updateWidgetProperties(state, action.id, action.key, action.value);
+    case CanvasActionType.UPDATE_DROPDOWN_OPTION:
+      return updateDropDownOption(state, action.id, action.optionId, action.key, action.value);
+    case CanvasActionType.DELETE_DROPDOWN_OPTION:
+      return deleteDropDownOption(state, action.widgetId, action.optionId);
+    case CanvasActionType.ADD_DROPDOWN_OPTION:
+      return addDropDownOption(state, action.widgetId);
     case CanvasActionType.ALIGN_WIDGETS:
       return alignWidgets(state, action.widgetIds, action.direction);
     case CanvasActionType.DELETE_WIDGETS:

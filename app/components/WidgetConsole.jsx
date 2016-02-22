@@ -7,7 +7,8 @@ import SystemConfigConsole from './console/SystemConfigConsole.jsx';
 const style = {
   backgroundColor: '#2c2c2c',
   color: 'rgba(255,255,255,0.7)',
-  padding: 0
+  padding: 0,
+  overflow: 'auto'
 };
 
 export default class WidgetConsole extends Component{

@@ -64,6 +64,7 @@ html, body, .full-height{
   padding: 10;
   display: block;
   padding: 5px;
+  font-size: 12px;
 }
 
 .lib-button:hover{

@@ -77,6 +77,15 @@ export function createTextArea(){
   }
 }
 
+export function createDropDown(){
+  return (dispatch, getState) => {
+    const action = {
+      type: CanvasActionType.NEW_DROPDOWN
+    };
+    dispatch(action);
+  }
+}
+
 export function updateLayout(id, width, height, marginTop, marginBottom){
   return (dispatch, getState) => {
     const action = {
@@ -133,6 +142,19 @@ export function updateWidget(id, key, value){
     const action = {
       type : CanvasActionType.UPDATE_WIDGET,
       id,
+      key,
+      value
+    }
+    dispatch(action);
+  }
+}
+
+export function updateDropDownOption(widgetId, optionId, key, value){
+  return (dispatch, getState) => {
+    const action = {
+      type : CanvasActionType.UPDATE_DROPDOWN_OPTION,
+      id: widgetId,
+      optionId,
       key,
       value
     }
@@ -213,5 +235,26 @@ export function undo(){
 export function redo(){
   return (dispatch, getState) => {
     dispatch(UndoActionCreators.redo());
+  }
+}
+
+export function deleteDropDownOption(widgetId, optionId){
+  return (dispatch, getState) => {
+    const action = {
+      type : CanvasActionType.DELETE_DROPDOWN_OPTION,
+      widgetId,
+      optionId
+    }
+    dispatch(action);
+  }
+}
+
+export function addDropDownOption(widgetId) {
+  return (dispatch, getState) => {
+    const action = {
+      type : CanvasActionType.ADD_DROPDOWN_OPTION,
+      widgetId
+    }
+    dispatch(action);
   }
 }
