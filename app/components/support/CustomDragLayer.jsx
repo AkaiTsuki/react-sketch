@@ -81,6 +81,7 @@ class CustomDragLayer extends Component{
       <div style={layerStyles}>
         <div style={style}></div>
         {this.renderItems(props)}
+        {this.renderAlignAssist(props, style)}
       </div>
     )
   }
@@ -92,7 +93,28 @@ class CustomDragLayer extends Component{
         <div style={style}></div>
       </div>
     )
+  }
 
+  renderAlignAssist(props, style){
+    const {alignments} = props;
+    const x = style.left;
+    const y = style.top;
+    if(!alignments.vertical[x]) return null;
+
+    const top = alignments.vertical[x].min < y ? alignments.vertical[x].min : y;
+    const height = alignments.vertical[x].max < y ? y - top : alignments.vertical[x].max - top;
+
+    const lineStyle = {
+      position: 'absolute',
+      width: 1,
+      left: x - 1,
+      top: top,
+      height: Math.abs(height),
+      borderRight: '1px dashed green'
+    };
+    return (
+      <div style={lineStyle}></div>
+    )
   }
 
   render() {

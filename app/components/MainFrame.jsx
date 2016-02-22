@@ -12,7 +12,7 @@ class MainFrame extends Component{
   }
 
   render() {
-    const {widgetLib, widgets, selected, actions, selectedWidgets, selectIndicator, config} = this.props;
+    const {widgetLib, widgets, selected, actions, selectedWidgets, selectIndicator, config, alignments} = this.props;
     const selectedWidgetId = this.getSelectWidgetId(selectedWidgets);
     const widget = selectedWidgetId == null ? null : widgets[selectedWidgetId];
 
@@ -20,7 +20,7 @@ class MainFrame extends Component{
       <div className="container-fluid full-height" >
         <div className="row full-height">
             <WidgetLibPanel widgetLib={widgetLib} actions={actions} />
-            <Viewport widgets={widgets} actions={actions} selected={selected} selectedWidgets={selectedWidgets} selectIndicator={selectIndicator} config={config}/>
+            <Viewport widgets={widgets} actions={actions} selected={selected} selectedWidgets={selectedWidgets} selectIndicator={selectIndicator} config={config} alignments={alignments}/>
             <WidgetConsole widgets={widgets} widget={widget} actions={actions} selected={selected} config={config}/>
         </div>
       </div>

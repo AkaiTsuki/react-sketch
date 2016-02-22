@@ -47,7 +47,7 @@ class Paper extends Component {
   }
 
   render() {
-    const {connectDropTarget, selected, connectDragSource, widgets,selectedWidgets,selectIndicator, config} = this.props;
+    const {connectDropTarget, selected, connectDragSource, widgets,selectedWidgets,selectIndicator, config, alignments} = this.props;
 
     const paperStyle = {
       position:'relative',
@@ -71,7 +71,7 @@ class Paper extends Component {
       <div className="paper" style={paperStyle} onClick={this._onClick}>
         {this.renderWidgets()}
         <SelectIndicator selectIndicator={selectIndicator} />
-        <CustomDragLayer selectedWidgets={selectedWidgets} />
+        <CustomDragLayer selectedWidgets={selectedWidgets} alignments={alignments}/>
       </div>
     )
   }
