@@ -18,13 +18,10 @@ class MainFrame extends Component{
 
     return (
       <div className="container-fluid full-height" >
-
         <div className="row full-height">
-          <div className='row full-height viewport'>
             <WidgetLibPanel widgetLib={widgetLib} actions={actions} />
             <Viewport widgets={widgets} actions={actions} selected={selected} selectedWidgets={selectedWidgets} selectIndicator={selectIndicator} config={config}/>
             <WidgetConsole widgets={widgets} widget={widget} actions={actions} selected={selected} config={config}/>
-          </div>
         </div>
       </div>
     )
