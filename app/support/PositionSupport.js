@@ -40,11 +40,11 @@ export const nextAvailableYPosition = (widgets) => {
     }
   }
 
-  return maxY+REVISE_STEP;
+  return snapToGrid(maxY+REVISE_STEP);
 }
 
 export const nextAvailableXPosition = (widgets) => {
-  return REVISE_STEP;
+  return snapToGrid(REVISE_STEP);
 }
 
 export const calculateResizeIndicatorPosition = (width, height, indicatorLen, direction) => {

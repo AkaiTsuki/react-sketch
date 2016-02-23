@@ -81,7 +81,8 @@ class CustomDragLayer extends Component{
       <div style={layerStyles}>
         <div style={style}></div>
         {this.renderItems(props)}
-        {this.renderAlignAssist(props, style)}
+        {this.renderVerticalAlignAssist(props, style)}
+        {this.renderHorizontalAlignAssist(props, style)}
       </div>
     )
   }
@@ -95,7 +96,7 @@ class CustomDragLayer extends Component{
     )
   }
 
-  renderAlignAssist(props, style){
+  renderVerticalAlignAssist(props, style){
     const {alignments} = props;
     const x = style.left;
     const y = style.top;
@@ -103,8 +104,7 @@ class CustomDragLayer extends Component{
 
     const top = alignments.vertical[x].min < y ? alignments.vertical[x].min : y;
     const height = alignments.vertical[x].max < y ? y - top : alignments.vertical[x].max - top;
-
-    const lineStyle = {
+    const verticalStyle = {
       position: 'absolute',
       width: 1,
       left: x - 1,
@@ -112,8 +112,31 @@ class CustomDragLayer extends Component{
       height: Math.abs(height),
       borderRight: '1px dashed green'
     };
+
     return (
-      <div style={lineStyle}></div>
+      <div style={verticalStyle}></div>
+    )
+  }
+
+  renderHorizontalAlignAssist(props, style) {
+    const {alignments} = props;
+    const x = style.left;
+    const y = style.top;
+    if(!alignments.horizontal[y]) return null;
+
+    const left = alignments.horizontal[y].min < x ? alignments.horizontal[y].min : x;
+    const width = alignments.horizontal[y].max < x ? x - left : alignments.horizontal[y].max - left;
+    const horizontalStyle = {
+      position: 'absolute',
+      width: Math.abs(width),
+      left: left,
+      top: y - 1,
+      height: 1,
+      borderBottom: '1px dashed green'
+    };
+    
+    return (
+      <div style={horizontalStyle}></div>
     )
   }
 

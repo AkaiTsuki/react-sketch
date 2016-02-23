@@ -121,16 +121,54 @@ const setupVertialAlignment = (alignments, widget) => {
   }
 }
 
+const setupHorizontalAlignment = (alignments, widget) => {
+  const {x, y} = widget;
+  if(!alignments.horizontal[y]) {
+    alignments.horizontal[y] = {
+      min: 50000,
+      max: -1
+    };
+  }
+
+  if(x < alignments.horizontal[y].min) {
+    alignments.horizontal[y].min = x;
+  }
+
+  if(widget.width && alignments.horizontal[y].max < (widget.x + widget.width)){
+    alignments.horizontal[y].max = (widget.x + widget.width);
+  }
+
+  if(widget.height){
+    const bottom = widget.height + y;
+    if(!alignments.horizontal[bottom]){
+      alignments.horizontal[bottom] = {
+        min: 50000,
+        max: -1
+      };
+    }
+
+    if(x < alignments.horizontal[bottom].min) {
+      alignments.horizontal[bottom].min = x;
+    }
+
+    if(widget.width && alignments.horizontal[bottom].max < (widget.x + widget.width)){
+      alignments.horizontal[bottom].max = (widget.x + widget.width);
+    }
+  }
+}
+
 const alignAssistSelector = createSelector(
   widgetsSelector,
   widgets => {
     const alignments = {
-      vertical: {}
+      vertical: {},
+      horizontal: {}
     }
 
     for(let id in widgets){
       const widget = widgets[id];
       setupVertialAlignment(alignments, widget);
+      setupHorizontalAlignment(alignments, widget);
     }
     return alignments;
   }
