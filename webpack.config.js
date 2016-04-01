@@ -9,7 +9,7 @@ const TARGET = process.env.npm_lifecycle_event;
 process.env.BABEL_ENV = TARGET;
 
 const PATHS = {
-  app: path.join(__dirname, 'app'),
+  src: path.join(__dirname, 'src'),
   build: path.join(__dirname, 'build'),
   css: path.join(__dirname, "node_modules", "bootstrap", "dist", "css", "bootstrap.min.css")
 };
@@ -19,7 +19,7 @@ const common = {
 
   // Entry accepts a path or an object of entries.
   // The build chapter contains an example of the latter.
-  entry: PATHS.app,
+  entry: PATHS.src,
 
   // Add resolve.extensions.
   // '' is needed to allow imports without an extension.
@@ -39,7 +39,7 @@ const common = {
         test: /\.css$/,
         loaders: ['style', 'css'],
         // Include accepts either a path or an array of paths.
-        include: [PATHS.app, PATHS.css]
+        include: [PATHS.src, PATHS.css]
       },
       // Set up jsx. This accepts js too thanks to RegExp
       {
@@ -48,7 +48,7 @@ const common = {
         // It uses default OS directory by default. If you need something
         // more custom, pass a path to it. I.e., babel?cacheDirectory=<path>
         loaders: ['babel?cacheDirectory'],
-        include: PATHS.app
+        include: PATHS.src
       }
       // { test: /\.woff|\.woff2$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
       // { test: /\.ttf$/,  loader: "url-loader?limit=10000&mimetype=application/octet-stream" },
