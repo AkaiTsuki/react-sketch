@@ -2,19 +2,35 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {
   renderIntoDocument,
-  scryRenderedDOMComponentsWithTag
+  scryRenderedDOMComponentsWithTag,
+  scryRenderedComponentsWithType
 } from 'react-addons-test-utils';
+
 import App from '../../src/containers/App';
+import Navi from '../../src/components/navi/Navi';
+import UIBuilder from '../../src/components/ui-builder/UIBuilder';
 import {expect} from 'chai';
 
-describe('App', () => {
-  it('renders a header', () => {
-    const component = renderIntoDocument(
-      <App />
-    );
+describe('App Container', () => {
 
-    const headers = scryRenderedDOMComponentsWithTag(component, 'h2');
-    expect(headers.length).to.equal(1);
-    expect(headers[0].textContent).to.equal('Hello React');
+    let app = null;
+
+    before(function() {
+      app = renderIntoDocument(<App />);
+      expect(app).not.be.null;
+    });
+
+  it('should have a navi bar', () => {
+
+    const navis = scryRenderedComponentsWithType(app, Navi);
+    expect(navis.length).to.equal(1);
+
+  });
+
+  it('should have a ui builder', () => {
+
+    const builders = scryRenderedComponentsWithType(app, UIBuilder);
+    expect(builders.length).to.equal(1);
+
   });
 });
