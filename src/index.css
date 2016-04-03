@@ -1,0 +1,32 @@
+html, body, .full-height {
+  height: 100%;
+}
+
+.app {
+  position:relative;
+  height: 100%;
+}
+
+#header {
+  height:50px;
+  width:100%;
+  top:0px;
+  left:0px;
+  position:absolute;
+}
+
+#footer {
+  height:50px;
+  width:100%;
+  bottom:0px;
+  left:0px;
+  position:absolute;
+}
+
+#content {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    height:100%;
+    padding: 70px 0px;
+}

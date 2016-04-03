@@ -1,12 +1,20 @@
 import React, {Component} from 'react';
 import Navi from '../components/navi/Navi';
+import UIBuilder from '../components/ui-builder/UIBuilder'
 
 export default class App extends Component {
   render(){
     return (
-      <div className="container-fluid">
-        <Navi />
-        <h1>React Sketch <small>A drag and drop tool to build dynamic UI</small></h1>
+      <div className="app">
+        <div id="header">
+          <Navi />
+        </div>
+        <div id="content">
+          <UIBuilder />
+        </div>
+        <div id="footer">
+          <div style={{textAlign: 'center'}}>Copyright 2016</div>
+        </div>
       </div>
     );
   }
