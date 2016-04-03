@@ -11,7 +11,7 @@ import Navi from '../../src/components/navi/Navi';
 import UIBuilder from '../../src/components/ui-builder/UIBuilder';
 import {expect} from 'chai';
 
-describe('App Container', () => {
+describe('App Component', () => {
 
     let app = null;
 

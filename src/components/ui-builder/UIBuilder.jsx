@@ -18,3 +18,7 @@ export default class UIBuilder extends Component {
     );
   }
 }
+
+UIBuilder.propTypes = {
+  widgetLib : PropTypes.object
+};

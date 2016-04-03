@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 
 import Navi from '../components/navi/Navi';
 import UIBuilder from '../components/ui-builder/UIBuilder'
@@ -21,3 +21,7 @@ export default class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  widgetLib : PropTypes.object
+};

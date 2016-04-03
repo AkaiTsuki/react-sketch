@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 
 export default class WidgetListItem extends Component {
   render() {
@@ -18,3 +18,7 @@ export default class WidgetListItem extends Component {
     );
   }
 }
+
+WidgetListItem.propTypes = {
+  widget : PropTypes.object
+};

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import WidgetListItem from './WidgetListItem';
 
 export default class WidgetList extends Component {
@@ -13,11 +13,22 @@ export default class WidgetList extends Component {
   }
 
   renderGroups(widgetList) {
-    const groups = [];
+    const result = [];
+    let count = 0;
     for(let group in widgetList) {
-      groups.push(this.renderItemInGroup(widgetList[group]));
+      if(this.shouldRenderSeparator(count)) {
+         result.push(<div key={count} className="list-group-separator"></div>);
+      }
+
+      result.push(this.renderItemInGroup(widgetList[group]));
+      count += 1;
     }
-    return groups;
+
+    return result;
+  }
+
+  shouldRenderSeparator(count) {
+    return count > 0;
   }
 
   renderItemInGroup(group) {
@@ -26,3 +37,7 @@ export default class WidgetList extends Component {
     });
   }
 }
+
+WidgetList.propTypes = {
+  widgetLib : PropTypes.object
+};

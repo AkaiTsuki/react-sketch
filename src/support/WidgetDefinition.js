@@ -5,12 +5,12 @@ const WidgetDefinition = {
       {
         name: 'title',
         iconText: 'title',
-        display: 'Title',
+        display: 'Text - Title',
         description: 'Title widget can be one of h1, h2, h3, h4, h5, h6'
       }, {
         name: 'label',
         iconText: 'label',
-        display: 'Label',
+        display: 'Text - Label',
         description: 'Label widget can be used with form input'
       }
     ]
@@ -52,7 +52,7 @@ const WidgetDefinition = {
       {
         name: 'panel',
         iconText: 'content_copy',
-        display: "Panel",
+        display: "Container - Panel",
         description: 'Panel to group widgets'
       }
     ]
