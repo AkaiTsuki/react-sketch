@@ -12,10 +12,12 @@ import { Provider } from 'react-redux';
 import rootReducer from './reducers/RootReducer';
 import AppContainer from './containers/AppContainer';
 import WidgetDefinition from './support/WidgetDefinition';
+import SystemConfig from './support/SystemConfig';
 
 const loggerMiddleware = createLogger();
 const initState = {
-  widgetLib: WidgetDefinition
+  widgetLib: WidgetDefinition,
+  systemConfig: SystemConfig
 };
 
 const store = createStore(rootReducer, initState, applyMiddleware(thunkMiddleware, loggerMiddleware));

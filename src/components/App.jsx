@@ -5,14 +5,14 @@ import UIBuilder from '../components/ui-builder/UIBuilder'
 
 export default class App extends Component {
   render(){
-    const {widgetLib} = this.props;
+    const {widgetLib, systemConfig} = this.props;
     return (
       <div className="app">
         <div id="header">
           <Navi />
         </div>
         <div id="content">
-          <UIBuilder widgetLib={widgetLib} />
+          <UIBuilder widgetLib={widgetLib} systemConfig={systemConfig} />
         </div>
         <div id="footer">
           <div style={{textAlign: 'center'}}>Copyright 2016</div>
@@ -23,5 +23,6 @@ export default class App extends Component {
 }
 
 App.propTypes = {
-  widgetLib : PropTypes.object
+  widgetLib : PropTypes.object,
+  systemConfig: PropTypes.object
 };

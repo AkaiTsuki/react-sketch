@@ -8,17 +8,18 @@ export default class UIBuilder extends Component {
   }
 
   render() {
-    const {widgetLib} = this.props;
+    const {widgetLib, systemConfig} = this.props;
 
     return (
       <div className='container-fluid full-height'>
         <WidgetLibraryView widgetLib={widgetLib}/>
-        <WidgetBuilderView />
+        <WidgetBuilderView systemConfig={systemConfig} />
       </div>
     );
   }
 }
 
 UIBuilder.propTypes = {
-  widgetLib : PropTypes.object
+  widgetLib : PropTypes.object,
+  systemConfig: PropTypes.object
 };

@@ -13,12 +13,18 @@ import {expect} from 'chai';
 
 describe('App Component', () => {
 
-    let app = null;
+  let app = null;
+  const fakeSystemConfig = {
+    canvas: {
+      width: 100,
+      height: 100
+    }
+  }
 
-    before(function() {
-      app = renderIntoDocument(<App />);
-      expect(app).not.be.null;
-    });
+  before(function() {
+    app = renderIntoDocument(<App systemConfig={fakeSystemConfig}/>);
+    expect(app).not.be.null;
+  });
 
   it('should have a navi bar', () => {
 
