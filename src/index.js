@@ -10,7 +10,7 @@ import createLogger from 'redux-logger';
 import { Provider } from 'react-redux';
 // application
 import rootReducer from './reducers/RootReducer';
-import App from './containers/App';
+import AppContainer from './containers/AppContainer';
 import WidgetDefinition from './support/WidgetDefinition';
 
 const loggerMiddleware = createLogger();
@@ -22,7 +22,7 @@ const store = createStore(rootReducer, initState, applyMiddleware(thunkMiddlewar
 
 render(
   <Provider store={store}>
-    <App />
+    <AppContainer />
   </Provider>,
   document.getElementById('app')
 );

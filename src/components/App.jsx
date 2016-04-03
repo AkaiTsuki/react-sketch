@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
 
-import rootSelector from '../selectors/RootSelector';
 import Navi from '../components/navi/Navi';
 import UIBuilder from '../components/ui-builder/UIBuilder'
 
-class App extends Component {
+export default class App extends Component {
   render(){
     const {widgetLib} = this.props;
     return (
@@ -23,14 +21,3 @@ class App extends Component {
     );
   }
 }
-
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch
-  }
-}
-
-export default connect(
-  rootSelector,
-  mapDispatchToProps
-)(App)

@@ -6,7 +6,7 @@ import {
   scryRenderedComponentsWithType
 } from 'react-addons-test-utils';
 
-import App from '../../src/containers/App';
+import App from '../../src/components/App';
 import Navi from '../../src/components/navi/Navi';
 import UIBuilder from '../../src/components/ui-builder/UIBuilder';
 import {expect} from 'chai';
