@@ -8,11 +8,11 @@ export default class UIBuilder extends Component {
   }
 
   render() {
-    const {widgetLib, systemConfig} = this.props;
+    const {widgetLib, systemConfig, actions} = this.props;
 
     return (
       <div className='container-fluid full-height'>
-        <WidgetLibraryView widgetLib={widgetLib}/>
+        <WidgetLibraryView widgetLib={widgetLib} actions={actions}/>
         <WidgetBuilderView systemConfig={systemConfig} />
       </div>
     );

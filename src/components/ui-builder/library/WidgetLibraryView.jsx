@@ -3,7 +3,7 @@ import WidgetList from './WidgetList';
 
 export default class WidgetLibraryView extends Component {
   render() {
-    const {widgetLib} = this.props;
+    const {widgetLib, actions} = this.props;
 
     return (
       <div className='col-md-3 full-height'>
@@ -12,7 +12,7 @@ export default class WidgetLibraryView extends Component {
              <h3 className="panel-title">Widget Library</h3>
           </div>
           <div className='panel-body'>
-            <WidgetList widgetLib={widgetLib}/>
+            <WidgetList widgetLib={widgetLib} actions={actions}/>
           </div>
         </div>
       </div>

@@ -32,8 +32,9 @@ export default class WidgetList extends Component {
   }
 
   renderItemInGroup(group) {
+    const {actions} = this.props;
     return group.widgets.map((widget, i) => {
-      return <WidgetListItem key={i} widget={widget} />
+      return <WidgetListItem key={i} widget={widget} actions={actions} />
     });
   }
 }
