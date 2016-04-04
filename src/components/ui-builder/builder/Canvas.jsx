@@ -1,5 +1,10 @@
 import React, {Component, PropTypes} from 'react';
+import PreviewLayer from './PreviewLayer';
+import ControlLayer from './ControlLayer';
 
+/**
+* a container use relative position to hold other widgets
+**/
 export default class Canvas extends Component {
   getStyle(canvasConfig) {
     return {
@@ -13,7 +18,10 @@ export default class Canvas extends Component {
     const {canvasConfig} = this.props;
     const style = this.getStyle(canvasConfig);
     return (
-      <div className='canvas' style={style}></div>
+      <div className='canvas' style={style}>
+        <PreviewLayer />
+        <ControlLayer />
+      </div>
     );
   }
 }

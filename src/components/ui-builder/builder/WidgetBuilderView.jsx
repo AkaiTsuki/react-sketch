@@ -1,6 +1,10 @@
 import React, {Component, PropTypes} from 'react';
 import Canvas from './Canvas';
 
+/**
+* Provide a viewport to hold the canvas, the viewport is enabling the
+* scrolling feature on both x and y coordination
+*/
 export default class WidgetBuilderView extends Component {
   render() {
     const {systemConfig} = this.props;
